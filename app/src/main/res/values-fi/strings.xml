@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Visor OS</string>
+    <string name="button_color_description">vaihda kontrastitilaa</string>
+    <string name="button_zoom_description">vaihda suurennustasoa</string>
+    <string name="button_flash_description">kytke taskulamppu päälle ja pois</string>
+    <string name="button_pause_description">jäädytä nykyinen kuva</string>
+    <string name="button_zoom_in_description">lähennä</string>
+    <string name="button_zoom_out_description">loitonna</string>
+    <string name="button_exit_description">poistu</string>
+    <string name="text_autofocus_enabled">Automaattitarkennus käytössä.</string>
+    <string name="text_autofocus_disabled">Automaattitarkennus pois käytöstä. Napauta tarkentaaksesi.</string>
+    <string name="text_image_stored">Kuva tallennettu kohteeseen </string>
+    <string name="title_activity_settings">Asetukset</string>
+    <string name="notification_sounds_header">Ilmoitusäänet</string>
+    <string name="lighting_header">Valaistus</string>
+    <string name="focus_sound_title">Automaattitarkennuksen jälkeen</string>
+    <string name="shutter_sound_title">Kuvakaappauksessa</string>
+    <string name="max_brightness_title">Näytön enimmäiskirkkaus</string>
+    <string name="auto_torch_title">Kytke taskulamppu käynnistyksessä</string>
+    <string name="advanced_header">Lisäasetukset</string>
+    <string name="preview_resolution_width">Esikatselun resoluution leveys</string>
+    <string name="camera_id">Kamera</string>
+    <string name="main_camera">Pääkamera</string>
+    <string name="selfie_camera">Selfie-kamera</string>
+    <string name="wide_or_other_camera">Laajakulma tai muu</string>
+    <string name="ui_header">Käyttöliittymä</string>
+    <string name="default_zoom_title">Oletuszoomaustaso</string>
+    <string name="handedness_title">Kätisyys</string>
+    <string name="language_title">Kieli</string>
+    <string-array name="handedness_entries">
+        <item>Oikeakätinen</item>
+        <item>Vasenkätinen</item>
+    </string-array>
+</resources>

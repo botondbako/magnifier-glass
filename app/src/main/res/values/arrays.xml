@@ -18,4 +18,93 @@
         <item>0</item>
     </string-array>
 
+    <string-array name="default_zoom_entries">
+        <item>1.0x</item>
+        <item>1.5x</item>
+        <item>2.0x</item>
+        <item>3.0x</item>
+        <item>5.0x</item>
+    </string-array>
+    <string-array name="default_zoom_values">
+        <item>0</item>
+        <item>6</item>
+        <item>11</item>
+        <item>22</item>
+        <item>44</item>
+    </string-array>
+
+    <string-array name="handedness_entries">
+        <item>Right-handed</item>
+        <item>Left-handed</item>
+    </string-array>
+    <string-array name="handedness_values">
+        <item>right</item>
+        <item>left</item>
+    </string-array>
+
+    <string-array name="language_entries">
+        <item>Default</item>
+        <item>English</item>
+        <item>Български</item>
+        <item>Català</item>
+        <item>Čeština</item>
+        <item>Dansk</item>
+        <item>Deutsch</item>
+        <item>Eesti</item>
+        <item>Ελληνικά</item>
+        <item>Español</item>
+        <item>Français</item>
+        <item>Hrvatski</item>
+        <item>Íslenska</item>
+        <item>Italiano</item>
+        <item>Latviešu</item>
+        <item>Lietuvių</item>
+        <item>Magyar</item>
+        <item>Nederlands</item>
+        <item>Norsk</item>
+        <item>Polski</item>
+        <item>Português</item>
+        <item>Română</item>
+        <item>Shqip</item>
+        <item>Slovenčina</item>
+        <item>Slovenščina</item>
+        <item>Srpski</item>
+        <item>Suomi</item>
+        <item>Svenska</item>
+        <item>Türkçe</item>
+        <item>Українська</item>
+    </string-array>
+    <string-array name="language_values">
+        <item>default</item>
+        <item>en</item>
+        <item>bg</item>
+        <item>ca</item>
+        <item>cs</item>
+        <item>da</item>
+        <item>de</item>
+        <item>et</item>
+        <item>el</item>
+        <item>es</item>
+        <item>fr</item>
+        <item>hr</item>
+        <item>is</item>
+        <item>it</item>
+        <item>lv</item>
+        <item>lt</item>
+        <item>hu</item>
+        <item>nl</item>
+        <item>nb</item>
+        <item>pl</item>
+        <item>pt</item>
+        <item>ro</item>
+        <item>sq</item>
+        <item>sk</item>
+        <item>sl</item>
+        <item>sr</item>
+        <item>fi</item>
+        <item>sv</item>
+        <item>tr</item>
+        <item>uk</item>
+    </string-array>
+
 </resources>

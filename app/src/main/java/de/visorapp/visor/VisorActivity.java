@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
@@ -18,8 +20,9 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
-import android.widget.SeekBar;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -33,6 +36,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import de.visorapp.visor.filters.ColorFilter;
 
@@ -86,14 +90,66 @@ public class VisorActivity extends Activity {
     private float prevScreenBrightnewss = -1f;
     public PhotoView mPhotoView;
 
-    private int zoomSliderVisibility = View.VISIBLE;
+    private int zoomPanelVisibility = View.VISIBLE;
     private View mVisorViewTouchArea;
     private SharedPreferences mSharedPreferences;
+    private int mCurrentZoomPercent = 0;
+    private static final int ZOOM_STEP = 10;
 
     public void playClickSound(View view) {
-        // TODO the user can disable this; if click-sounds are enable I hear a double click effect...
-        // if(view == null) return;
-        // view.playSoundEffect(android.view.SoundEffectConstants.CLICK);
+    }
+
+    private void updateZoomLabel(int percent) {
+        TextView label = findViewById(R.id.zoom_label);
+        if (label != null) {
+            float factor = 1.0f + percent * 0.09f;
+            label.setText(String.format("%.1fx", factor));
+        }
+    }
+
+    private void applyLocale() {
+        String lang = mSharedPreferences.getString(
+                getString(R.string.key_preference_language), "default");
+        Locale locale;
+        if ("default".equals(lang)) {
+            locale = Resources.getSystem().getConfiguration().locale;
+        } else {
+            locale = new Locale(lang);
+        }
+        Locale.setDefault(locale);
+        Configuration config = getResources().getConfiguration();
+        config.setLocale(locale);
+        getResources().updateConfiguration(config, getResources().getDisplayMetrics());
+    }
+
+    private void applyHandedness() {
+        String hand = mSharedPreferences.getString(
+                getString(R.string.key_preference_handedness), "right");
+        boolean leftHanded = "left".equals(hand);
+        if (!leftHanded) return; // layouts default to right-handed
+
+        // Only swap views that are direct children of the RelativeLayout
+        int[] ids = {R.id.button_exit, R.id.zoom_panel, R.id.button_bar, R.id.button_pause};
+        for (int id : ids) {
+            View v = findViewById(id);
+            if (v == null) continue;
+            if (!(v.getLayoutParams() instanceof RelativeLayout.LayoutParams)) continue;
+            RelativeLayout.LayoutParams p = (RelativeLayout.LayoutParams) v.getLayoutParams();
+            // Swap right/left parent alignment
+            boolean wasRight = (p.getRules()[RelativeLayout.ALIGN_PARENT_RIGHT] != 0 ||
+                    p.getRules()[RelativeLayout.ALIGN_PARENT_END] != 0);
+            boolean wasLeft = (p.getRules()[RelativeLayout.ALIGN_PARENT_LEFT] != 0 ||
+                    p.getRules()[RelativeLayout.ALIGN_PARENT_START] != 0);
+            // Clear both
+            p.removeRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+            p.removeRule(RelativeLayout.ALIGN_PARENT_LEFT);
+            p.removeRule(RelativeLayout.ALIGN_PARENT_END);
+            p.removeRule(RelativeLayout.ALIGN_PARENT_START);
+            if (wasRight) p.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+            if (wasLeft) p.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+
+            v.setLayoutParams(p);
+        }
     }
 
     private View.OnClickListener autoFocusClickHandler = new View.OnClickListener() {
@@ -131,7 +187,7 @@ public class VisorActivity extends Activity {
             playClickSound(v);
 
             mVisorView.toggleCameraPreview();
-            ImageButton btn = (ImageButton) v;
+            Button btn = (Button) v;
             // FrameLayout previewLayout = getCameraPreviewFrame();
 
             if (cameraPreviewState) {
@@ -145,11 +201,11 @@ public class VisorActivity extends Activity {
         }
     };
 
-    private void cameraPreviewIsPaused(ImageButton playOrPauseButton) {
-        playOrPauseButton.setImageResource(R.drawable.ic_play);
+    private void cameraPreviewIsPaused(Button playOrPauseButton) {
+        playOrPauseButton.setText("▶");
         mVisorViewTouchArea.setVisibility(View.INVISIBLE);
-        zoomSliderVisibility = mZoomSlider.getVisibility();
-        mZoomSlider.setVisibility(View.INVISIBLE);
+        zoomPanelVisibility = mZoomPanel.getVisibility();
+        mZoomPanel.setVisibility(View.INVISIBLE);
         mPhotoButton.setVisibility(View.VISIBLE);
         mFlashButton.setAlpha(64);
         mFlashButton.getBackground().setAlpha(64);
@@ -164,10 +220,10 @@ public class VisorActivity extends Activity {
         mPhotoView.setAlpha(255);
     }
 
-    private void cameraPreviewIsActive(ImageButton playOrPauseButton) {
-        playOrPauseButton.setImageResource(R.drawable.ic_pause);
+    private void cameraPreviewIsActive(Button playOrPauseButton) {
+        playOrPauseButton.setText("⏸");
         mVisorViewTouchArea.setVisibility(View.VISIBLE);
-        mZoomSlider.setVisibility(zoomSliderVisibility);
+        mZoomPanel.setVisibility(zoomPanelVisibility);
         mPhotoButton.setVisibility(View.INVISIBLE);
         mFlashButton.setAlpha(255);
         mFlashButton.getBackground().setAlpha(255);
@@ -214,31 +270,34 @@ public class VisorActivity extends Activity {
         }
     };
 
-    private SeekBar.OnSeekBarChangeListener zoomSliderChangelistener = new SeekBar.OnSeekBarChangeListener() {
+    private View.OnClickListener zoomInClickHandler = new View.OnClickListener() {
         @Override
-        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-            if (cameraPreviewState) {
-                mVisorView.setZoomLevelPercent(progress);
-            }
+        public void onClick(View v) {
+            if (!cameraPreviewState) return;
+            mCurrentZoomPercent = Math.min(100, mCurrentZoomPercent + ZOOM_STEP);
+            mVisorView.setZoomLevelPercent(mCurrentZoomPercent);
+            updateZoomLabel(mCurrentZoomPercent);
+            mVisorView.autoFocusCamera();
         }
+    };
 
+    private View.OnClickListener zoomOutClickHandler = new View.OnClickListener() {
         @Override
-        public void onStartTrackingTouch(SeekBar seekBar) {
-
-        }
-
-        @Override
-        public void onStopTrackingTouch(SeekBar seekBar) {
-            mVisorView.autoFocusCamera(); // will not be applied in continuous modes
+        public void onClick(View v) {
+            if (!cameraPreviewState) return;
+            mCurrentZoomPercent = Math.max(0, mCurrentZoomPercent - ZOOM_STEP);
+            mVisorView.setZoomLevelPercent(mCurrentZoomPercent);
+            updateZoomLabel(mCurrentZoomPercent);
+            mVisorView.autoFocusCamera();
         }
     };
     /**
      * Store the reference to swap the icon on it if we pause the preview.
      */
-    private SeekBar mZoomSlider;
-    private ImageButton mPhotoButton;
-    private ImageButton mPauseButton;
-    private ImageButton mFlashButton;
+    private View mZoomPanel;
+    private Button mPhotoButton;
+    private Button mPauseButton;
+    private View mFlashButton;
     private Animation animScale;
     private Animation animScaleLongPress;
 
@@ -367,10 +426,12 @@ public class VisorActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         // set proper display orientation
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        applyLocale();
         setContentView(R.layout.activity_visor);
+        applyHandedness();
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_CODE);
@@ -415,32 +476,42 @@ public class VisorActivity extends Activity {
      *
      */
     private void setButtonListeners() {
-        ImageButton settingsButtonm = findViewById(R.id.settings_button);
-        settingsButtonm.setOnClickListener(openSettingsClickHandler);
+        findViewById(R.id.settings_button).setOnClickListener(openSettingsClickHandler);
 
-        // Add a listener to the Zoom slider
-        SeekBar zoomSlider =  findViewById(R.id.zoom_slider);
-        zoomSlider.setOnSeekBarChangeListener(zoomSliderChangelistener);
+        findViewById(R.id.button_exit).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        // Add listeners to the Zoom buttons
+        findViewById(R.id.button_zoom_in).setOnClickListener(zoomInClickHandler);
+        findViewById(R.id.button_zoom_out).setOnClickListener(zoomOutClickHandler);
+        int defaultZoom = Integer.parseInt(mSharedPreferences.getString(
+                getString(R.string.key_preference_default_zoom), "0"));
+        mCurrentZoomPercent = defaultZoom;
+        updateZoomLabel(defaultZoom);
 
         mPhotoButton = findViewById(R.id.button_photo);
         mPhotoButton.setOnClickListener(screenshotClickHandler);
 
         // Add a listener to the Flash button
-        ImageButton flashButton = (ImageButton) findViewById(R.id.button_flash);
+        View flashButton = findViewById(R.id.button_flash);
         flashButton.setOnClickListener(flashLightClickHandler);
 
         // Add a listener to the Color Filter button
-        ImageButton colorButton = (ImageButton) findViewById(R.id.button_color);
+        View colorButton = findViewById(R.id.button_color);
         colorButton.setOnClickListener(colorModeClickHandler);
         colorButton.setOnLongClickListener(colorModeLongClickHandler);
 
-        ImageButton pauseButton = (ImageButton) findViewById(R.id.button_pause);
+        Button pauseButton = findViewById(R.id.button_pause);
         pauseButton.setOnClickListener(pauseClickHandler);
 
-        mVisorView.setZoomSlider(zoomSlider);
+        mVisorView.setZoomPanel(findViewById(R.id.zoom_panel));
         mVisorView.setFlashButton(flashButton);
 
-        mZoomSlider = zoomSlider;
+        mZoomPanel = findViewById(R.id.zoom_panel);
         mPauseButton = pauseButton;
         mFlashButton = flashButton;
     }
@@ -452,6 +523,32 @@ public class VisorActivity extends Activity {
         //                           So the user now has to activly adjust the brightness.
         resetBrightnessToPreviousValue();
         Log.d(TAG, "onPause called!");
+    }
+
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        setContentView(R.layout.activity_visor);
+        applyHandedness();
+        FrameLayout previewLayout = getCameraPreviewFrame();
+        previewLayout.setBackgroundColor(Color.BLACK);
+        // re-attach existing views
+        if (mVisorView.getParent() != null)
+            ((android.view.ViewGroup) mVisorView.getParent()).removeView(mVisorView);
+        if (mPhotoView.getParent() != null)
+            ((android.view.ViewGroup) mPhotoView.getParent()).removeView(mPhotoView);
+        previewLayout.addView(mVisorView);
+        previewLayout.addView(mPhotoView);
+        mPhotoView.setAlpha(0);
+        setButtonListeners();
+        mVisorViewTouchArea = findViewById(R.id.camera_preview_touch_area);
+        mVisorViewTouchArea.setOnClickListener(autoFocusClickHandler);
+        mVisorViewTouchArea.setOnLongClickListener(tapAndHoldListener);
+        if (mVisorView.getCameraPreviewWidth() > 0) {
+            mVisorView.setCameraDisplayAndFaceOrientation(this);
+        }
+        mVisorView.setZoomLevelPercent(mCurrentZoomPercent);
+        updateZoomLabel(mCurrentZoomPercent);
     }
 
     @Override

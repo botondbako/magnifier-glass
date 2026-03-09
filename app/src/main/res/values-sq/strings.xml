@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Visor OS</string>
+    <string name="button_color_description">ndrysho modalitetin e kontrastit</string>
+    <string name="button_zoom_description">ndrysho nivelin e zmadhimit</string>
+    <string name="button_flash_description">ndiz dhe fik elektrikun</string>
+    <string name="button_pause_description">ngri imazhin aktual</string>
+    <string name="button_zoom_in_description">zmadho</string>
+    <string name="button_zoom_out_description">zvogëlo</string>
+    <string name="button_exit_description">dil</string>
+    <string name="text_autofocus_enabled">Autofokusi i aktivizuar.</string>
+    <string name="text_autofocus_disabled">Autofokusi i çaktivizuar. Prekni për të fokusuar.</string>
+    <string name="text_image_stored">Imazhi u ruajt në </string>
+    <string name="title_activity_settings">Cilësimet</string>
+    <string name="notification_sounds_header">Tingujt e njoftimeve</string>
+    <string name="lighting_header">Ndriçimi</string>
+    <string name="focus_sound_title">Pas autofokusit</string>
+    <string name="shutter_sound_title">Gjatë kapjes së ekranit</string>
+    <string name="max_brightness_title">Ndriçimi maksimal i ekranit</string>
+    <string name="auto_torch_title">Ndiz elektrikun në nisje</string>
+    <string name="advanced_header">Të avancuara</string>
+    <string name="preview_resolution_width">Gjerësia e rezolucionit të pamjes paraprake</string>
+    <string name="camera_id">Kamera</string>
+    <string name="main_camera">Kamera kryesore</string>
+    <string name="selfie_camera">Kamera selfie</string>
+    <string name="wide_or_other_camera">Këndgjerë ose tjetër</string>
+    <string name="ui_header">Ndërfaqja</string>
+    <string name="default_zoom_title">Niveli i paracaktuar i zmadhimit</string>
+    <string name="handedness_title">Dorëzimi</string>
+    <string name="language_title">Gjuha</string>
+    <string-array name="handedness_entries">
+        <item>Djathtazi</item>
+        <item>Majtazi</item>
+    </string-array>
+</resources>

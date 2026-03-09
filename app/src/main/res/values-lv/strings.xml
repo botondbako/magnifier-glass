@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Visor OS</string>
+    <string name="button_color_description">mainīt kontrasta režīmu</string>
+    <string name="button_zoom_description">mainīt palielinājuma līmeni</string>
+    <string name="button_flash_description">ieslēgt un izslēgt lukturīti</string>
+    <string name="button_pause_description">iesaldēt pašreizējo attēlu</string>
+    <string name="button_zoom_in_description">pietuvināt</string>
+    <string name="button_zoom_out_description">attālināt</string>
+    <string name="button_exit_description">iziet</string>
+    <string name="text_autofocus_enabled">Autofokuss ieslēgts.</string>
+    <string name="text_autofocus_disabled">Autofokuss izslēgts. Pieskarieties, lai fokusētu.</string>
+    <string name="text_image_stored">Attēls saglabāts </string>
+    <string name="title_activity_settings">Iestatījumi</string>
+    <string name="notification_sounds_header">Paziņojumu skaņas</string>
+    <string name="lighting_header">Apgaismojums</string>
+    <string name="focus_sound_title">Pēc autofokusa</string>
+    <string name="shutter_sound_title">Uzņemot ekrānuzņēmumu</string>
+    <string name="max_brightness_title">Maksimālais ekrāna spilgtums</string>
+    <string name="auto_torch_title">Ieslēgt lukturīti startējot</string>
+    <string name="advanced_header">Papildu</string>
+    <string name="preview_resolution_width">Priekšskatījuma izšķirtspējas platums</string>
+    <string name="camera_id">Kamera</string>
+    <string name="main_camera">Galvenā kamera</string>
+    <string name="selfie_camera">Selfiju kamera</string>
+    <string name="wide_or_other_camera">Platleņķa vai cita</string>
+    <string name="ui_header">Saskarne</string>
+    <string name="default_zoom_title">Noklusējuma tālummaiņas līmenis</string>
+    <string name="handedness_title">Rokturība</string>
+    <string name="language_title">Valoda</string>
+    <string-array name="handedness_entries">
+        <item>Labrocis</item>
+        <item>Kreilis</item>
+    </string-array>
+</resources>

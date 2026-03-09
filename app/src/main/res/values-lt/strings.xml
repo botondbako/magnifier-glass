@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Visor OS</string>
+    <string name="button_color_description">keisti kontrasto režimą</string>
+    <string name="button_zoom_description">keisti didinimo lygį</string>
+    <string name="button_flash_description">įjungti ir išjungti žibintuvėlį</string>
+    <string name="button_pause_description">sustabdyti esamą vaizdą</string>
+    <string name="button_zoom_in_description">priartinti</string>
+    <string name="button_zoom_out_description">nutolinti</string>
+    <string name="button_exit_description">išeiti</string>
+    <string name="text_autofocus_enabled">Automatinis fokusavimas įjungtas.</string>
+    <string name="text_autofocus_disabled">Automatinis fokusavimas išjungtas. Palieskite, kad sufokusuotumėte.</string>
+    <string name="text_image_stored">Vaizdas išsaugotas </string>
+    <string name="title_activity_settings">Nustatymai</string>
+    <string name="notification_sounds_header">Pranešimų garsai</string>
+    <string name="lighting_header">Apšvietimas</string>
+    <string name="focus_sound_title">Po automatinio fokusavimo</string>
+    <string name="shutter_sound_title">Darant ekrano kopiją</string>
+    <string name="max_brightness_title">Maksimalus ekrano ryškumas</string>
+    <string name="auto_torch_title">Įjungti žibintuvėlį paleidžiant</string>
+    <string name="advanced_header">Išplėstiniai</string>
+    <string name="preview_resolution_width">Peržiūros raiškos plotis</string>
+    <string name="camera_id">Kamera</string>
+    <string name="main_camera">Pagrindinė kamera</string>
+    <string name="selfie_camera">Selfie kamera</string>
+    <string name="wide_or_other_camera">Plačiakampė ar kita</string>
+    <string name="ui_header">Sąsaja</string>
+    <string name="default_zoom_title">Numatytasis priartinimo lygis</string>
+    <string name="handedness_title">Rankiškumas</string>
+    <string name="language_title">Kalba</string>
+    <string-array name="handedness_entries">
+        <item>Dešiniarankis</item>
+        <item>Kairiarankis</item>
+    </string-array>
+</resources>

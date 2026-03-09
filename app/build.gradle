@@ -1,17 +1,5 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: "org.sonarqube"
-
-buildscript {
-    repositories {
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
-    }
-    dependencies {
-        classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:3.0"
-    }
-}
 
 allprojects {
     repositories {
@@ -30,6 +18,9 @@ android {
         versionCode 3
         versionName "1.6"
     }
+    buildFeatures {
+        buildConfig true
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -43,8 +34,17 @@ android {
             path "src/main/jni/CMakeLists.txt"
         }
     }
+    signingConfigs {
+        release {
+            storeFile signingConfigs.debug.storeFile
+            storePassword signingConfigs.debug.storePassword
+            keyAlias signingConfigs.debug.keyAlias
+            keyPassword signingConfigs.debug.keyPassword
+        }
+    }
     buildTypes {
         release {
+            signingConfig signingConfigs.release
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             debuggable false
@@ -53,6 +53,7 @@ android {
             zipAlignEnabled true
         }
     }
+    namespace "de.visorapp.visor"
 }
 
 dependencies {

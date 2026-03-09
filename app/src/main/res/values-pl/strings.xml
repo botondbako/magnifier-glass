@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Visor OS</string>
+    <string name="button_color_description">zmień tryb kontrastu</string>
+    <string name="button_zoom_description">zmień poziom powiększenia</string>
+    <string name="button_flash_description">włącz i wyłącz latarkę</string>
+    <string name="button_pause_description">zamroź bieżący obraz</string>
+    <string name="button_zoom_in_description">powiększ</string>
+    <string name="button_zoom_out_description">pomniejsz</string>
+    <string name="button_exit_description">wyjdź</string>
+    <string name="text_autofocus_enabled">Autofokus włączony.</string>
+    <string name="text_autofocus_disabled">Autofokus wyłączony. Dotknij, aby ustawić ostrość.</string>
+    <string name="text_image_stored">Obraz zapisany w </string>
+    <string name="title_activity_settings">Ustawienia</string>
+    <string name="notification_sounds_header">Dźwięki powiadomień</string>
+    <string name="lighting_header">Oświetlenie</string>
+    <string name="focus_sound_title">Po autofokusie</string>
+    <string name="shutter_sound_title">Przy zrzucie ekranu</string>
+    <string name="max_brightness_title">Maksymalna jasność ekranu</string>
+    <string name="auto_torch_title">Włącz latarkę przy starcie</string>
+    <string name="advanced_header">Zaawansowane</string>
+    <string name="preview_resolution_width">Szerokość rozdzielczości podglądu</string>
+    <string name="camera_id">Aparat</string>
+    <string name="main_camera">Aparat główny</string>
+    <string name="selfie_camera">Aparat do selfie</string>
+    <string name="wide_or_other_camera">Szerokokątny lub inny</string>
+    <string name="ui_header">Interfejs</string>
+    <string name="default_zoom_title">Domyślny poziom zoomu</string>
+    <string name="handedness_title">Ręczność</string>
+    <string name="language_title">Język</string>
+    <string-array name="handedness_entries">
+        <item>Praworęczny</item>
+        <item>Leworęczny</item>
+    </string-array>
+</resources>

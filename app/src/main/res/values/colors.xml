@@ -6,5 +6,6 @@
     <color name="slider_color_orange">#fe9e0e</color>
     <color name="button_color_red">#ff1300</color>
     <color name="button_color_blue">#0092cc</color>
+    <color name="button_color_green">#4CAF50</color>
 
 </resources>

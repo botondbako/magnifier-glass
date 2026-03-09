@@ -9,6 +9,8 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.DropDownPreference
 import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.PreferenceManager
+import java.util.Locale
 import kotlin.math.max
 
 
@@ -16,7 +18,9 @@ class SettingsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        applyLocale()
         setContentView(R.layout.settings_activity)
+        setTitle(R.string.title_activity_settings)
         supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.settings, SettingsFragment())
@@ -34,11 +38,31 @@ class SettingsActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+    private fun applyLocale() {
+        val prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext)
+        val lang = prefs.getString(getString(R.string.key_preference_language), "default") ?: "default"
+        val locale = if (lang == "default") {
+            android.content.res.Resources.getSystem().configuration.locale
+        } else {
+            Locale(lang)
+        }
+        Locale.setDefault(locale)
+        val config = resources.configuration
+        config.setLocale(locale)
+        resources.updateConfiguration(config, resources.displayMetrics)
+    }
+
     class SettingsFragment : PreferenceFragmentCompat() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey)
             initPreviewResolutionWidth()
             initCameraChooser()
+
+            findPreference<DropDownPreference>(getString(R.string.key_preference_language))
+                ?.setOnPreferenceChangeListener { _, _ ->
+                    activity?.recreate()
+                    true
+                }
         }
 
         private fun initCameraChooser() {

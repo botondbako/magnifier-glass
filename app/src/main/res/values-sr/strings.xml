@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Visor OS</string>
+    <string name="button_color_description">промени режим контраста</string>
+    <string name="button_zoom_description">промени ниво увећања</string>
+    <string name="button_flash_description">укључи и искључи лампу</string>
+    <string name="button_pause_description">замрзни тренутну слику</string>
+    <string name="button_zoom_in_description">увећај</string>
+    <string name="button_zoom_out_description">умањи</string>
+    <string name="button_exit_description">излаз</string>
+    <string name="text_autofocus_enabled">Аутофокус укључен.</string>
+    <string name="text_autofocus_disabled">Аутофокус искључен. Додирните за фокусирање.</string>
+    <string name="text_image_stored">Слика сачувана у </string>
+    <string name="title_activity_settings">Подешавања</string>
+    <string name="notification_sounds_header">Звуци обавештења</string>
+    <string name="lighting_header">Осветљење</string>
+    <string name="focus_sound_title">После аутофокуса</string>
+    <string name="shutter_sound_title">При снимку екрана</string>
+    <string name="max_brightness_title">Максимална осветљеност екрана</string>
+    <string name="auto_torch_title">Укључи лампу при покретању</string>
+    <string name="advanced_header">Напредно</string>
+    <string name="preview_resolution_width">Ширина резолуције прегледа</string>
+    <string name="camera_id">Камера</string>
+    <string name="main_camera">Главна камера</string>
+    <string name="selfie_camera">Селфи камера</string>
+    <string name="wide_or_other_camera">Широкоугаона или друга</string>
+    <string name="ui_header">Интерфејс</string>
+    <string name="default_zoom_title">Подразумевани ниво зумирања</string>
+    <string name="handedness_title">Рукост</string>
+    <string name="language_title">Језик</string>
+    <string-array name="handedness_entries">
+        <item>Десноруки</item>
+        <item>Леворуки</item>
+    </string-array>
+</resources>

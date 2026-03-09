@@ -22,7 +22,6 @@ import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
-import android.widget.SeekBar;
 import android.widget.Toast;
 
 import androidx.preference.PreferenceManager;
@@ -308,12 +307,12 @@ public class VisorSurface extends SurfaceView implements SurfaceHolder.Callback,
         }
     };
     /**
-     * reference to the zoom button.
+     * reference to the zoom panel.
      * <p>
-     * We hide the zoom slider if zoom is not supported
+     * We hide the zoom panel if zoom is not supported
      * by the device camera.
      */
-    private SeekBar zoomSlider;
+    private View zoomPanel;
     /**
      * reference to the flash button.
      * <p>
@@ -348,7 +347,6 @@ public class VisorSurface extends SurfaceView implements SurfaceHolder.Callback,
         mCurrentColorFilterIndex = 0;
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        mCameraCurrentZoomLevel = mSharedPreferences.getInt(getResources().getString(R.string.key_preference_zoom_level), mCameraCurrentZoomLevel);
         mCurrentColorFilterIndex = mSharedPreferences.getInt(getResources().getString(R.string.key_preference_color_mode), mCurrentColorFilterIndex);
         storedAutoFocusMode = mSharedPreferences.getString(getResources().getString(R.string.key_preference_autofocus_mode), FOCUS_MODE_AUTO);
 
@@ -442,11 +440,7 @@ public class VisorSurface extends SurfaceView implements SurfaceHolder.Callback,
     public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
         final int orientation = getResources().getConfiguration().orientation;
         Log.d(TAG, "called surfaceChanged, display orientation: " + orientation);
-        if (orientation == ActivityInfo.SCREEN_ORIENTATION_USER || orientation == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
-            enableCamera();
-        } else {
-            Log.d(TAG, "delaying camera start unitil screen is rotated");
-        }
+        enableCamera();
     }
 
     @Override
@@ -544,7 +538,7 @@ public class VisorSurface extends SurfaceView implements SurfaceHolder.Callback,
         if (parameters.isZoomSupported()) {
             mCameraMaxZoomLevel = parameters.getMaxZoom();
         } else if (!BuildConfig.DEBUG) {
-            getZoomSlider().setVisibility(View.INVISIBLE);
+            getZoomPanel().setVisibility(View.INVISIBLE);
         }
         Camera.Size size = getBestPreviewSize(parameters);
 
@@ -622,7 +616,6 @@ public class VisorSurface extends SurfaceView implements SurfaceHolder.Callback,
         } else {
             setCameraZoomLevel(mCameraCurrentZoomLevel);
         }
-        setSZoomSliderLevelPercent(mCameraCurrentZoomLevel * 100 / mCameraMaxZoomLevel);
         if (mCurrentColorFilterIndex > 0) {
             mCurrentColorFilterIndex--;
             // decrease index because
@@ -642,6 +635,7 @@ public class VisorSurface extends SurfaceView implements SurfaceHolder.Callback,
     }
 
     public void setCameraDisplayAndFaceOrientation(Activity activity) {
+        if (mCamera == null) return;
         Camera.CameraInfo info = new Camera.CameraInfo();
         Camera.getCameraInfo(mCameraId, info);
         mCameraIsFrontFacing = info.facing == Camera.CameraInfo.CAMERA_FACING_FRONT;
@@ -871,19 +865,15 @@ public class VisorSurface extends SurfaceView implements SurfaceHolder.Callback,
 
     }
 
-    public void setSZoomSliderLevelPercent(int zoomLevelPercent) {
-        zoomSlider.setProgress(zoomLevelPercent);
-    }
-
     public void setZoomLevelPercent(int zoomLevelPercent) {
         mCameraCurrentZoomLevel = (int) ((double) zoomLevelPercent * mCameraMaxZoomLevel / 100);
 
         if (mCameraCurrentZoomLevel > mCameraMaxZoomLevel) {
-            zoomLevelPercent = mCameraMaxZoomLevel;
+            mCameraCurrentZoomLevel = mCameraMaxZoomLevel;
         }
 
         if (mState == STATE_PREVIEW) {
-            setCameraZoomLevel(zoomLevelPercent);
+            setCameraZoomLevel(mCameraCurrentZoomLevel);
         }
     }
 
@@ -1040,16 +1030,16 @@ public class VisorSurface extends SurfaceView implements SurfaceHolder.Callback,
         mCamera.setParameters(parameters);
     }
 
-    public SeekBar getZoomSlider() {
-        return zoomSlider;
+    public View getZoomPanel() {
+        return zoomPanel;
     }
 
     public View getFlashButtonView() {
         return flashButtonView;
     }
 
-    public void setZoomSlider(SeekBar zoomSlider) {
-        this.zoomSlider = zoomSlider;
+    public void setZoomPanel(View zoomPanel) {
+        this.zoomPanel = zoomPanel;
     }
 
     public void setFlashButton(View flashButton) {

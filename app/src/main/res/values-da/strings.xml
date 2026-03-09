@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Visor OS</string>
+    <string name="button_color_description">skift kontrasttilstand</string>
+    <string name="button_zoom_description">skift forstørrelsesniveau</string>
+    <string name="button_flash_description">tænd og sluk lommelygte</string>
+    <string name="button_pause_description">frys det aktuelle billede</string>
+    <string name="button_zoom_in_description">zoom ind</string>
+    <string name="button_zoom_out_description">zoom ud</string>
+    <string name="button_exit_description">afslut</string>
+    <string name="text_autofocus_enabled">Autofokus aktiveret.</string>
+    <string name="text_autofocus_disabled">Autofokus deaktiveret. Tryk for at fokusere.</string>
+    <string name="text_image_stored">Billede gemt i </string>
+    <string name="title_activity_settings">Indstillinger</string>
+    <string name="notification_sounds_header">Notifikationslyde</string>
+    <string name="lighting_header">Belysning</string>
+    <string name="focus_sound_title">Efter autofokus</string>
+    <string name="shutter_sound_title">Ved skærmbillede</string>
+    <string name="max_brightness_title">Maksimal skærmlysstyrke</string>
+    <string name="auto_torch_title">Tænd lommelygte ved start</string>
+    <string name="advanced_header">Avanceret</string>
+    <string name="preview_resolution_width">Bredde af forhåndsvisningsopløsning</string>
+    <string name="camera_id">Kamera</string>
+    <string name="main_camera">Hovedkamera</string>
+    <string name="selfie_camera">Selfiekamera</string>
+    <string name="wide_or_other_camera">Vidvinkel eller andet</string>
+    <string name="ui_header">Brugerflade</string>
+    <string name="default_zoom_title">Standard zoomniveau</string>
+    <string name="handedness_title">Håndthed</string>
+    <string name="language_title">Sprog</string>
+    <string-array name="handedness_entries">
+        <item>Højrehåndet</item>
+        <item>Venstrehåndet</item>
+    </string-array>
+</resources>

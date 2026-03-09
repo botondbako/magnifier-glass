@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Visor OS</string>
+    <string name="button_color_description">ändra kontrastläge</string>
+    <string name="button_zoom_description">ändra förstoringsnivå</string>
+    <string name="button_flash_description">slå på och av ficklampan</string>
+    <string name="button_pause_description">frys aktuell bild</string>
+    <string name="button_zoom_in_description">zooma in</string>
+    <string name="button_zoom_out_description">zooma ut</string>
+    <string name="button_exit_description">avsluta</string>
+    <string name="text_autofocus_enabled">Autofokus aktiverad.</string>
+    <string name="text_autofocus_disabled">Autofokus avaktiverad. Tryck för att fokusera.</string>
+    <string name="text_image_stored">Bild sparad i </string>
+    <string name="title_activity_settings">Inställningar</string>
+    <string name="notification_sounds_header">Aviseringsljud</string>
+    <string name="lighting_header">Belysning</string>
+    <string name="focus_sound_title">Efter autofokus</string>
+    <string name="shutter_sound_title">Vid skärmdump</string>
+    <string name="max_brightness_title">Maximal skärmljusstyrka</string>
+    <string name="auto_torch_title">Slå på ficklampa vid start</string>
+    <string name="advanced_header">Avancerat</string>
+    <string name="preview_resolution_width">Bredd på förhandsvisningsupplösning</string>
+    <string name="camera_id">Kamera</string>
+    <string name="main_camera">Huvudkamera</string>
+    <string name="selfie_camera">Selfiekamera</string>
+    <string name="wide_or_other_camera">Vidvinkel eller annan</string>
+    <string name="ui_header">Gränssnitt</string>
+    <string name="default_zoom_title">Standardzoomnivå</string>
+    <string name="handedness_title">Handedness</string>
+    <string name="language_title">Språk</string>
+    <string-array name="handedness_entries">
+        <item>Högerhänt</item>
+        <item>Vänsterhänt</item>
+    </string-array>
+</resources>

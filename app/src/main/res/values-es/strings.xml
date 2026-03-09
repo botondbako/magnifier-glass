@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Visor OS</string>
+    <string name="button_color_description">cambiar modo de contraste</string>
+    <string name="button_zoom_description">cambiar nivel de aumento</string>
+    <string name="button_flash_description">encender y apagar la linterna</string>
+    <string name="button_pause_description">congelar la imagen actual</string>
+    <string name="button_zoom_in_description">acercar</string>
+    <string name="button_zoom_out_description">alejar</string>
+    <string name="button_exit_description">salir</string>
+    <string name="text_autofocus_enabled">Enfoque automático activado.</string>
+    <string name="text_autofocus_disabled">Enfoque automático desactivado. Toque para enfocar.</string>
+    <string name="text_image_stored">Imagen guardada en </string>
+    <string name="title_activity_settings">Ajustes</string>
+    <string name="notification_sounds_header">Sonidos de notificación</string>
+    <string name="lighting_header">Iluminación</string>
+    <string name="focus_sound_title">Después del enfoque automático</string>
+    <string name="shutter_sound_title">Al capturar pantalla</string>
+    <string name="max_brightness_title">Brillo máximo de pantalla</string>
+    <string name="auto_torch_title">Encender linterna al iniciar</string>
+    <string name="advanced_header">Avanzado</string>
+    <string name="preview_resolution_width">Ancho de resolución de vista previa</string>
+    <string name="camera_id">Cámara</string>
+    <string name="main_camera">Cámara principal</string>
+    <string name="selfie_camera">Cámara selfie</string>
+    <string name="wide_or_other_camera">Gran angular u otra</string>
+    <string name="ui_header">Interfaz</string>
+    <string name="default_zoom_title">Nivel de zoom predeterminado</string>
+    <string name="handedness_title">Lateralidad</string>
+    <string name="language_title">Idioma</string>
+    <string-array name="handedness_entries">
+        <item>Diestro</item>
+        <item>Zurdo</item>
+    </string-array>
+</resources>

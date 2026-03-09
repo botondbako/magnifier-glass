@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Visor OS</string>
+    <string name="button_color_description">промяна на режима на контраст</string>
+    <string name="button_zoom_description">промяна на нивото на увеличение</string>
+    <string name="button_flash_description">включване и изключване на фенерчето</string>
+    <string name="button_pause_description">замразяване на текущото изображение</string>
+    <string name="button_zoom_in_description">увеличаване</string>
+    <string name="button_zoom_out_description">намаляване</string>
+    <string name="button_exit_description">изход</string>
+    <string name="text_autofocus_enabled">Автофокусът е включен.</string>
+    <string name="text_autofocus_disabled">Автофокусът е изключен. Докоснете за фокусиране.</string>
+    <string name="text_image_stored">Изображението е запазено в </string>
+    <string name="title_activity_settings">Настройки</string>
+    <string name="notification_sounds_header">Звуци за известия</string>
+    <string name="lighting_header">Осветление</string>
+    <string name="focus_sound_title">След автофокус</string>
+    <string name="shutter_sound_title">При заснемане на екрана</string>
+    <string name="max_brightness_title">Максимална яркост на екрана</string>
+    <string name="auto_torch_title">Включване на фенерчето при стартиране</string>
+    <string name="advanced_header">Разширени</string>
+    <string name="preview_resolution_width">Ширина на резолюцията на визуализацията</string>
+    <string name="camera_id">Камера</string>
+    <string name="main_camera">Основна камера</string>
+    <string name="selfie_camera">Селфи камера</string>
+    <string name="wide_or_other_camera">Широкоъгълна или друга</string>
+    <string name="ui_header">Интерфейс</string>
+    <string name="default_zoom_title">Ниво на увеличение по подразбиране</string>
+    <string name="handedness_title">Ръчност</string>
+    <string name="language_title">Език</string>
+    <string-array name="handedness_entries">
+        <item>Деснорък</item>
+        <item>Леворък</item>
+    </string-array>
+</resources>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Visor OS</string>
+    <string name="button_color_description">schimbă modul de contrast</string>
+    <string name="button_zoom_description">schimbă nivelul de mărire</string>
+    <string name="button_flash_description">pornește și oprește lanterna</string>
+    <string name="button_pause_description">îngheață imaginea curentă</string>
+    <string name="button_zoom_in_description">mărire</string>
+    <string name="button_zoom_out_description">micșorare</string>
+    <string name="button_exit_description">ieșire din aplicație</string>
+    <string name="text_autofocus_enabled">Autofocus activat.</string>
+    <string name="text_autofocus_disabled">Autofocus dezactivat. Atingeți pentru focalizare.</string>
+    <string name="text_image_stored">Imagine salvată în </string>
+
+    <!-- Preference Titles -->
+    <string name="title_activity_settings">Setări</string>
+    <string name="notification_sounds_header">Sunete de notificare</string>
+    <string name="lighting_header">Iluminare</string>
+
+    <!-- Notification Sound Preferences -->
+    <string name="focus_sound_title">După autofocus</string>
+    <string name="shutter_sound_title">La captură de ecran</string>
+
+    <!-- Lighting Preferences -->
+    <string name="max_brightness_title">Luminozitate maximă a ecranului</string>
+    <string name="auto_torch_title">Pornește lanterna la start</string>
+
+    <!-- Advanced Preferences -->
+    <string name="advanced_header">Avansat</string>
+    <string name="preview_resolution_width">Lățimea rezoluției de previzualizare</string>
+    <string name="camera_id">Cameră</string>
+    <string name="main_camera">Camera principală</string>
+    <string name="selfie_camera">Camera selfie</string>
+    <string name="wide_or_other_camera">Unghi larg sau altă cameră</string>
+
+    <!-- UI Preferences -->
+    <string name="ui_header">Interfață</string>
+    <string name="default_zoom_title">Nivel implicit de mărire</string>
+    <string name="handedness_title">Mâna dominantă</string>
+    <string name="language_title">Limbă</string>
+
+    <string-array name="handedness_entries">
+        <item>Dreptaci</item>
+        <item>Stângaci</item>
+    </string-array>
+</resources>

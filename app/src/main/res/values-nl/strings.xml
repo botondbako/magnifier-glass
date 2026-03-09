@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Visor OS</string>
+    <string name="button_color_description">contrastmodus wijzigen</string>
+    <string name="button_zoom_description">vergrotingsniveau wijzigen</string>
+    <string name="button_flash_description">zaklamp aan- en uitzetten</string>
+    <string name="button_pause_description">huidig beeld bevriezen</string>
+    <string name="button_zoom_in_description">inzoomen</string>
+    <string name="button_zoom_out_description">uitzoomen</string>
+    <string name="button_exit_description">afsluiten</string>
+    <string name="text_autofocus_enabled">Autofocus ingeschakeld.</string>
+    <string name="text_autofocus_disabled">Autofocus uitgeschakeld. Tik om scherp te stellen.</string>
+    <string name="text_image_stored">Afbeelding opgeslagen in </string>
+    <string name="title_activity_settings">Instellingen</string>
+    <string name="notification_sounds_header">Meldingsgeluiden</string>
+    <string name="lighting_header">Verlichting</string>
+    <string name="focus_sound_title">Na autofocus</string>
+    <string name="shutter_sound_title">Bij schermopname</string>
+    <string name="max_brightness_title">Maximale schermhelderheid</string>
+    <string name="auto_torch_title">Zaklamp aanzetten bij opstarten</string>
+    <string name="advanced_header">Geavanceerd</string>
+    <string name="preview_resolution_width">Breedte voorbeeldresolutie</string>
+    <string name="camera_id">Camera</string>
+    <string name="main_camera">Hoofdcamera</string>
+    <string name="selfie_camera">Selfiecamera</string>
+    <string name="wide_or_other_camera">Groothoek of andere</string>
+    <string name="ui_header">Interface</string>
+    <string name="default_zoom_title">Standaard zoomniveau</string>
+    <string name="handedness_title">Handigheid</string>
+    <string name="language_title">Taal</string>
+    <string-array name="handedness_entries">
+        <item>Rechtshandig</item>
+        <item>Linkshandig</item>
+    </string-array>
+</resources>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Visor OS</string>
+    <string name="button_color_description">changer le mode de contraste</string>
+    <string name="button_zoom_description">changer le niveau de grossissement</string>
+    <string name="button_flash_description">allumer et éteindre la lampe</string>
+    <string name="button_pause_description">figer l\'image actuelle</string>
+    <string name="button_zoom_in_description">agrandir</string>
+    <string name="button_zoom_out_description">réduire</string>
+    <string name="button_exit_description">quitter</string>
+    <string name="text_autofocus_enabled">Autofocus activé.</string>
+    <string name="text_autofocus_disabled">Autofocus désactivé. Appuyez pour faire la mise au point.</string>
+    <string name="text_image_stored">Image enregistrée dans </string>
+    <string name="title_activity_settings">Paramètres</string>
+    <string name="notification_sounds_header">Sons de notification</string>
+    <string name="lighting_header">Éclairage</string>
+    <string name="focus_sound_title">Après autofocus</string>
+    <string name="shutter_sound_title">Lors de la capture</string>
+    <string name="max_brightness_title">Luminosité maximale de l\'écran</string>
+    <string name="auto_torch_title">Allumer la lampe au démarrage</string>
+    <string name="advanced_header">Avancé</string>
+    <string name="preview_resolution_width">Largeur de résolution de l\'aperçu</string>
+    <string name="camera_id">Caméra</string>
+    <string name="main_camera">Caméra principale</string>
+    <string name="selfie_camera">Caméra selfie</string>
+    <string name="wide_or_other_camera">Grand angle ou autre</string>
+    <string name="ui_header">Interface</string>
+    <string name="default_zoom_title">Niveau de zoom par défaut</string>
+    <string name="handedness_title">Latéralité</string>
+    <string name="language_title">Langue</string>
+    <string-array name="handedness_entries">
+        <item>Droitier</item>
+        <item>Gaucher</item>
+    </string-array>
+</resources>

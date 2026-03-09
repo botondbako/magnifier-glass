@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Visor OS</string>
+    <string name="button_color_description">cambia modalità contrasto</string>
+    <string name="button_zoom_description">cambia livello di ingrandimento</string>
+    <string name="button_flash_description">accendi e spegni la torcia</string>
+    <string name="button_pause_description">blocca l\'immagine corrente</string>
+    <string name="button_zoom_in_description">ingrandisci</string>
+    <string name="button_zoom_out_description">riduci</string>
+    <string name="button_exit_description">esci</string>
+    <string name="text_autofocus_enabled">Autofocus attivato.</string>
+    <string name="text_autofocus_disabled">Autofocus disattivato. Tocca per mettere a fuoco.</string>
+    <string name="text_image_stored">Immagine salvata in </string>
+    <string name="title_activity_settings">Impostazioni</string>
+    <string name="notification_sounds_header">Suoni di notifica</string>
+    <string name="lighting_header">Illuminazione</string>
+    <string name="focus_sound_title">Dopo autofocus</string>
+    <string name="shutter_sound_title">Alla cattura dello schermo</string>
+    <string name="max_brightness_title">Luminosità massima dello schermo</string>
+    <string name="auto_torch_title">Accendi torcia all\'avvio</string>
+    <string name="advanced_header">Avanzate</string>
+    <string name="preview_resolution_width">Larghezza risoluzione anteprima</string>
+    <string name="camera_id">Fotocamera</string>
+    <string name="main_camera">Fotocamera principale</string>
+    <string name="selfie_camera">Fotocamera selfie</string>
+    <string name="wide_or_other_camera">Grandangolo o altra</string>
+    <string name="ui_header">Interfaccia</string>
+    <string name="default_zoom_title">Livello di zoom predefinito</string>
+    <string name="handedness_title">Lateralità</string>
+    <string name="language_title">Lingua</string>
+    <string-array name="handedness_entries">
+        <item>Destrorso</item>
+        <item>Mancino</item>
+    </string-array>
+</resources>

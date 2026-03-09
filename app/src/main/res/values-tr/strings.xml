@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Visor OS</string>
+    <string name="button_color_description">kontrast modunu değiştir</string>
+    <string name="button_zoom_description">büyütme seviyesini değiştir</string>
+    <string name="button_flash_description">el fenerini aç ve kapat</string>
+    <string name="button_pause_description">mevcut görüntüyü dondur</string>
+    <string name="button_zoom_in_description">yakınlaştır</string>
+    <string name="button_zoom_out_description">uzaklaştır</string>
+    <string name="button_exit_description">çıkış</string>
+    <string name="text_autofocus_enabled">Otomatik odaklama etkin.</string>
+    <string name="text_autofocus_disabled">Otomatik odaklama devre dışı. Odaklamak için dokunun.</string>
+    <string name="text_image_stored">Görüntü kaydedildi </string>
+    <string name="title_activity_settings">Ayarlar</string>
+    <string name="notification_sounds_header">Bildirim sesleri</string>
+    <string name="lighting_header">Aydınlatma</string>
+    <string name="focus_sound_title">Otomatik odaklamadan sonra</string>
+    <string name="shutter_sound_title">Ekran görüntüsünde</string>
+    <string name="max_brightness_title">Maksimum ekran parlaklığı</string>
+    <string name="auto_torch_title">Başlangıçta el fenerini aç</string>
+    <string name="advanced_header">Gelişmiş</string>
+    <string name="preview_resolution_width">Önizleme çözünürlük genişliği</string>
+    <string name="camera_id">Kamera</string>
+    <string name="main_camera">Ana kamera</string>
+    <string name="selfie_camera">Selfie kamerası</string>
+    <string name="wide_or_other_camera">Geniş açı veya diğer</string>
+    <string name="ui_header">Arayüz</string>
+    <string name="default_zoom_title">Varsayılan yakınlaştırma seviyesi</string>
+    <string name="handedness_title">El tercihi</string>
+    <string name="language_title">Dil</string>
+    <string-array name="handedness_entries">
+        <item>Sağ elini kullanan</item>
+        <item>Sol elini kullanan</item>
+    </string-array>
+</resources>

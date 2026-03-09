@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Visor OS</string>
+    <string name="button_color_description">změnit režim kontrastu</string>
+    <string name="button_zoom_description">změnit úroveň zvětšení</string>
+    <string name="button_flash_description">zapnout a vypnout svítilnu</string>
+    <string name="button_pause_description">zmrazit aktuální obraz</string>
+    <string name="button_zoom_in_description">přiblížit</string>
+    <string name="button_zoom_out_description">oddálit</string>
+    <string name="button_exit_description">ukončit</string>
+    <string name="text_autofocus_enabled">Automatické ostření zapnuto.</string>
+    <string name="text_autofocus_disabled">Automatické ostření vypnuto. Klepněte pro zaostření.</string>
+    <string name="text_image_stored">Obrázek uložen v </string>
+    <string name="title_activity_settings">Nastavení</string>
+    <string name="notification_sounds_header">Zvuky oznámení</string>
+    <string name="lighting_header">Osvětlení</string>
+    <string name="focus_sound_title">Po automatickém ostření</string>
+    <string name="shutter_sound_title">Při snímku obrazovky</string>
+    <string name="max_brightness_title">Maximální jas displeje</string>
+    <string name="auto_torch_title">Zapnout svítilnu při spuštění</string>
+    <string name="advanced_header">Pokročilé</string>
+    <string name="preview_resolution_width">Šířka rozlišení náhledu</string>
+    <string name="camera_id">Fotoaparát</string>
+    <string name="main_camera">Hlavní fotoaparát</string>
+    <string name="selfie_camera">Selfie fotoaparát</string>
+    <string name="wide_or_other_camera">Širokoúhlý nebo jiný</string>
+    <string name="ui_header">Rozhraní</string>
+    <string name="default_zoom_title">Výchozí úroveň přiblížení</string>
+    <string name="handedness_title">Strannost</string>
+    <string name="language_title">Jazyk</string>
+    <string-array name="handedness_entries">
+        <item>Pravák</item>
+        <item>Levák</item>
+    </string-array>
+</resources>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Visor OS</string>
+    <string name="button_color_description">змінити режим контрасту</string>
+    <string name="button_zoom_description">змінити рівень збільшення</string>
+    <string name="button_flash_description">увімкнути та вимкнути ліхтарик</string>
+    <string name="button_pause_description">заморозити поточне зображення</string>
+    <string name="button_zoom_in_description">збільшити</string>
+    <string name="button_zoom_out_description">зменшити</string>
+    <string name="button_exit_description">вихід</string>
+    <string name="text_autofocus_enabled">Автофокус увімкнено.</string>
+    <string name="text_autofocus_disabled">Автофокус вимкнено. Торкніться для фокусування.</string>
+    <string name="text_image_stored">Зображення збережено в </string>
+    <string name="title_activity_settings">Налаштування</string>
+    <string name="notification_sounds_header">Звуки сповіщень</string>
+    <string name="lighting_header">Освітлення</string>
+    <string name="focus_sound_title">Після автофокусу</string>
+    <string name="shutter_sound_title">При знімку екрана</string>
+    <string name="max_brightness_title">Максимальна яскравість екрана</string>
+    <string name="auto_torch_title">Увімкнути ліхтарик при запуску</string>
+    <string name="advanced_header">Додатково</string>
+    <string name="preview_resolution_width">Ширина роздільної здатності попереднього перегляду</string>
+    <string name="camera_id">Камера</string>
+    <string name="main_camera">Основна камера</string>
+    <string name="selfie_camera">Селфі-камера</string>
+    <string name="wide_or_other_camera">Ширококутна або інша</string>
+    <string name="ui_header">Інтерфейс</string>
+    <string name="default_zoom_title">Рівень масштабування за замовчуванням</string>
+    <string name="handedness_title">Рукість</string>
+    <string name="language_title">Мова</string>
+    <string-array name="handedness_entries">
+        <item>Правша</item>
+        <item>Лівша</item>
+    </string-array>
+</resources>

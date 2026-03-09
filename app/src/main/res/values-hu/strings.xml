@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Visor OS</string>
+    <string name="button_color_description">kontraszt mód váltása</string>
+    <string name="button_zoom_description">nagyítási szint módosítása</string>
+    <string name="button_flash_description">zseblámpa be- és kikapcsolása</string>
+    <string name="button_pause_description">aktuális kamerakép befagyasztása</string>
+    <string name="button_zoom_in_description">nagyítás</string>
+    <string name="button_zoom_out_description">kicsinyítés</string>
+    <string name="button_exit_description">kilépés</string>
+    <string name="text_autofocus_enabled">Autofókusz bekapcsolva.</string>
+    <string name="text_autofocus_disabled">Autofókusz kikapcsolva. Érintse meg a fókuszáláshoz.</string>
+    <string name="text_image_stored">Kép mentve ide: </string>
+
+    <!-- Preference Titles -->
+    <string name="title_activity_settings">Beállítások</string>
+    <string name="notification_sounds_header">Értesítési hangok</string>
+    <string name="lighting_header">Világítás</string>
+
+    <!-- Notification Sound Preferences -->
+    <string name="focus_sound_title">Autofókusz után</string>
+    <string name="shutter_sound_title">Képernyőkép készítésekor</string>
+
+    <!-- Lighting Preferences -->
+    <string name="max_brightness_title">Maximális kijelző fényerő</string>
+    <string name="auto_torch_title">Zseblámpa bekapcsolása indításkor</string>
+
+    <!-- Advanced Preferences -->
+    <string name="advanced_header">Haladó</string>
+    <string name="preview_resolution_width">Előnézet felbontás szélessége</string>
+    <string name="camera_id">Kamera</string>
+    <string name="main_camera">Fő kamera</string>
+    <string name="selfie_camera">Szelfi kamera</string>
+    <string name="wide_or_other_camera">Széles látószögű vagy egyéb</string>
+
+    <!-- UI Preferences -->
+    <string name="ui_header">Felület</string>
+    <string name="default_zoom_title">Alapértelmezett nagyítási szint</string>
+    <string name="handedness_title">Kezesség</string>
+    <string name="language_title">Nyelv</string>
+
+    <string-array name="handedness_entries">
+        <item>Jobbkezes</item>
+        <item>Balkezes</item>
+    </string-array>
+</resources>

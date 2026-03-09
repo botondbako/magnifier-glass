@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Visor OS</string>
+    <string name="button_color_description">zmeniť režim kontrastu</string>
+    <string name="button_zoom_description">zmeniť úroveň zväčšenia</string>
+    <string name="button_flash_description">zapnúť a vypnúť baterku</string>
+    <string name="button_pause_description">zmraziť aktuálny obraz</string>
+    <string name="button_zoom_in_description">priblížiť</string>
+    <string name="button_zoom_out_description">oddialiť</string>
+    <string name="button_exit_description">ukončiť</string>
+    <string name="text_autofocus_enabled">Automatické ostrenie zapnuté.</string>
+    <string name="text_autofocus_disabled">Automatické ostrenie vypnuté. Ťuknite pre zaostrenie.</string>
+    <string name="text_image_stored">Obrázok uložený v </string>
+    <string name="title_activity_settings">Nastavenia</string>
+    <string name="notification_sounds_header">Zvuky oznámení</string>
+    <string name="lighting_header">Osvetlenie</string>
+    <string name="focus_sound_title">Po automatickom ostrení</string>
+    <string name="shutter_sound_title">Pri snímke obrazovky</string>
+    <string name="max_brightness_title">Maximálny jas displeja</string>
+    <string name="auto_torch_title">Zapnúť baterku pri spustení</string>
+    <string name="advanced_header">Pokročilé</string>
+    <string name="preview_resolution_width">Šírka rozlíšenia náhľadu</string>
+    <string name="camera_id">Fotoaparát</string>
+    <string name="main_camera">Hlavný fotoaparát</string>
+    <string name="selfie_camera">Selfie fotoaparát</string>
+    <string name="wide_or_other_camera">Širokoúhlý alebo iný</string>
+    <string name="ui_header">Rozhranie</string>
+    <string name="default_zoom_title">Predvolená úroveň priblíženia</string>
+    <string name="handedness_title">Strannosť</string>
+    <string name="language_title">Jazyk</string>
+    <string-array name="handedness_entries">
+        <item>Pravák</item>
+        <item>Ľavák</item>
+    </string-array>
+</resources>

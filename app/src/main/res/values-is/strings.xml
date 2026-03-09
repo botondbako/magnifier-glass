@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Visor OS</string>
+    <string name="button_color_description">breyta birtustigsham</string>
+    <string name="button_zoom_description">breyta stækkunarstigi</string>
+    <string name="button_flash_description">kveikja og slökkva á vasaljósi</string>
+    <string name="button_pause_description">frysta núverandi mynd</string>
+    <string name="button_zoom_in_description">stækka</string>
+    <string name="button_zoom_out_description">minnka</string>
+    <string name="button_exit_description">hætta</string>
+    <string name="text_autofocus_enabled">Sjálfvirkur fókus virkur.</string>
+    <string name="text_autofocus_disabled">Sjálfvirkur fókus óvirkur. Snertu til að fókusera.</string>
+    <string name="text_image_stored">Mynd vistuð í </string>
+    <string name="title_activity_settings">Stillingar</string>
+    <string name="notification_sounds_header">Tilkynningahljóð</string>
+    <string name="lighting_header">Lýsing</string>
+    <string name="focus_sound_title">Eftir sjálfvirkan fókus</string>
+    <string name="shutter_sound_title">Við skjámynd</string>
+    <string name="max_brightness_title">Hámarks skjábirta</string>
+    <string name="auto_torch_title">Kveikja á vasaljósi við ræsingu</string>
+    <string name="advanced_header">Ítarlegt</string>
+    <string name="preview_resolution_width">Breidd forskoðunarupplausnar</string>
+    <string name="camera_id">Myndavél</string>
+    <string name="main_camera">Aðalmyndavél</string>
+    <string name="selfie_camera">Selfie-myndavél</string>
+    <string name="wide_or_other_camera">Víðmynd eða önnur</string>
+    <string name="ui_header">Viðmót</string>
+    <string name="default_zoom_title">Sjálfgefið aðdráttarstig</string>
+    <string name="handedness_title">Handlegg</string>
+    <string name="language_title">Tungumál</string>
+    <string-array name="handedness_entries">
+        <item>Rétthentur</item>
+        <item>Örvhentur</item>
+    </string-array>
+</resources>

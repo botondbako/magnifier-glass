@@ -5,6 +5,9 @@
     <string name="button_zoom_description">ändere Vergrößerungsstufe der Kamera</string>
     <string name="button_flash_description">an und ausschalten des Blitzlichts</string>
     <string name="button_pause_description">fiert das aktuelle Bild ein</string>
+    <string name="button_zoom_in_description">vergrößern</string>
+    <string name="button_zoom_out_description">verkleinern</string>
+    <string name="button_exit_description">App beenden</string>
     <string name="text_autofocus_enabled">Autofokus aktiviert.</string>
     <string name="text_autofocus_disabled">Autofokus deaktiviert. Antippen zum Fokussieren.</string>
     <string name="text_image_stored">Bild gespeichert unter </string>
@@ -30,4 +33,14 @@
     <string name="selfie_camera">Selfie-Kamera</string>
     <string name="wide_or_other_camera">Weitwinkel- oder andere</string>
 
+    <!-- UI Preferences -->
+    <string name="ui_header">Oberfläche</string>
+    <string name="default_zoom_title">Standard-Vergrößerungsstufe</string>
+    <string name="handedness_title">Händigkeit</string>
+    <string name="language_title">Sprache</string>
+
+    <string-array name="handedness_entries">
+        <item>Rechtshändig</item>
+        <item>Linkshändig</item>
+    </string-array>
 </resources>

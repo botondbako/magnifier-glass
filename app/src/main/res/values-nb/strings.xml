@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Visor OS</string>
+    <string name="button_color_description">endre kontrastmodus</string>
+    <string name="button_zoom_description">endre forstørrelsesnivå</string>
+    <string name="button_flash_description">slå lommelykt av og på</string>
+    <string name="button_pause_description">frys gjeldende bilde</string>
+    <string name="button_zoom_in_description">zoom inn</string>
+    <string name="button_zoom_out_description">zoom ut</string>
+    <string name="button_exit_description">avslutt</string>
+    <string name="text_autofocus_enabled">Autofokus aktivert.</string>
+    <string name="text_autofocus_disabled">Autofokus deaktivert. Trykk for å fokusere.</string>
+    <string name="text_image_stored">Bilde lagret i </string>
+    <string name="title_activity_settings">Innstillinger</string>
+    <string name="notification_sounds_header">Varsellyder</string>
+    <string name="lighting_header">Belysning</string>
+    <string name="focus_sound_title">Etter autofokus</string>
+    <string name="shutter_sound_title">Ved skjermbilde</string>
+    <string name="max_brightness_title">Maksimal skjermlysstyrke</string>
+    <string name="auto_torch_title">Slå på lommelykt ved start</string>
+    <string name="advanced_header">Avansert</string>
+    <string name="preview_resolution_width">Bredde på forhåndsvisningsoppløsning</string>
+    <string name="camera_id">Kamera</string>
+    <string name="main_camera">Hovedkamera</string>
+    <string name="selfie_camera">Selfiekamera</string>
+    <string name="wide_or_other_camera">Vidvinkel eller annet</string>
+    <string name="ui_header">Grensesnitt</string>
+    <string name="default_zoom_title">Standard zoomnivå</string>
+    <string name="handedness_title">Håndthet</string>
+    <string name="language_title">Språk</string>
+    <string-array name="handedness_entries">
+        <item>Høyrehendt</item>
+        <item>Venstrehendt</item>
+    </string-array>
+</resources>

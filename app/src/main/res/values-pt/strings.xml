@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Visor OS</string>
+    <string name="button_color_description">mudar modo de contraste</string>
+    <string name="button_zoom_description">mudar nível de ampliação</string>
+    <string name="button_flash_description">ligar e desligar a lanterna</string>
+    <string name="button_pause_description">congelar a imagem atual</string>
+    <string name="button_zoom_in_description">ampliar</string>
+    <string name="button_zoom_out_description">reduzir</string>
+    <string name="button_exit_description">sair</string>
+    <string name="text_autofocus_enabled">Foco automático ativado.</string>
+    <string name="text_autofocus_disabled">Foco automático desativado. Toque para focar.</string>
+    <string name="text_image_stored">Imagem guardada em </string>
+    <string name="title_activity_settings">Definições</string>
+    <string name="notification_sounds_header">Sons de notificação</string>
+    <string name="lighting_header">Iluminação</string>
+    <string name="focus_sound_title">Após foco automático</string>
+    <string name="shutter_sound_title">Ao capturar ecrã</string>
+    <string name="max_brightness_title">Brilho máximo do ecrã</string>
+    <string name="auto_torch_title">Ligar lanterna ao iniciar</string>
+    <string name="advanced_header">Avançado</string>
+    <string name="preview_resolution_width">Largura da resolução de pré-visualização</string>
+    <string name="camera_id">Câmara</string>
+    <string name="main_camera">Câmara principal</string>
+    <string name="selfie_camera">Câmara selfie</string>
+    <string name="wide_or_other_camera">Grande angular ou outra</string>
+    <string name="ui_header">Interface</string>
+    <string name="default_zoom_title">Nível de zoom predefinido</string>
+    <string name="handedness_title">Lateralidade</string>
+    <string name="language_title">Idioma</string>
+    <string-array name="handedness_entries">
+        <item>Destro</item>
+        <item>Canhoto</item>
+    </string-array>
+</resources>

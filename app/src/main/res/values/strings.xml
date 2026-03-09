@@ -5,6 +5,9 @@
     <string name="button_zoom_description">change magnification level</string>
     <string name="button_flash_description">toggle flashlight on and off</string>
     <string name="button_pause_description">freezes the current camera image</string>
+    <string name="button_zoom_in_description">zoom in</string>
+    <string name="button_zoom_out_description">zoom out</string>
+    <string name="button_exit_description">exit app</string>
     <string name="text_autofocus_enabled">Autofocus enabled.</string>
     <string name="text_autofocus_disabled">Autofocus disabled. Tap to focus.</string>
     <string name="text_image_stored">Image stored in path </string>
@@ -19,8 +22,10 @@
     <string name="key_preference_max_brightness" translatable="false">VisorAndroidKeyPreferenceMaxBrightness</string>
     <string name="key_preference_auto_torch" translatable="false">VisorAndroidKeyPreferenceAutoTorch</string>
     <string name="key_preference_preview_resolution" translatable="false">VisorAndroidKeyPreferencePreviewResolution</string>
-    <string name="key_preference_camera_id" translatable="false">VisorAndroidKeyPreferenceCameraId</string>/>
-
+    <string name="key_preference_camera_id" translatable="false">VisorAndroidKeyPreferenceCameraId</string>
+    <string name="key_preference_default_zoom" translatable="false">VisorAndroidKeyPreferenceDefaultZoom</string>
+    <string name="key_preference_handedness" translatable="false">VisorAndroidKeyPreferenceHandedness</string>
+    <string name="key_preference_language" translatable="false">VisorAndroidKeyPreferenceLanguage</string>
 
     <!-- Preference Titles -->
     <string name="title_activity_settings">Settings</string>
@@ -42,4 +47,10 @@
     <string name="main_camera">Main camera</string>
     <string name="selfie_camera">Selfie camera</string>
     <string name="wide_or_other_camera">Wide or other</string>
+
+    <!-- UI Preferences -->
+    <string name="ui_header">Interface</string>
+    <string name="default_zoom_title">Default zoom level</string>
+    <string name="handedness_title">Handedness</string>
+    <string name="language_title">Language</string>
 </resources>

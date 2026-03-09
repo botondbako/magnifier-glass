@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Visor OS</string>
+    <string name="button_color_description">promijeni način kontrasta</string>
+    <string name="button_zoom_description">promijeni razinu povećanja</string>
+    <string name="button_flash_description">uključi i isključi svjetiljku</string>
+    <string name="button_pause_description">zamrzni trenutnu sliku</string>
+    <string name="button_zoom_in_description">povećaj</string>
+    <string name="button_zoom_out_description">smanji</string>
+    <string name="button_exit_description">izlaz</string>
+    <string name="text_autofocus_enabled">Automatsko fokusiranje uključeno.</string>
+    <string name="text_autofocus_disabled">Automatsko fokusiranje isključeno. Dodirnite za fokusiranje.</string>
+    <string name="text_image_stored">Slika spremljena u </string>
+    <string name="title_activity_settings">Postavke</string>
+    <string name="notification_sounds_header">Zvukovi obavijesti</string>
+    <string name="lighting_header">Osvjetljenje</string>
+    <string name="focus_sound_title">Nakon automatskog fokusiranja</string>
+    <string name="shutter_sound_title">Pri snimci zaslona</string>
+    <string name="max_brightness_title">Maksimalna svjetlina zaslona</string>
+    <string name="auto_torch_title">Uključi svjetiljku pri pokretanju</string>
+    <string name="advanced_header">Napredno</string>
+    <string name="preview_resolution_width">Širina rezolucije pregleda</string>
+    <string name="camera_id">Kamera</string>
+    <string name="main_camera">Glavna kamera</string>
+    <string name="selfie_camera">Selfie kamera</string>
+    <string name="wide_or_other_camera">Širokokutna ili druga</string>
+    <string name="ui_header">Sučelje</string>
+    <string name="default_zoom_title">Zadana razina zumiranja</string>
+    <string name="handedness_title">Rukovodnost</string>
+    <string name="language_title">Jezik</string>
+    <string-array name="handedness_entries">
+        <item>Desnoruk</item>
+        <item>Ljevoruk</item>
+    </string-array>
+</resources>

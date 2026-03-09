@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Visor OS</string>
+    <string name="button_color_description">muuda kontrastirežiimi</string>
+    <string name="button_zoom_description">muuda suurendustaset</string>
+    <string name="button_flash_description">lülita taskulamp sisse ja välja</string>
+    <string name="button_pause_description">külmuta praegune pilt</string>
+    <string name="button_zoom_in_description">suurenda</string>
+    <string name="button_zoom_out_description">vähenda</string>
+    <string name="button_exit_description">välju</string>
+    <string name="text_autofocus_enabled">Autofookus lubatud.</string>
+    <string name="text_autofocus_disabled">Autofookus keelatud. Puudutage fokuseerimiseks.</string>
+    <string name="text_image_stored">Pilt salvestatud asukohta </string>
+    <string name="title_activity_settings">Seaded</string>
+    <string name="notification_sounds_header">Teavitushelid</string>
+    <string name="lighting_header">Valgustus</string>
+    <string name="focus_sound_title">Pärast autofookust</string>
+    <string name="shutter_sound_title">Ekraanipildi tegemisel</string>
+    <string name="max_brightness_title">Maksimaalne ekraani heledus</string>
+    <string name="auto_torch_title">Lülita taskulamp käivitamisel sisse</string>
+    <string name="advanced_header">Täpsemad</string>
+    <string name="preview_resolution_width">Eelvaate eraldusvõime laius</string>
+    <string name="camera_id">Kaamera</string>
+    <string name="main_camera">Põhikaamera</string>
+    <string name="selfie_camera">Selfie-kaamera</string>
+    <string name="wide_or_other_camera">Lainurk- või muu</string>
+    <string name="ui_header">Liides</string>
+    <string name="default_zoom_title">Vaikimisi suumitase</string>
+    <string name="handedness_title">Käelisus</string>
+    <string name="language_title">Keel</string>
+    <string-array name="handedness_entries">
+        <item>Paremakäeline</item>
+        <item>Vasakukäeline</item>
+    </string-array>
+</resources>
