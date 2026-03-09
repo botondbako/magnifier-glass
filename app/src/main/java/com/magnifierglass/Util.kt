@@ -1,4 +1,4 @@
-package de.visorapp.visor
+package com.magnifierglass
 
 import android.content.ContentValues
 import android.content.Context

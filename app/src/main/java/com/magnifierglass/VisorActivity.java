@@ -1,4 +1,4 @@
-package de.visorapp.visor;
+package com.magnifierglass;
 
 import android.Manifest;
 import android.app.Activity;
@@ -38,7 +38,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import de.visorapp.visor.filters.ColorFilter;
+import com.magnifierglass.filters.ColorFilter;
 
 /**
  */
@@ -433,6 +433,10 @@ public class VisorActivity extends Activity {
         setContentView(R.layout.activity_visor);
         applyHandedness();
 
+        if (savedInstanceState != null) {
+            mCurrentZoomPercent = savedInstanceState.getInt("zoomPercent", 0);
+        }
+
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_CODE);
             return;
@@ -488,10 +492,12 @@ public class VisorActivity extends Activity {
         // Add listeners to the Zoom buttons
         findViewById(R.id.button_zoom_in).setOnClickListener(zoomInClickHandler);
         findViewById(R.id.button_zoom_out).setOnClickListener(zoomOutClickHandler);
-        int defaultZoom = Integer.parseInt(mSharedPreferences.getString(
-                getString(R.string.key_preference_default_zoom), "0"));
-        mCurrentZoomPercent = defaultZoom;
-        updateZoomLabel(defaultZoom);
+        if (mCurrentZoomPercent == 0) {
+            int defaultZoom = Integer.parseInt(mSharedPreferences.getString(
+                    getString(R.string.key_preference_default_zoom), "0"));
+            mCurrentZoomPercent = defaultZoom;
+        }
+        updateZoomLabel(mCurrentZoomPercent);
 
         mPhotoButton = findViewById(R.id.button_photo);
         mPhotoButton.setOnClickListener(screenshotClickHandler);
@@ -597,6 +603,12 @@ public class VisorActivity extends Activity {
             // Several error may come out with file handling or OOM
             e.printStackTrace();
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("zoomPercent", mCurrentZoomPercent);
     }
 
     /**

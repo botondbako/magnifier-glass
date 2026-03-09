@@ -93,11 +93,11 @@
         android:gravity="center_vertical"
         android:elevation="8dp">
 
-        <Button android:id="@+id/button_zoom_in"
+        <Button android:id="@+id/button_zoom_out"
             android:layout_width="36dp" android:layout_height="36dp"
-            android:text="🔍+" android:textSize="12sp" android:textColor="#000000"
+            android:text="🔍−" android:textSize="12sp" android:textColor="#000000"
             android:background="@drawable/button_zoom_round_corners"
-            android:contentDescription="@string/button_zoom_in_description"
+            android:contentDescription="@string/button_zoom_out_description"
             android:elevation="8dp"
             android:padding="0dp" android:minWidth="0dp" android:minHeight="0dp" />
 
@@ -108,11 +108,11 @@
             android:shadowColor="#000000" android:shadowDx="1" android:shadowDy="1" android:shadowRadius="3"
             android:paddingLeft="4dp" android:paddingRight="4dp" />
 
-        <Button android:id="@+id/button_zoom_out"
+        <Button android:id="@+id/button_zoom_in"
             android:layout_width="36dp" android:layout_height="36dp"
-            android:text="🔍−" android:textSize="12sp" android:textColor="#000000"
+            android:text="🔍+" android:textSize="12sp" android:textColor="#000000"
             android:background="@drawable/button_zoom_round_corners"
-            android:contentDescription="@string/button_zoom_out_description"
+            android:contentDescription="@string/button_zoom_in_description"
             android:elevation="8dp"
             android:padding="0dp" android:minWidth="0dp" android:minHeight="0dp" />
     </LinearLayout>

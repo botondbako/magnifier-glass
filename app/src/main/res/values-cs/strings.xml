@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Visor OS</string>
+    <string name="app_name">MagnifierGlass</string>
     <string name="button_color_description">změnit režim kontrastu</string>
     <string name="button_zoom_description">změnit úroveň zvětšení</string>
     <string name="button_flash_description">zapnout a vypnout svítilnu</string>

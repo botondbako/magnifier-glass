@@ -1,4 +1,4 @@
-package de.visorapp.visor
+package com.magnifierglass
 
 import android.hardware.Camera
 import android.hardware.camera2.CameraCharacteristics

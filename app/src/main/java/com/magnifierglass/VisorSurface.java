@@ -1,4 +1,4 @@
-package de.visorapp.visor;
+package com.magnifierglass;
 
 import android.app.Activity;
 import android.content.Context;
@@ -32,13 +32,13 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import de.visorapp.visor.filters.BlackWhiteColorFilter;
-import de.visorapp.visor.filters.BlueYellowColorFilter;
-import de.visorapp.visor.filters.ColorFilter;
-import de.visorapp.visor.filters.NoColorFilter;
-import de.visorapp.visor.filters.WhiteBlackColorFilter;
-import de.visorapp.visor.filters.YellowBlueColorFilter;
-import de.visorapp.visor.threads.BitmapCreateThread;
+import com.magnifierglass.filters.BlackWhiteColorFilter;
+import com.magnifierglass.filters.BlueYellowColorFilter;
+import com.magnifierglass.filters.ColorFilter;
+import com.magnifierglass.filters.NoColorFilter;
+import com.magnifierglass.filters.WhiteBlackColorFilter;
+import com.magnifierglass.filters.YellowBlueColorFilter;
+import com.magnifierglass.threads.BitmapCreateThread;
 
 import static android.hardware.Camera.Parameters.FOCUS_MODE_AUTO;
 

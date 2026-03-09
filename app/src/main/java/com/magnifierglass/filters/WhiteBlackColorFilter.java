@@ -1,4 +1,4 @@
-package de.visorapp.visor.filters;
+package com.magnifierglass.filters;
 
 import android.graphics.ColorMatrix;
 

@@ -1,4 +1,4 @@
-package de.visorapp.visor.threads;
+package com.magnifierglass.threads;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -6,8 +6,8 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.util.Log;
 
-import de.visorapp.visor.BitmapRenderer;
-import de.visorapp.visor.NativeYuvDecoder;
+import com.magnifierglass.BitmapRenderer;
+import com.magnifierglass.NativeYuvDecoder;
 
 /**
  * An external thread to render the bitmap out of the raw yuvData from the legacy camera preview API.

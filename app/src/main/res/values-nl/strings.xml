@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Visor OS</string>
+    <string name="app_name">MagnifierGlass</string>
     <string name="button_color_description">contrastmodus wijzigen</string>
     <string name="button_zoom_description">vergrotingsniveau wijzigen</string>
     <string name="button_flash_description">zaklamp aan- en uitzetten</string>

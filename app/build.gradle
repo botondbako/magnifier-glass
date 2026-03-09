@@ -8,11 +8,12 @@ allprojects {
 }
 
 android {
+    namespace 'com.magnifierglass'
     compileSdk 34
     buildToolsVersion buildToolsVersion
 
     defaultConfig {
-        applicationId "de.visorapp.visoropensource"
+        applicationId "com.magnifierglass"
         minSdk 21
         targetSdk 34
         versionCode 4
@@ -52,7 +53,6 @@ android {
             renderscriptDebuggable false
         }
     }
-    namespace "de.visorapp.visor"
 }
 
 dependencies {

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Visor OS</string>
+    <string name="app_name">MagnifierGlass</string>
     <string name="button_color_description">vaihda kontrastitilaa</string>
     <string name="button_zoom_description">vaihda suurennustasoa</string>
     <string name="button_flash_description">kytke taskulamppu päälle ja pois</string>

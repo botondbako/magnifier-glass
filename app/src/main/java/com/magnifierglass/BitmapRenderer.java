@@ -1,4 +1,4 @@
-package de.visorapp.visor;
+package com.magnifierglass;
 
 import android.graphics.Bitmap;
 

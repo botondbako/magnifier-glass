@@ -1,4 +1,4 @@
-package de.visorapp.visor;
+package com.magnifierglass;
 
 /**
  * Created by Christian on 02.04.17.
