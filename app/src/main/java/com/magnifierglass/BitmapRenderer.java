@@ -3,13 +3,12 @@ package com.magnifierglass;
 import android.graphics.Bitmap;
 
 /**
- * Created by handspiel on 11.08.15.
+ * Callback interface for receiving rendered bitmaps from background threads.
  */
 public interface BitmapRenderer {
     /**
-     * renders bitmaps.
-     * You can also use it as a setter method.
-     * @param bitmap
+     * Called when a bitmap has been rendered and is ready for display.
+     * @param bitmap the rendered bitmap
      */
     void renderBitmap(Bitmap bitmap);
 }

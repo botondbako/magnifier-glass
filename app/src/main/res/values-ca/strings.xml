@@ -2,15 +2,11 @@
 <resources>
     <string name="app_name">MagnifierGlass</string>
     <string name="button_color_description">canviar mode de contrast</string>
-    <string name="button_zoom_description">canviar nivell d\'ampliació</string>
     <string name="button_flash_description">encendre i apagar la llanterna</string>
     <string name="button_pause_description">congelar la imatge actual</string>
     <string name="button_zoom_in_description">ampliar</string>
     <string name="button_zoom_out_description">reduir</string>
     <string name="button_exit_description">sortir</string>
-    <string name="text_autofocus_enabled">Enfocament automàtic activat.</string>
-    <string name="text_autofocus_disabled">Enfocament automàtic desactivat. Toqueu per enfocar.</string>
-    <string name="text_image_stored">Imatge desada a </string>
     <string name="title_activity_settings">Configuració</string>
     <string name="notification_sounds_header">Sons de notificació</string>
     <string name="lighting_header">Il·luminació</string>

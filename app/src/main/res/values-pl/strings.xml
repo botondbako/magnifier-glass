@@ -2,15 +2,11 @@
 <resources>
     <string name="app_name">MagnifierGlass</string>
     <string name="button_color_description">zmień tryb kontrastu</string>
-    <string name="button_zoom_description">zmień poziom powiększenia</string>
     <string name="button_flash_description">włącz i wyłącz latarkę</string>
     <string name="button_pause_description">zamroź bieżący obraz</string>
     <string name="button_zoom_in_description">powiększ</string>
     <string name="button_zoom_out_description">pomniejsz</string>
     <string name="button_exit_description">wyjdź</string>
-    <string name="text_autofocus_enabled">Autofokus włączony.</string>
-    <string name="text_autofocus_disabled">Autofokus wyłączony. Dotknij, aby ustawić ostrość.</string>
-    <string name="text_image_stored">Obraz zapisany w </string>
     <string name="title_activity_settings">Ustawienia</string>
     <string name="notification_sounds_header">Dźwięki powiadomień</string>
     <string name="lighting_header">Oświetlenie</string>

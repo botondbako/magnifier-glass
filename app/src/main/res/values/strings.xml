@@ -2,30 +2,24 @@
 <resources>
     <string name="app_name">MagnifierGlass</string>
     <string name="button_color_description">change contrast mode</string>
-    <string name="button_zoom_description">change magnification level</string>
     <string name="button_flash_description">toggle flashlight on and off</string>
     <string name="button_pause_description">freezes the current camera image</string>
     <string name="button_zoom_in_description">zoom in</string>
     <string name="button_zoom_out_description">zoom out</string>
     <string name="button_exit_description">exit app</string>
-    <string name="text_autofocus_enabled">Autofocus enabled.</string>
-    <string name="text_autofocus_disabled">Autofocus disabled. Tap to focus.</string>
-    <string name="text_image_stored">Image stored in path </string>
 
     <!-- Key names (equal in all languages) -->
-    <string name="key_preference_zoom_level" translatable="false">VisorAndroidKeyPreferenceZoomLevel</string>
-    <string name="key_preference_color_mode" translatable="false">VisorAndroidKeyPreferenceColorMode</string>
-    <string name="key_preference_autofocus_mode" translatable="false">VisorAndroidKeyPreferenceAutofocusMode</string>
-    <string name="key_preference_activity_button_mode" translatable="false">VisorAndroidKeyPreferenceButtonMode</string>
-    <string name="key_preference_autofocus_sound" translatable="false">VisorAndroidKeyPreferenceAutoFocusSound</string>
-    <string name="key_preference_shutter_sound" translatable="false">VisorAndroidKeyPreferenceShutterSound</string>
-    <string name="key_preference_max_brightness" translatable="false">VisorAndroidKeyPreferenceMaxBrightness</string>
-    <string name="key_preference_auto_torch" translatable="false">VisorAndroidKeyPreferenceAutoTorch</string>
-    <string name="key_preference_preview_resolution" translatable="false">VisorAndroidKeyPreferencePreviewResolution</string>
-    <string name="key_preference_camera_id" translatable="false">VisorAndroidKeyPreferenceCameraId</string>
-    <string name="key_preference_default_zoom" translatable="false">VisorAndroidKeyPreferenceDefaultZoom</string>
-    <string name="key_preference_handedness" translatable="false">VisorAndroidKeyPreferenceHandedness</string>
-    <string name="key_preference_language" translatable="false">VisorAndroidKeyPreferenceLanguage</string>
+    <string name="key_preference_zoom_level" translatable="false">MagnifierGlassAndroidKeyPreferenceZoomLevel</string>
+    <string name="key_preference_color_mode" translatable="false">MagnifierGlassAndroidKeyPreferenceColorMode</string>
+    <string name="key_preference_autofocus_sound" translatable="false">MagnifierGlassAndroidKeyPreferenceAutoFocusSound</string>
+    <string name="key_preference_shutter_sound" translatable="false">MagnifierGlassAndroidKeyPreferenceShutterSound</string>
+    <string name="key_preference_max_brightness" translatable="false">MagnifierGlassAndroidKeyPreferenceMaxBrightness</string>
+    <string name="key_preference_auto_torch" translatable="false">MagnifierGlassAndroidKeyPreferenceAutoTorch</string>
+    <string name="key_preference_preview_resolution" translatable="false">MagnifierGlassAndroidKeyPreferencePreviewResolution</string>
+    <string name="key_preference_camera_id" translatable="false">MagnifierGlassAndroidKeyPreferenceCameraId</string>
+    <string name="key_preference_default_zoom" translatable="false">MagnifierGlassAndroidKeyPreferenceDefaultZoom</string>
+    <string name="key_preference_handedness" translatable="false">MagnifierGlassAndroidKeyPreferenceHandedness</string>
+    <string name="key_preference_language" translatable="false">MagnifierGlassAndroidKeyPreferenceLanguage</string>
 
     <!-- Preference Titles -->
     <string name="title_activity_settings">Settings</string>

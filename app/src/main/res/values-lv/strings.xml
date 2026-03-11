@@ -2,15 +2,11 @@
 <resources>
     <string name="app_name">MagnifierGlass</string>
     <string name="button_color_description">mainīt kontrasta režīmu</string>
-    <string name="button_zoom_description">mainīt palielinājuma līmeni</string>
     <string name="button_flash_description">ieslēgt un izslēgt lukturīti</string>
     <string name="button_pause_description">iesaldēt pašreizējo attēlu</string>
     <string name="button_zoom_in_description">pietuvināt</string>
     <string name="button_zoom_out_description">attālināt</string>
     <string name="button_exit_description">iziet</string>
-    <string name="text_autofocus_enabled">Autofokuss ieslēgts.</string>
-    <string name="text_autofocus_disabled">Autofokuss izslēgts. Pieskarieties, lai fokusētu.</string>
-    <string name="text_image_stored">Attēls saglabāts </string>
     <string name="title_activity_settings">Iestatījumi</string>
     <string name="notification_sounds_header">Paziņojumu skaņas</string>
     <string name="lighting_header">Apgaismojums</string>

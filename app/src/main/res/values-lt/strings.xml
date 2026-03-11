@@ -2,15 +2,11 @@
 <resources>
     <string name="app_name">MagnifierGlass</string>
     <string name="button_color_description">keisti kontrasto režimą</string>
-    <string name="button_zoom_description">keisti didinimo lygį</string>
     <string name="button_flash_description">įjungti ir išjungti žibintuvėlį</string>
     <string name="button_pause_description">sustabdyti esamą vaizdą</string>
     <string name="button_zoom_in_description">priartinti</string>
     <string name="button_zoom_out_description">nutolinti</string>
     <string name="button_exit_description">išeiti</string>
-    <string name="text_autofocus_enabled">Automatinis fokusavimas įjungtas.</string>
-    <string name="text_autofocus_disabled">Automatinis fokusavimas išjungtas. Palieskite, kad sufokusuotumėte.</string>
-    <string name="text_image_stored">Vaizdas išsaugotas </string>
     <string name="title_activity_settings">Nustatymai</string>
     <string name="notification_sounds_header">Pranešimų garsai</string>
     <string name="lighting_header">Apšvietimas</string>

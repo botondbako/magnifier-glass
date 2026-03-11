@@ -1,20 +1,8 @@
-Visor OS - Low Vision Magnifier for Android
-============================================
+MagnifierGlass - Low Vision Magnifier for Android
+==================================================
 
 Original work Copyright (c) 2015 Christian Illies
 Modifications Copyright (c) 2026 Botond Bako
 
-Modifications by Botond Bako (2026):
-- Replaced zoom slider with zoom in/out buttons
-- Redesigned UI with separate portrait and landscape layouts
-- Replaced image buttons with Unicode text buttons
-- Added exit button (top corner) and pause button (bottom corner)
-- Added left-handed mode support for all new UI elements
-- Added in-app language selector (Settings > Interface > Language)
-- Added translations for 28 European languages:
-  Bulgarian, Catalan, Czech, Danish, Dutch, Estonian, Finnish, French,
-  Greek, Croatian, Icelandic, Italian, Latvian, Lithuanian, Norwegian,
-  Polish, Portuguese, Albanian, Slovak, Slovenian, Serbian, Spanish,
-  Swedish, Turkish, Ukrainian, Romanian, Hungarian, German
-- Dynamic layout switching on orientation change
-- Locale applied immediately on language change without restart
+Licensed under the Apache License, Version 2.0.
+See LICENSE for details.

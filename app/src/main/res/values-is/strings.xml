@@ -2,15 +2,11 @@
 <resources>
     <string name="app_name">MagnifierGlass</string>
     <string name="button_color_description">breyta birtustigsham</string>
-    <string name="button_zoom_description">breyta stækkunarstigi</string>
     <string name="button_flash_description">kveikja og slökkva á vasaljósi</string>
     <string name="button_pause_description">frysta núverandi mynd</string>
     <string name="button_zoom_in_description">stækka</string>
     <string name="button_zoom_out_description">minnka</string>
     <string name="button_exit_description">hætta</string>
-    <string name="text_autofocus_enabled">Sjálfvirkur fókus virkur.</string>
-    <string name="text_autofocus_disabled">Sjálfvirkur fókus óvirkur. Snertu til að fókusera.</string>
-    <string name="text_image_stored">Mynd vistuð í </string>
     <string name="title_activity_settings">Stillingar</string>
     <string name="notification_sounds_header">Tilkynningahljóð</string>
     <string name="lighting_header">Lýsing</string>

@@ -2,15 +2,11 @@
 <resources>
     <string name="app_name">MagnifierGlass</string>
     <string name="button_color_description">kontraszt mód váltása</string>
-    <string name="button_zoom_description">nagyítási szint módosítása</string>
     <string name="button_flash_description">zseblámpa be- és kikapcsolása</string>
     <string name="button_pause_description">aktuális kamerakép befagyasztása</string>
     <string name="button_zoom_in_description">nagyítás</string>
     <string name="button_zoom_out_description">kicsinyítés</string>
     <string name="button_exit_description">kilépés</string>
-    <string name="text_autofocus_enabled">Autofókusz bekapcsolva.</string>
-    <string name="text_autofocus_disabled">Autofókusz kikapcsolva. Érintse meg a fókuszáláshoz.</string>
-    <string name="text_image_stored">Kép mentve ide: </string>
 
     <!-- Preference Titles -->
     <string name="title_activity_settings">Beállítások</string>

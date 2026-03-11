@@ -2,10 +2,8 @@ package com.magnifierglass.filters;
 
 import android.graphics.ColorMatrix;
 
-/**
- * Created by Christian Illies on 02.08.15.
- */
-public class BlueYellowColorFilter extends BlackWhiteColorFilter {
+/** Blue-on-yellow high-contrast color filter. */
+public class BlueYellowColorFilter extends BaseFilter {
 
     @Override
     public void filter(ColorMatrix colorMatrix) {
@@ -13,11 +11,8 @@ public class BlueYellowColorFilter extends BlackWhiteColorFilter {
         colorMatrix.postConcat(new ColorMatrix(blueYellowMatrix));
     }
 
-    /**
-     * inverts the colors of the {@link ColorMatrix} by using blue as black and yellow as white.
-     * @return
-     */
-    public float[] getInvertedBlueYellowMatrix() {
+    /** Returns a blue-yellow color mapping matrix. */
+    float[] getInvertedBlueYellowMatrix() {
         return new float[] {
                  3,        3,       1,    0, -512,
                  3,        3,       1,    0, -512,

@@ -2,15 +2,11 @@
 <resources>
     <string name="app_name">MagnifierGlass</string>
     <string name="button_color_description">ändra kontrastläge</string>
-    <string name="button_zoom_description">ändra förstoringsnivå</string>
     <string name="button_flash_description">slå på och av ficklampan</string>
     <string name="button_pause_description">frys aktuell bild</string>
     <string name="button_zoom_in_description">zooma in</string>
     <string name="button_zoom_out_description">zooma ut</string>
     <string name="button_exit_description">avsluta</string>
-    <string name="text_autofocus_enabled">Autofokus aktiverad.</string>
-    <string name="text_autofocus_disabled">Autofokus avaktiverad. Tryck för att fokusera.</string>
-    <string name="text_image_stored">Bild sparad i </string>
     <string name="title_activity_settings">Inställningar</string>
     <string name="notification_sounds_header">Aviseringsljud</string>
     <string name="lighting_header">Belysning</string>

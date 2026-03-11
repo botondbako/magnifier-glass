@@ -2,15 +2,11 @@
 <resources>
     <string name="app_name">MagnifierGlass</string>
     <string name="button_color_description">cambiar modo de contraste</string>
-    <string name="button_zoom_description">cambiar nivel de aumento</string>
     <string name="button_flash_description">encender y apagar la linterna</string>
     <string name="button_pause_description">congelar la imagen actual</string>
     <string name="button_zoom_in_description">acercar</string>
     <string name="button_zoom_out_description">alejar</string>
     <string name="button_exit_description">salir</string>
-    <string name="text_autofocus_enabled">Enfoque automático activado.</string>
-    <string name="text_autofocus_disabled">Enfoque automático desactivado. Toque para enfocar.</string>
-    <string name="text_image_stored">Imagen guardada en </string>
     <string name="title_activity_settings">Ajustes</string>
     <string name="notification_sounds_header">Sonidos de notificación</string>
     <string name="lighting_header">Iluminación</string>

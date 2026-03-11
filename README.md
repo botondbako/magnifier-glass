@@ -1,56 +1,114 @@
-# MagnifierGlass - low vision magnifier
+# MagnifierGlass
 
-> Fork of [visor-android](https://github.com/kloener/visor-android) by Christian Illies
+A magnifying glass app for Android, designed for people with low vision.
 
-MagnifierGlass is a magnifying glass app for Android.
-Enlarge difficult to read text by 4 magnification levels and change contrast
-to 5 different viewing modes. Optionally, turn on the LED flash of
-your device to help you see better in low-light conditions.
+> Fork of [visor-android](https://github.com/kloener/visor-android) by Christian Illies, licensed under Apache 2.0.
 
-During the day, there is a lot of printed text to read:
+## What it does
 
-- restaurant menus,
-- price tags,
-- the newspaper,
-- letters or
-- photos from your loved ones
+MagnifierGlass turns your phone's camera into a handheld electronic magnifier. Point it at text or objects and see them enlarged on screen with enhanced contrast.
 
-MagnifierGlass zooms and improves the contrast of whatever you want to see.
-Its advanced color modes and simple interface are made for giving
-you the best possible perception of printed text on your screen
-like you'd expect it from a handheld electronic magnifier.
+Features:
+- Live camera preview with pinch-to-zoom (live and frozen image)
+- 5 color modes: normal, black/white, white/black, blue/yellow, yellow/blue
+- Zoom in/out buttons with on-screen zoom level indicator
+- LED flashlight toggle for low-light conditions
+- Multi-frame image stabilization for sharper frozen images
+- Continuous autofocus (tap to refocus)
+- Screenshot capture and share
+- Left-handed mode (mirrors button layout)
+- Configurable default zoom, preview resolution, camera selection
+- Multi-language support
+- Full-screen immersive mode
 
-## Screenshots
+## Requirements
 
-![Screenshot of the current android version](https://christian-illies.info/upload/visor-screenshot-v1.0-normal.png)
-![Black White High Contrast Mode](https://christian-illies.info/upload/visor-screenshot-v1.0-b-w.png)
-![White Black High Contrast Mode](https://christian-illies.info/upload/visor-screenshot-v1.0-w-b.png)
-![Blue Yellow High Contrast Mode](https://christian-illies.info/upload/visor-screenshot-v1.0-b-y.png)
-![Yellow Blue High Contrast Mode](https://christian-illies.info/upload/visor-screenshot-v1.0-y-b.png)
+- Android 5.0+ (API 21)
+- Device with a camera
 
-## Changes from upstream
+## Building from source
 
-- Renamed app to MagnifierGlass (`com.magnifierglass`)
-- New launcher icon
-- Redesigned UI with zoom buttons and multilingual support
-- Updated build tools and dependencies (AGP 8.7.3, Gradle 8.10.2, JDK 21)
+### Prerequisites
 
-## Upstream Changelog
+All platforms need:
+- **JDK 17** or newer
+- **Android SDK** with:
+  - SDK Platform 34
+  - Build Tools 34.0.0
+  - CMake (for the native YUV decoder)
+  - NDK (any recent version)
 
-See the [original repository](https://github.com/kloener/visor-android) for the full changelog.
+The easiest way to get the Android SDK is to install [Android Studio](https://developer.android.com/studio), which bundles everything. Alternatively, install the [command-line tools](https://developer.android.com/studio#command-line-tools-only) and use `sdkmanager`:
 
-## Licence
+```bash
+sdkmanager "platforms;android-34" "build-tools;34.0.0" "cmake;3.22.1" "ndk;27.0.12077973"
+```
 
-Copyright (c) 2015 Christian Illies
+Set the `ANDROID_HOME` environment variable to your SDK location.
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+#### Linux
 
-http://www.apache.org/licenses/LICENSE-2.0
+```bash
+# Debian/Ubuntu
+sudo apt install openjdk-17-jdk
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+# Fedora
+sudo dnf install java-17-openjdk-devel
+
+# Arch
+sudo pacman -S jdk17-openjdk
+
+export ANDROID_HOME=~/Android/Sdk
+```
+
+#### macOS
+
+```bash
+brew install openjdk@17
+export ANDROID_HOME=~/Library/Android/sdk
+```
+
+#### Windows
+
+Install JDK 17 from [Adoptium](https://adoptium.net/) or via `winget install EclipseAdoptium.Temurin.17.JDK`. Set `ANDROID_HOME` to `%LOCALAPPDATA%\Android\Sdk` (the Android Studio default).
+
+Use `gradlew.bat` instead of `./gradlew` in all commands below.
+
+### Build
+
+```bash
+git clone https://github.com/botondbako/magnifier-glass.git
+cd magnifier-glass
+./gradlew assembleDebug
+```
+
+The APK is at `app/build/outputs/apk/debug/app-debug.apk`.
+
+### Install on a connected device
+
+1. Enable **Developer Options** on your phone (tap Build Number 7 times in Settings → About Phone).
+2. Enable **USB Debugging** in Developer Options.
+3. Connect the phone via USB and accept the debugging prompt.
+4. Run:
+
+```bash
+./gradlew installDebug
+```
+
+Or install the APK manually:
+
+```bash
+adb install app/build/outputs/apk/debug/app-debug.apk
+```
+
+### Run tests
+
+```bash
+./gradlew testDebugUnitTest
+```
+
+## License
+
+Original code copyright (c) 2015 Christian Illies, licensed under the Apache License, Version 2.0.
+
+This fork has been substantially rewritten by [Botond Bako](https://github.com/botondbako). All changes and new code are copyright (c) 2026 Botond Bako, licensed under the same Apache License, Version 2.0. See [LICENSE](http://www.apache.org/licenses/LICENSE-2.0) for details.

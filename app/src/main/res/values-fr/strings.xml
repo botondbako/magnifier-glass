@@ -2,15 +2,11 @@
 <resources>
     <string name="app_name">MagnifierGlass</string>
     <string name="button_color_description">changer le mode de contraste</string>
-    <string name="button_zoom_description">changer le niveau de grossissement</string>
     <string name="button_flash_description">allumer et éteindre la lampe</string>
     <string name="button_pause_description">figer l\'image actuelle</string>
     <string name="button_zoom_in_description">agrandir</string>
     <string name="button_zoom_out_description">réduire</string>
     <string name="button_exit_description">quitter</string>
-    <string name="text_autofocus_enabled">Autofocus activé.</string>
-    <string name="text_autofocus_disabled">Autofocus désactivé. Appuyez pour faire la mise au point.</string>
-    <string name="text_image_stored">Image enregistrée dans </string>
     <string name="title_activity_settings">Paramètres</string>
     <string name="notification_sounds_header">Sons de notification</string>
     <string name="lighting_header">Éclairage</string>

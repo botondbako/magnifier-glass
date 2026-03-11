@@ -2,15 +2,11 @@
 <resources>
     <string name="app_name">MagnifierGlass</string>
     <string name="button_color_description">spremeni način kontrasta</string>
-    <string name="button_zoom_description">spremeni stopnjo povečave</string>
     <string name="button_flash_description">vklopi in izklopi svetilko</string>
     <string name="button_pause_description">zamrzni trenutno sliko</string>
     <string name="button_zoom_in_description">povečaj</string>
     <string name="button_zoom_out_description">pomanjšaj</string>
     <string name="button_exit_description">izhod</string>
-    <string name="text_autofocus_enabled">Samodejno ostrenje vklopljeno.</string>
-    <string name="text_autofocus_disabled">Samodejno ostrenje izklopljeno. Tapnite za ostrenje.</string>
-    <string name="text_image_stored">Slika shranjena v </string>
     <string name="title_activity_settings">Nastavitve</string>
     <string name="notification_sounds_header">Zvoki obvestil</string>
     <string name="lighting_header">Osvetlitev</string>

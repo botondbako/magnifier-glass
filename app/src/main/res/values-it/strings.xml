@@ -2,15 +2,11 @@
 <resources>
     <string name="app_name">MagnifierGlass</string>
     <string name="button_color_description">cambia modalità contrasto</string>
-    <string name="button_zoom_description">cambia livello di ingrandimento</string>
     <string name="button_flash_description">accendi e spegni la torcia</string>
     <string name="button_pause_description">blocca l\'immagine corrente</string>
     <string name="button_zoom_in_description">ingrandisci</string>
     <string name="button_zoom_out_description">riduci</string>
     <string name="button_exit_description">esci</string>
-    <string name="text_autofocus_enabled">Autofocus attivato.</string>
-    <string name="text_autofocus_disabled">Autofocus disattivato. Tocca per mettere a fuoco.</string>
-    <string name="text_image_stored">Immagine salvata in </string>
     <string name="title_activity_settings">Impostazioni</string>
     <string name="notification_sounds_header">Suoni di notifica</string>
     <string name="lighting_header">Illuminazione</string>

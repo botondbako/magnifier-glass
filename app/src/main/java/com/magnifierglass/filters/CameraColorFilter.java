@@ -2,10 +2,8 @@ package com.magnifierglass.filters;
 
 import android.graphics.ColorMatrix;
 
-/**
- * Created by Christian Illies on 02.08.15.
- */
-public interface ColorFilter {
+/** Color filter applied to the camera preview via {@link android.graphics.ColorMatrix}. */
+public interface CameraColorFilter {
     /**
      * Filters the given matrix by using {@link ColorMatrix}.postConcat.
      * The given colorMatrix is handled as a reference so we don't need return value.

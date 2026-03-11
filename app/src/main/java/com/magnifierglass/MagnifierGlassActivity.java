@@ -2,19 +2,20 @@ package com.magnifierglass;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -36,90 +37,60 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
-import com.magnifierglass.filters.ColorFilter;
+import com.magnifierglass.filters.CameraColorFilter;
 
-/**
- */
-public class VisorActivity extends Activity {
-    /**
-     * Whether or not the system UI should be auto-hidden after
-     * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
-     */
-    private static final boolean AUTO_HIDE = true;
-
-    /**
-     * If {@link #AUTO_HIDE} is set, the number of milliseconds to wait after
-     * user interaction before hiding the system UI.
-     */
-    private static final int AUTO_HIDE_DELAY_MILLIS = 1000;
-
-    /**
-     * If set, will toggle the system UI visibility upon interaction. Otherwise,
-     * will show the system UI visibility upon interaction.
-     */
-    private static final boolean TOGGLE_ON_CLICK = false;
-
-    // Defining Permission codes.
-    // We can give any value
-    // but unique for each permission.
+public class MagnifierGlassActivity extends Activity {
     private static final int CAMERA_PERMISSION_CODE = 100;
     private static final int STORAGE_PERMISSION_CODE = 101;
 
     /**
      * Tag name for the Log message.
      */
-    private static final String TAG = "VisorActivity";
+    private static final String TAG = "MagnifierGlassActivity";
 
     /**
      * our surface view containing the camera preview image.
      */
-    private VisorSurface mVisorView;
+    private MagnifierGlassSurface mMagnifierView;
 
     /**
      * Is the preview running? > Pause Btn + Zoom Btn
      * If not > Play Btn + Photo Share Btn
      */
-    private boolean cameraPreviewState;
+    private boolean isPreviewActive = true;
 
     /**
      * stores the brightness level of the screen to restore it after the
      * app gets paused or destroyed.
      */
-    private float prevScreenBrightnewss = -1f;
-    public PhotoView mPhotoView;
+    private float prevScreenBrightness = -1f;
+    private PhotoView mPhotoView;
 
     private int zoomPanelVisibility = View.VISIBLE;
-    private View mVisorViewTouchArea;
+    private View mMagnifierViewTouchArea;
     private SharedPreferences mSharedPreferences;
-    private int mCurrentZoomPercent = 0;
+    private int mCurrentZoomPercent = -1;
     private static final int ZOOM_STEP = 10;
+    private static final SimpleDateFormat SCREENSHOT_DATE_FORMAT =
+            new SimpleDateFormat("yyyyMMdd_HHmmss", java.util.Locale.US);
+    /** Cached frozen bitmap so it survives rotation while paused. */
+    private Bitmap mFrozenBitmap;
 
-    public void playClickSound(View view) {
-    }
 
     private void updateZoomLabel(int percent) {
         TextView label = findViewById(R.id.zoom_label);
-        if (label != null) {
-            float factor = 1.0f + percent * 0.09f;
-            label.setText(String.format("%.1fx", factor));
+        if (label == null) return;
+        float factor = mMagnifierView != null ? mMagnifierView.getActualZoomFactor() : -1;
+        if (factor < 0) {
+            // Fallback before camera is ready — linear estimate from percent
+            factor = 1.0f + percent / 100f * 9f;
         }
+        label.setText(String.format(java.util.Locale.US, "%.1fx", factor));
     }
 
     private void applyLocale() {
-        String lang = mSharedPreferences.getString(
-                getString(R.string.key_preference_language), "default");
-        Locale locale;
-        if ("default".equals(lang)) {
-            locale = Resources.getSystem().getConfiguration().locale;
-        } else {
-            locale = new Locale(lang);
-        }
-        Locale.setDefault(locale);
-        Configuration config = getResources().getConfiguration();
-        config.setLocale(locale);
-        getResources().updateConfiguration(config, getResources().getDisplayMetrics());
+        LocaleHelper.applyLocale(this);
     }
 
     private void applyHandedness() {
@@ -152,93 +123,139 @@ public class VisorActivity extends Activity {
         }
     }
 
-    private View.OnClickListener autoFocusClickHandler = new View.OnClickListener() {
+    private final View.OnClickListener autoFocusClickHandler = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            mVisorView.autoFocusCamera();
+            mMagnifierView.restartAutoFocus();
         }
     };
 
-    private View.OnClickListener colorModeClickHandler = new View.OnClickListener() {
+    private final View.OnClickListener colorModeClickHandler = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             v.startAnimation(animScale);
-            playClickSound(v);
 
-            mVisorView.toggleColorMode();
+            mMagnifierView.toggleColorMode();
         }
     };
 
-    private View.OnLongClickListener colorModeLongClickHandler = new View.OnLongClickListener() {
+    private final View.OnLongClickListener colorModeLongClickHandler = new View.OnLongClickListener() {
         @Override
         public boolean onLongClick(View v) {
             v.startAnimation(animScale);
-            playClickSound(v);
 
-            mVisorView.setColorMode(0);
+            mMagnifierView.setColorMode(0);
             return true;
         }
     };
 
-    private View.OnClickListener pauseClickHandler = new View.OnClickListener() {
+    private final View.OnClickListener pauseClickHandler = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             v.startAnimation(animScale);
-            playClickSound(v);
 
-            mVisorView.toggleCameraPreview();
-            Button btn = (Button) v;
-            // FrameLayout previewLayout = getCameraPreviewFrame();
+            final Button btn = (Button) v;
 
-            if (cameraPreviewState) {
-                cameraPreviewIsPaused(btn);
+            if (isPreviewActive) {
+                btn.setEnabled(false);
+                mMagnifierView.pauseWithFocus(new Runnable() {
+                    @Override
+                    public void run() {
+                        isPreviewActive = false;
+                        cameraPreviewIsPaused(btn);
+                        btn.setEnabled(true);
+                    }
+                });
             } else {
-                cameraPreviewIsActive(btn);
+                unfreezePreview();
             }
-
-            // btn.invalidateDrawable(null);
-            cameraPreviewState = !cameraPreviewState;
         }
     };
 
+    PhotoView getPhotoView() {
+        return mPhotoView;
+    }
+
     private void cameraPreviewIsPaused(Button playOrPauseButton) {
         playOrPauseButton.setText("▶");
-        mVisorViewTouchArea.setVisibility(View.INVISIBLE);
+        mMagnifierViewTouchArea.setVisibility(View.INVISIBLE);
         zoomPanelVisibility = mZoomPanel.getVisibility();
         mZoomPanel.setVisibility(View.INVISIBLE);
         mPhotoButton.setVisibility(View.VISIBLE);
-        mFlashButton.setAlpha(64);
-        mFlashButton.getBackground().setAlpha(64);
+        mFlashButton.setAlpha(0.25f);
+        mFlashButton.getBackground().mutate().setAlpha(64);
 
-        /** enable pinch to zoom via PhotoView from https://github.com/chrisbanes/PhotoView */
-        mPhotoView.setImageBitmap(mVisorView.getBitmap());
+        // Enable pinch to zoom via PhotoView from https://github.com/chrisbanes/PhotoView
+        if (mFrozenBitmap == null || mFrozenBitmap.isRecycled()) {
+            mFrozenBitmap = mMagnifierView.getBitmap();
+        }
+        if (mFrozenBitmap == null) {
+            // Freeze failed — revert to active state and restart preview
+            isPreviewActive = true;
+            mMagnifierView.resumeCameraPreview();
+            cameraPreviewIsActive(playOrPauseButton);
+            return;
+        }
+        mPhotoView.setImageBitmap(mFrozenBitmap);
 
-        mVisorView.setAlpha(0);
-        // mVisorView.setVisibility(View.GONE); // the change of visiblity would cause a surfaceDestroy!
+        mMagnifierView.setVisibility(View.INVISIBLE);
 
         mPhotoView.setVisibility(View.VISIBLE);
-        mPhotoView.setAlpha(255);
+        mPhotoView.setAlpha(1f);
+
+        // match preview zoom: set PhotoView scale to match the preview's fill scale
+        final float previewScale = mMagnifierView.getPreviewScale();
+        if (previewScale > 0) {
+            mPhotoView.post(new Runnable() {
+                @Override
+                public void run() {
+                    // previewScale is an absolute pixel ratio (view px / bitmap px).
+                    // PhotoView.setScale() is relative to its own fit-to-view base,
+                    // so divide out the base to avoid double-scaling.
+                    Drawable d = mPhotoView.getDrawable();
+                    if (d == null) return;
+                    float fitScale = Math.min(
+                            (float) mPhotoView.getWidth() / d.getIntrinsicWidth(),
+                            (float) mPhotoView.getHeight() / d.getIntrinsicHeight());
+                    float targetScale = (fitScale > 0) ? previewScale / fitScale : 1f;
+                    float minScale = mPhotoView.getMinimumScale();
+                    if (targetScale < minScale) targetScale = minScale;
+                    float maxScale = mPhotoView.getMaximumScale();
+                    if (targetScale > maxScale) mPhotoView.setMaximumScale(targetScale * 2);
+                    mPhotoView.setScale(targetScale, false);
+                }
+            });
+        }
+    }
+
+    private void unfreezePreview() {
+        if (mFrozenBitmap != null && !mFrozenBitmap.isRecycled()) {
+            mFrozenBitmap.recycle();
+        }
+        mFrozenBitmap = null;
+        isPreviewActive = true;
+        cameraPreviewIsActive(mPauseButton);
+        mMagnifierView.resumeCameraPreview();
     }
 
     private void cameraPreviewIsActive(Button playOrPauseButton) {
         playOrPauseButton.setText("⏸");
-        mVisorViewTouchArea.setVisibility(View.VISIBLE);
+        mMagnifierViewTouchArea.setVisibility(View.VISIBLE);
         mZoomPanel.setVisibility(zoomPanelVisibility);
-        mPhotoButton.setVisibility(View.INVISIBLE);
-        mFlashButton.setAlpha(255);
+        mPhotoButton.setVisibility(View.GONE);
+        mFlashButton.setAlpha(1f);
         mFlashButton.getBackground().setAlpha(255);
 
-        // previewLayout.removeView(mPhotoView);
-        mVisorView.setAlpha(1.0f);
-        // mVisorView.setVisibility(View.VISIBLE); // the change of visiblity would cause a surfaceDestroy!
+        mMagnifierView.setVisibility(View.VISIBLE);
+        mMagnifierView.setAlpha(1.0f);
 
         if (mPhotoView != null) {
             mPhotoView.setVisibility(View.GONE);
-            mPhotoView.setAlpha(0);
+            mPhotoView.setAlpha(0f);
         }
     }
 
-    private View.OnClickListener openSettingsClickHandler = new View.OnClickListener() {
+    private final View.OnClickListener openSettingsClickHandler = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
@@ -246,49 +263,41 @@ public class VisorActivity extends Activity {
         }
     };
 
-    private View.OnClickListener flashLightClickHandler = new View.OnClickListener() {
+    private final View.OnClickListener flashLightClickHandler = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             v.startAnimation(animScale);
-            playClickSound(v);
 
-            mVisorView.nextFlashlightMode(getApplicationContext());
+            mMagnifierView.nextFlashlightMode();
         }
     };
-    private View.OnClickListener screenshotClickHandler = new View.OnClickListener() {
+    private final View.OnClickListener screenshotClickHandler = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             v.startAnimation(animScale);
             takeScreenshot();
         }
     };
-    private View.OnLongClickListener tapAndHoldListener = new View.OnLongClickListener() {
-        @Override
-        public boolean onLongClick(View v) {
-            mVisorView.toggleAutoFocusMode();
-            return true;
-        }
-    };
 
-    private View.OnClickListener zoomInClickHandler = new View.OnClickListener() {
+    private final View.OnClickListener zoomInClickHandler = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            if (!cameraPreviewState) return;
+            if (!isPreviewActive) return;
             mCurrentZoomPercent = Math.min(100, mCurrentZoomPercent + ZOOM_STEP);
-            mVisorView.setZoomLevelPercent(mCurrentZoomPercent);
+            mMagnifierView.setZoomLevelPercent(mCurrentZoomPercent);
             updateZoomLabel(mCurrentZoomPercent);
-            mVisorView.autoFocusCamera();
+            mMagnifierView.restartAutoFocus();
         }
     };
 
-    private View.OnClickListener zoomOutClickHandler = new View.OnClickListener() {
+    private final View.OnClickListener zoomOutClickHandler = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            if (!cameraPreviewState) return;
+            if (!isPreviewActive) return;
             mCurrentZoomPercent = Math.max(0, mCurrentZoomPercent - ZOOM_STEP);
-            mVisorView.setZoomLevelPercent(mCurrentZoomPercent);
+            mMagnifierView.setZoomLevelPercent(mCurrentZoomPercent);
             updateZoomLabel(mCurrentZoomPercent);
-            mVisorView.autoFocusCamera();
+            mMagnifierView.restartAutoFocus();
         }
     };
     /**
@@ -299,29 +308,14 @@ public class VisorActivity extends Activity {
     private Button mPauseButton;
     private View mFlashButton;
     private Animation animScale;
-    private Animation animScaleLongPress;
-
-    /**
-     * sends a {@link Toast} message to the user and quits the app immediately.
-     *
-     * @param text
-     */
-    protected void abortAppWithMessage(CharSequence text) {
-        Context context = getApplicationContext();
-        int duration = Toast.LENGTH_SHORT;
-
-        Toast toasty = Toast.makeText(context, text, duration);
-        toasty.show();
-
-        finish();
-    }
+    private ScaleGestureDetector mScaleDetector;
 
     /**
      * sets the brightness value of the screen to 1F
      */
     protected void setBrightnessToMaximum() {
         WindowManager.LayoutParams layout = getWindow().getAttributes();
-        prevScreenBrightnewss = layout.screenBrightness;
+        prevScreenBrightness = layout.screenBrightness;
         layout.screenBrightness = 1F;
         getWindow().setAttributes(layout);
     }
@@ -330,53 +324,37 @@ public class VisorActivity extends Activity {
      * resets the brightness value to the previous screen value.
      */
     protected void resetBrightnessToPreviousValue() {
-        if (prevScreenBrightnewss < 0)
+        if (prevScreenBrightness < 0)
             return;
         WindowManager.LayoutParams layout = getWindow().getAttributes();
-        layout.screenBrightness = prevScreenBrightnewss;
+        layout.screenBrightness = prevScreenBrightness;
         getWindow().setAttributes(layout);
-        prevScreenBrightnewss = -1f;
+        prevScreenBrightness = -1f;
     }
 
     /**
-     * When you use the SYSTEM_UI_FLAG_IMMERSIVE_STICKY flag, an inward swipe in the system bars
-     * areas causes the bars to temporarily appear in a semi-transparent state, but no flags are
-     * cleared, and your system UI visibility change listeners are not triggered. The bars
-     * automatically hide again after a short delay, or if the user interacts with the
-     * middle of the screen.
-     *
-     * Below is a simple approach to using this flag. Any time the window receives focus, simply set the IMMERSIVE_STICKY flag,
-     * along with the other flags discussed in Use IMMERSIVE.
-     *
-     * @note https://developer.android.com/training/system-ui/immersive.html
-     *
-     * @param hasFocus
+     * Uses IMMERSIVE_STICKY to auto-hide system bars after a short delay.
      */
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         if (hasFocus) {
-            View decorView = getWindow().getDecorView();
-
-            // Api level 1
-            int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
-
-            // Jelly Bean to Kitkat-1
-            if(android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                uiOptions = uiOptions
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                android.view.WindowInsetsController controller = getWindow().getInsetsController();
+                if (controller != null) {
+                    controller.hide(android.view.WindowInsets.Type.systemBars());
+                    controller.setSystemBarsBehavior(
+                            android.view.WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE);
+                }
+            } else {
+                getWindow().getDecorView().setSystemUiVisibility(
+                        View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        | View.SYSTEM_UI_FLAG_FULLSCREEN;
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
             }
-
-            // Kitkat to Oreo
-            if(android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                uiOptions = uiOptions | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY; // 19
-            }
-
-            decorView.setSystemUiVisibility(uiOptions);
         }
     }
 
@@ -395,7 +373,7 @@ public class VisorActivity extends Activity {
 
         if (requestCode == CAMERA_PERMISSION_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                restartActvitiy();
+                restartActivity();
             } else {
                 Toast.makeText(this,
                         "Camera Permission Denied",
@@ -414,11 +392,11 @@ public class VisorActivity extends Activity {
         }
     }
 
-    private void restartActvitiy() {
+    private void restartActivity() {
         Intent intent = new Intent(getApplicationContext(), this.getClass());
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-        Runtime.getRuntime().exit(0);
+        finish();
     }
 
     @Override
@@ -430,11 +408,14 @@ public class VisorActivity extends Activity {
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         applyLocale();
-        setContentView(R.layout.activity_visor);
+        setContentView(R.layout.activity_magnifier_glass);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            getWindow().setDecorFitsSystemWindows(false);
+        }
         applyHandedness();
 
         if (savedInstanceState != null) {
-            mCurrentZoomPercent = savedInstanceState.getInt("zoomPercent", 0);
+            mCurrentZoomPercent = savedInstanceState.getInt("zoomPercent", -1);
         }
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED) {
@@ -443,42 +424,61 @@ public class VisorActivity extends Activity {
         }
 
         animScale = AnimationUtils.loadAnimation(this, R.anim.scale);
-        animScaleLongPress = AnimationUtils.loadAnimation(this, R.anim.longpress);
 
-        mVisorView = new VisorSurface(this);
+        mMagnifierView = new MagnifierGlassSurface(this);
         mPhotoView = new PhotoView(this);
 
-        List<ColorFilter> filterList = new ArrayList<ColorFilter>();
-        filterList.add(VisorSurface.NO_FILTER);
-        filterList.add(VisorSurface.BLACK_WHITE_COLOR_FILTER);
-        filterList.add(VisorSurface.WHITE_BLACK_COLOR_FILTER);
-        filterList.add(VisorSurface.BLUE_YELLOW_COLOR_FILTER);
-        filterList.add(VisorSurface.YELLOW_BLUE_COLOR_FILTER);
+        List<CameraColorFilter> filterList = new ArrayList<>();
+        filterList.add(MagnifierGlassSurface.NO_FILTER);
+        filterList.add(MagnifierGlassSurface.BLACK_WHITE_COLOR_FILTER);
+        filterList.add(MagnifierGlassSurface.WHITE_BLACK_COLOR_FILTER);
+        filterList.add(MagnifierGlassSurface.BLUE_YELLOW_COLOR_FILTER);
+        filterList.add(MagnifierGlassSurface.YELLOW_BLUE_COLOR_FILTER);
 
-        mVisorView.setCameraColorFilters(filterList);
+        mMagnifierView.setCameraColorFilters(filterList);
         FrameLayout previewLayout = getCameraPreviewFrame();
         previewLayout.setBackgroundColor(Color.BLACK);
-        previewLayout.addView(mVisorView);
+        previewLayout.addView(mMagnifierView);
         previewLayout.addView(mPhotoView);
 
-        mPhotoView.setAlpha(0);
+        mPhotoView.setAlpha(0f);
 
         setButtonListeners();
 
         // Add listeners to the Preview area (left of the buttons to avoid accidental triggering)
-        mVisorViewTouchArea = findViewById(R.id.camera_preview_touch_area);
-        mVisorViewTouchArea.setOnClickListener(autoFocusClickHandler);/**/
-        mVisorViewTouchArea.setOnLongClickListener(tapAndHoldListener);
+        mMagnifierViewTouchArea = findViewById(R.id.camera_preview_touch_area);
+        mMagnifierViewTouchArea.setOnClickListener(autoFocusClickHandler);
 
+        mScaleDetector = new ScaleGestureDetector(this, new ScaleGestureDetector.SimpleOnScaleGestureListener() {
+            @Override
+            public boolean onScale(ScaleGestureDetector detector) {
+                if (!isPreviewActive) return false;
+                float factor = detector.getScaleFactor();
+                int delta = Math.round((factor - 1.0f) * 100);
+                mCurrentZoomPercent = Math.max(0, Math.min(100, mCurrentZoomPercent + delta));
+                mMagnifierView.setZoomLevelPercent(mCurrentZoomPercent);
+                updateZoomLabel(mCurrentZoomPercent);
+                return true;
+            }
+        });
+        setupTouchZoom();
+
+    }
+
+    private void setupTouchZoom() {
+        mMagnifierViewTouchArea.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                mScaleDetector.onTouchEvent(event);
+                return event.getPointerCount() > 1;
+            }
+        });
     }
 
     private FrameLayout getCameraPreviewFrame() {
         return (FrameLayout) findViewById(R.id.camera_preview);
     }
 
-    /**
-     *
-     */
     private void setButtonListeners() {
         findViewById(R.id.settings_button).setOnClickListener(openSettingsClickHandler);
 
@@ -492,10 +492,9 @@ public class VisorActivity extends Activity {
         // Add listeners to the Zoom buttons
         findViewById(R.id.button_zoom_in).setOnClickListener(zoomInClickHandler);
         findViewById(R.id.button_zoom_out).setOnClickListener(zoomOutClickHandler);
-        if (mCurrentZoomPercent == 0) {
-            int defaultZoom = Integer.parseInt(mSharedPreferences.getString(
+        if (mCurrentZoomPercent < 0) {
+            mCurrentZoomPercent = Integer.parseInt(mSharedPreferences.getString(
                     getString(R.string.key_preference_default_zoom), "0"));
-            mCurrentZoomPercent = defaultZoom;
         }
         updateZoomLabel(mCurrentZoomPercent);
 
@@ -514,8 +513,8 @@ public class VisorActivity extends Activity {
         Button pauseButton = findViewById(R.id.button_pause);
         pauseButton.setOnClickListener(pauseClickHandler);
 
-        mVisorView.setZoomPanel(findViewById(R.id.zoom_panel));
-        mVisorView.setFlashButton(flashButton);
+        mMagnifierView.setZoomPanel(findViewById(R.id.zoom_panel));
+        mMagnifierView.setFlashButton(flashButton);
 
         mZoomPanel = findViewById(R.id.zoom_panel);
         mPauseButton = pauseButton;
@@ -525,8 +524,6 @@ public class VisorActivity extends Activity {
     @Override
     protected void onPause() {
         super.onPause();
-        // 2015-10-19 ChangeRequest: Some users have problems with the high brightness value.
-        //                           So the user now has to activly adjust the brightness.
         resetBrightnessToPreviousValue();
         Log.d(TAG, "onPause called!");
     }
@@ -534,31 +531,46 @@ public class VisorActivity extends Activity {
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        setContentView(R.layout.activity_visor);
+        // Release camera before re-parenting so that mState is guaranteed
+        // STATE_CLOSED when the new surface lifecycle calls enableCamera().
+        mMagnifierView.releaseCamera();
+        setContentView(R.layout.activity_magnifier_glass);
         applyHandedness();
         FrameLayout previewLayout = getCameraPreviewFrame();
         previewLayout.setBackgroundColor(Color.BLACK);
         // re-attach existing views
-        if (mVisorView.getParent() != null)
-            ((android.view.ViewGroup) mVisorView.getParent()).removeView(mVisorView);
+        if (mMagnifierView.getParent() != null)
+            ((android.view.ViewGroup) mMagnifierView.getParent()).removeView(mMagnifierView);
         if (mPhotoView.getParent() != null)
             ((android.view.ViewGroup) mPhotoView.getParent()).removeView(mPhotoView);
-        previewLayout.addView(mVisorView);
+        previewLayout.addView(mMagnifierView);
         previewLayout.addView(mPhotoView);
-        mPhotoView.setAlpha(0);
         setButtonListeners();
-        mVisorViewTouchArea = findViewById(R.id.camera_preview_touch_area);
-        mVisorViewTouchArea.setOnClickListener(autoFocusClickHandler);
-        mVisorViewTouchArea.setOnLongClickListener(tapAndHoldListener);
-        if (mVisorView.getCameraPreviewWidth() > 0) {
-            mVisorView.setCameraDisplayAndFaceOrientation(this);
-        }
-        mVisorView.setZoomLevelPercent(mCurrentZoomPercent);
+        mMagnifierViewTouchArea = findViewById(R.id.camera_preview_touch_area);
+        mMagnifierViewTouchArea.setOnClickListener(autoFocusClickHandler);
+        setupTouchZoom();
+        mMagnifierView.setZoomLevelPercent(mCurrentZoomPercent);
         updateZoomLabel(mCurrentZoomPercent);
+
+        if (!isPreviewActive) {
+            // Reset to active state; surface lifecycle will restart the camera
+            if (mFrozenBitmap != null && !mFrozenBitmap.isRecycled()) {
+                mFrozenBitmap.recycle();
+            }
+            mFrozenBitmap = null;
+            isPreviewActive = true;
+            cameraPreviewIsActive(mPauseButton);
+        } else {
+            mPhotoView.setAlpha(0f);
+        }
     }
 
     @Override
     protected void onDestroy() {
+        if (mFrozenBitmap != null && !mFrozenBitmap.isRecycled()) {
+            mFrozenBitmap.recycle();
+        }
+        mFrozenBitmap = null;
         super.onDestroy();
         Log.d(TAG, "onDestroy called!");
     }
@@ -570,16 +582,15 @@ public class VisorActivity extends Activity {
             setBrightnessToMaximum();
         }
 
-        if (cameraPreviewState != true && mPhotoView != null) {
-            cameraPreviewState = true;
-            cameraPreviewIsActive(mPauseButton);
+        if (!isPreviewActive && mPhotoView != null) {
+            unfreezePreview();
         }
 
         Log.d(TAG, "onResume called!");
     }
 
     /**
-     * @source https://stackoverflow.com/questions/2661536/how-to-programmatically-take-a-screenshot-in-android#5651242
+     * See https://stackoverflow.com/questions/2661536/how-to-programmatically-take-a-screenshot-in-android#5651242
      */
     private void takeScreenshot() {
         if (Build.VERSION.SDK_INT >= 23 && Build.VERSION.SDK_INT < 29 &&
@@ -587,21 +598,18 @@ public class VisorActivity extends Activity {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
             return;
         }
-        Date now = new Date();
-        android.text.format.DateFormat.format("yyyy-MM-dd_hh:mm:ss", now);
         try {
-            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", getResources().getConfiguration().locale).format(new Date());
+            String timeStamp = SCREENSHOT_DATE_FORMAT.format(new Date());
             String imageFileName = "JPEG_" + timeStamp + ".jpg";
-            Bitmap bitmap = mVisorView.getBitmap();
-            mVisorView.playActionSoundShutter();
-            mVisorView.mState = VisorSurface.STATE_CLOSED;
-            cameraPreviewIsActive(mPauseButton);
-            Uri uri = Util.saveImageOnAllAPIs(bitmap, this, "", imageFileName, VisorSurface.JPEG_QUALITY);
+            Bitmap bitmap = mMagnifierView.getBitmap();
+            if (bitmap == null) return;
+            mMagnifierView.playActionSoundShutter();
+            Uri uri = Util.saveImageOnAllAPIs(bitmap, this, "", imageFileName, MagnifierGlassSurface.JPEG_QUALITY);
+            bitmap.recycle();
             if (uri != null)
                 openScreenshot(uri);
         } catch (Throwable e) {
-            // Several error may come out with file handling or OOM
-            e.printStackTrace();
+            Log.e(TAG, "takeScreenshot failed", e);
         }
     }
 
@@ -612,13 +620,12 @@ public class VisorActivity extends Activity {
     }
 
     /**
-     * @source https://stackoverflow.com/questions/2661536/how-to-programmatically-take-a-screenshot-in-android#5651242
+     * See https://stackoverflow.com/questions/2661536/how-to-programmatically-take-a-screenshot-in-android#5651242
      */
     private void openScreenshot(Uri uri) {
         Intent intent = new Intent(Intent.ACTION_VIEW)
                 .setDataAndType(uri, "image/*")
                 .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        intent.putExtra(Intent.EXTRA_STREAM, uri);
         startActivity(intent);
     }
 }

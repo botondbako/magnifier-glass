@@ -2,15 +2,11 @@
 <resources>
     <string name="app_name">MagnifierGlass</string>
     <string name="button_color_description">промени режим контраста</string>
-    <string name="button_zoom_description">промени ниво увећања</string>
     <string name="button_flash_description">укључи и искључи лампу</string>
     <string name="button_pause_description">замрзни тренутну слику</string>
     <string name="button_zoom_in_description">увећај</string>
     <string name="button_zoom_out_description">умањи</string>
     <string name="button_exit_description">излаз</string>
-    <string name="text_autofocus_enabled">Аутофокус укључен.</string>
-    <string name="text_autofocus_disabled">Аутофокус искључен. Додирните за фокусирање.</string>
-    <string name="text_image_stored">Слика сачувана у </string>
     <string name="title_activity_settings">Подешавања</string>
     <string name="notification_sounds_header">Звуци обавештења</string>
     <string name="lighting_header">Осветљење</string>

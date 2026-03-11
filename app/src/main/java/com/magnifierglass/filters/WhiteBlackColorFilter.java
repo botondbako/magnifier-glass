@@ -2,9 +2,7 @@ package com.magnifierglass.filters;
 
 import android.graphics.ColorMatrix;
 
-/**
- * Created by Christian Illies on 02.08.15.
- */
+/** Inverted high-contrast filter: white-on-black. */
 public class WhiteBlackColorFilter extends BlackWhiteColorFilter {
     @Override
     public void filter(ColorMatrix colorMatrix) {

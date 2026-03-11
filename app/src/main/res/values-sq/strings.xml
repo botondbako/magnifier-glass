@@ -2,15 +2,11 @@
 <resources>
     <string name="app_name">MagnifierGlass</string>
     <string name="button_color_description">ndrysho modalitetin e kontrastit</string>
-    <string name="button_zoom_description">ndrysho nivelin e zmadhimit</string>
     <string name="button_flash_description">ndiz dhe fik elektrikun</string>
     <string name="button_pause_description">ngri imazhin aktual</string>
     <string name="button_zoom_in_description">zmadho</string>
     <string name="button_zoom_out_description">zvogëlo</string>
     <string name="button_exit_description">dil</string>
-    <string name="text_autofocus_enabled">Autofokusi i aktivizuar.</string>
-    <string name="text_autofocus_disabled">Autofokusi i çaktivizuar. Prekni për të fokusuar.</string>
-    <string name="text_image_stored">Imazhi u ruajt në </string>
     <string name="title_activity_settings">Cilësimet</string>
     <string name="notification_sounds_header">Tingujt e njoftimeve</string>
     <string name="lighting_header">Ndriçimi</string>

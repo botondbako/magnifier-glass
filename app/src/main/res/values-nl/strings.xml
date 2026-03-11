@@ -2,15 +2,11 @@
 <resources>
     <string name="app_name">MagnifierGlass</string>
     <string name="button_color_description">contrastmodus wijzigen</string>
-    <string name="button_zoom_description">vergrotingsniveau wijzigen</string>
     <string name="button_flash_description">zaklamp aan- en uitzetten</string>
     <string name="button_pause_description">huidig beeld bevriezen</string>
     <string name="button_zoom_in_description">inzoomen</string>
     <string name="button_zoom_out_description">uitzoomen</string>
     <string name="button_exit_description">afsluiten</string>
-    <string name="text_autofocus_enabled">Autofocus ingeschakeld.</string>
-    <string name="text_autofocus_disabled">Autofocus uitgeschakeld. Tik om scherp te stellen.</string>
-    <string name="text_image_stored">Afbeelding opgeslagen in </string>
     <string name="title_activity_settings">Instellingen</string>
     <string name="notification_sounds_header">Meldingsgeluiden</string>
     <string name="lighting_header">Verlichting</string>

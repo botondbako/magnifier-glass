@@ -2,15 +2,11 @@
 <resources>
     <string name="app_name">MagnifierGlass</string>
     <string name="button_color_description">kontrast modunu değiştir</string>
-    <string name="button_zoom_description">büyütme seviyesini değiştir</string>
     <string name="button_flash_description">el fenerini aç ve kapat</string>
     <string name="button_pause_description">mevcut görüntüyü dondur</string>
     <string name="button_zoom_in_description">yakınlaştır</string>
     <string name="button_zoom_out_description">uzaklaştır</string>
     <string name="button_exit_description">çıkış</string>
-    <string name="text_autofocus_enabled">Otomatik odaklama etkin.</string>
-    <string name="text_autofocus_disabled">Otomatik odaklama devre dışı. Odaklamak için dokunun.</string>
-    <string name="text_image_stored">Görüntü kaydedildi </string>
     <string name="title_activity_settings">Ayarlar</string>
     <string name="notification_sounds_header">Bildirim sesleri</string>
     <string name="lighting_header">Aydınlatma</string>

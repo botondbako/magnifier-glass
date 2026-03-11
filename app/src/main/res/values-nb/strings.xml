@@ -2,15 +2,11 @@
 <resources>
     <string name="app_name">MagnifierGlass</string>
     <string name="button_color_description">endre kontrastmodus</string>
-    <string name="button_zoom_description">endre forstørrelsesnivå</string>
     <string name="button_flash_description">slå lommelykt av og på</string>
     <string name="button_pause_description">frys gjeldende bilde</string>
     <string name="button_zoom_in_description">zoom inn</string>
     <string name="button_zoom_out_description">zoom ut</string>
     <string name="button_exit_description">avslutt</string>
-    <string name="text_autofocus_enabled">Autofokus aktivert.</string>
-    <string name="text_autofocus_disabled">Autofokus deaktivert. Trykk for å fokusere.</string>
-    <string name="text_image_stored">Bilde lagret i </string>
     <string name="title_activity_settings">Innstillinger</string>
     <string name="notification_sounds_header">Varsellyder</string>
     <string name="lighting_header">Belysning</string>

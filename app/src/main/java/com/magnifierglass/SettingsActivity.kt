@@ -1,16 +1,12 @@
 package com.magnifierglass
 
-import android.hardware.Camera
 import android.hardware.camera2.CameraCharacteristics
 import android.hardware.camera2.CameraManager
-import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.DropDownPreference
 import androidx.preference.PreferenceFragmentCompat
-import androidx.preference.PreferenceManager
-import java.util.Locale
 import kotlin.math.max
 
 
@@ -31,7 +27,7 @@ class SettingsActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
-                super.onBackPressed()
+                finish()
                 return true
             }
         }
@@ -39,17 +35,7 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     private fun applyLocale() {
-        val prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext)
-        val lang = prefs.getString(getString(R.string.key_preference_language), "default") ?: "default"
-        val locale = if (lang == "default") {
-            android.content.res.Resources.getSystem().configuration.locale
-        } else {
-            Locale(lang)
-        }
-        Locale.setDefault(locale)
-        val config = resources.configuration
-        config.setLocale(locale)
-        resources.updateConfiguration(config, resources.displayMetrics)
+        LocaleHelper.applyLocale(this)
     }
 
     class SettingsFragment : PreferenceFragmentCompat() {
@@ -66,47 +52,40 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         private fun initCameraChooser() {
-            val visorSurface = VisorSurface.getInstance()
-            val numberOfCameras = Camera.getNumberOfCameras()
-            var entryValues: MutableList<CharSequence> = ArrayList()
-            var entries: MutableList<CharSequence> = ArrayList()
-            val manager: CameraManager
+            val magnifierSurface = MagnifierGlassSurface.getInstance() ?: return
+            val entryValues: MutableList<CharSequence> = ArrayList()
+            val entries: MutableList<CharSequence> = ArrayList()
             var haveMain = false
             var haveSelfie = false
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                manager = context?.getSystemService(CAMERA_SERVICE) as CameraManager
-                manager.cameraIdList.forEach {
-                    val cameraCharacteristics = manager.getCameraCharacteristics(it)
-                    entryValues.add(it)
-                    if (!haveMain && cameraCharacteristics.get(CameraCharacteristics.LENS_FACING) == Camera.CameraInfo.CAMERA_FACING_FRONT) {
-                        entries.add(resources.getString(R.string.main_camera))
-                        haveMain = true
-                    } else if (!haveSelfie && cameraCharacteristics.get(CameraCharacteristics.LENS_FACING) == Camera.CameraInfo.CAMERA_FACING_BACK) {
-                        entries.add(resources.getString(R.string.selfie_camera))
-                        haveSelfie = true
-                    } else
-                        entries.add(resources.getString(R.string.wide_or_other_camera))
-                }
-            } else {
-                entryValues = MutableList(numberOfCameras) { i -> i.toString() }
-                entries = entryValues
+            val manager = context?.getSystemService(CAMERA_SERVICE) as CameraManager
+            manager.cameraIdList.forEach {
+                val cameraCharacteristics = manager.getCameraCharacteristics(it)
+                entryValues.add(it)
+                if (!haveMain && cameraCharacteristics.get(CameraCharacteristics.LENS_FACING) == CameraCharacteristics.LENS_FACING_BACK) {
+                    entries.add(resources.getString(R.string.main_camera))
+                    haveMain = true
+                } else if (!haveSelfie && cameraCharacteristics.get(CameraCharacteristics.LENS_FACING) == CameraCharacteristics.LENS_FACING_FRONT) {
+                    entries.add(resources.getString(R.string.selfie_camera))
+                    haveSelfie = true
+                } else
+                    entries.add(resources.getString(R.string.wide_or_other_camera))
             }
             val cameraIdPreference = findPreference<DropDownPreference>(resources.getString(R.string.key_preference_camera_id))
             if (cameraIdPreference != null) {
                 cameraIdPreference.entries = entries.toTypedArray()
                 cameraIdPreference.entryValues = entryValues.toTypedArray()
-                cameraIdPreference.setValueIndex(visorSurface.preferredCameraId)
+                cameraIdPreference.setValueIndex(magnifierSurface.preferredCameraId)
             }
         }
 
         private fun initPreviewResolutionWidth() {
-            val visorSurface = VisorSurface.getInstance()
-            val availablePreviewWidths: Array<CharSequence>? = visorSurface.availablePreviewWidths
+            val magnifierSurface = MagnifierGlassSurface.getInstance() ?: return
+            val availablePreviewWidths: Array<CharSequence>? = magnifierSurface.availablePreviewWidths
             val previewResolutionPreference = findPreference<DropDownPreference>(resources.getString(R.string.key_preference_preview_resolution))
             if (previewResolutionPreference != null && availablePreviewWidths != null) {
                 previewResolutionPreference.entries = availablePreviewWidths
                 previewResolutionPreference.entryValues = availablePreviewWidths
-                val currentPreviewWidth = visorSurface.cameraPreviewWidth
+                val currentPreviewWidth = magnifierSurface.cameraPreviewWidth
                 val currentIndex = max(0, availablePreviewWidths.indexOf(currentPreviewWidth.toString()))
                 previewResolutionPreference.setValueIndex(currentIndex)
             }

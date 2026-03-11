@@ -2,9 +2,7 @@ package com.magnifierglass.filters;
 
 import android.graphics.ColorMatrix;
 
-/**
- * Created by Christian Illies on 02.08.15.
- */
+/** Inverted blue-yellow filter: yellow-on-blue. */
 public class YellowBlueColorFilter extends BlueYellowColorFilter {
     @Override
     public void filter(ColorMatrix colorMatrix) {

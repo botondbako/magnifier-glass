@@ -2,14 +2,12 @@ package com.magnifierglass.filters;
 
 import android.graphics.ColorMatrix;
 
-/**
- * Created by Christian Illies on 02.08.15.
- */
+/** High-contrast black-on-white color filter (greyscale + contrast boost). */
 public class BlackWhiteColorFilter extends BaseFilter {
     /**
      * our default contrast level
      */
-    protected static final float CONTRAST_LEVEL = 0.66f;
+    private static final float CONTRAST_LEVEL = 0.66f;
 
     @Override
     public void filter(ColorMatrix colorMatrix) {

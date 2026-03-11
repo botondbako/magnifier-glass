@@ -3,32 +3,20 @@ package com.magnifierglass.filters;
 import android.graphics.ColorMatrix;
 
 /**
- * Created by Christian Illies on 10.08.15.
- *
- * BaseFilter class to give subclasses some pre-defined color setups
- * like greyscale or high contrast.
+ * Base class providing pre-defined color matrices (greyscale, contrast, invert)
+ * for use by concrete {@link CameraColorFilter} implementations.
  */
-public abstract class BaseFilter implements ColorFilter {
+public abstract class BaseFilter implements CameraColorFilter {
 
 
     /**
-     * returns a float array with increased contrast for further use in
-     * a {@link ColorMatrix} object.
+     * Returns a contrast adjustment matrix for use in a {@link ColorMatrix}.
      *
-     * -1f no visible contrast (grey layer)
-     * -0.5f low contrast
-     * 0f no changes made
-     * 1f high contrast
-     * 2f very high contrast
-     * ...
-     *
-     * @param contrast the contrast value you wanna increase (or decrease) -1f to +1f
-     * @return
+     * @param contrast the contrast value: -1f (grey) to 0f (unchanged) to 1f+ (high contrast)
      */
-    public float[] getContrastMatrix(float contrast) {
+    float[] getContrastMatrix(float contrast) {
         float scale = contrast + 1.f;
         float translate = (-.5f * scale + .5f) * 255.f;
-        //cm.set(new float[] {
         return new float[] {
                 scale, 0, 0, 0, translate,
                 0, scale, 0, 0, translate,
@@ -37,11 +25,8 @@ public abstract class BaseFilter implements ColorFilter {
         };
     }
 
-    /**
-     * inverts the colors of the {@link ColorMatrix}.
-     * @return
-     */
-    public float[] getInvertMatrix() {
+    /** Returns a color inversion matrix. */
+    float[] getInvertMatrix() {
         return new float[] {
                 -1,  0,  0,  0, 255,
                 0,  -1,  0,  0, 255,
@@ -50,29 +35,23 @@ public abstract class BaseFilter implements ColorFilter {
         };
     }
 
-    /**
-     * inverts the colors of the {@link ColorMatrix}.
-     * @return
-     */
-    public float[] getInvertedGreyscaledMatrix() {
+    /** Returns an inverted greyscale matrix using BT.601 perceptual luminance weights. */
+    float[] getInvertedGreyscaledMatrix() {
         return new float[] {
-                -0.5f,  -0.5f,  -0.5f,  0, 255,
-                -0.5f,  -0.5f,  -0.5f,  0, 255,
-                -0.5f,  -0.5f,  -0.5f,  0, 255,
-                0,       0,      0,     1,   0
+                -0.299f, -0.587f, -0.114f,  0, 255,
+                -0.299f, -0.587f, -0.114f,  0, 255,
+                -0.299f, -0.587f, -0.114f,  0, 255,
+                      0,       0,       0,  1,   0
         };
     }
 
-    /**
-     * grey scale the colors of the {@link ColorMatrix}.
-     * @return
-     */
-    public float[] getGreyscaleMatrix() {
+    /** Returns a greyscale conversion matrix using BT.601 perceptual luminance weights. */
+    float[] getGreyscaleMatrix() {
         return new float[] {
-                0.5f, 0.5f, 0.5f,  0, 0,
-                0.5f, 0.5f, 0.5f,  0, 0,
-                0.5f, 0.5f, 0.5f,  0, 0,
-                   0,    0,    0,  1, 0
+                0.299f, 0.587f, 0.114f,  0, 0,
+                0.299f, 0.587f, 0.114f,  0, 0,
+                0.299f, 0.587f, 0.114f,  0, 0,
+                     0,      0,      0,  1, 0
         };
     }
 }

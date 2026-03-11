@@ -2,12 +2,12 @@ package com.magnifierglass
 
 import android.content.ContentValues
 import android.content.Context
-import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
+import android.util.Log
 import androidx.core.content.FileProvider
 import java.io.File
 import java.io.File.separator
@@ -64,10 +64,9 @@ class Util {
         private fun saveImageToStream(bitmap: Bitmap, outputStream: OutputStream?, quality: Int) {
             if (outputStream != null) {
                 try {
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream)
-                    outputStream.close()
+                    outputStream.use { bitmap.compress(Bitmap.CompressFormat.JPEG, quality, it) }
                 } catch (e: Exception) {
-                    e.printStackTrace()
+                    Log.e("Util", "saveImageToStream failed", e)
                 }
             }
         }

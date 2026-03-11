@@ -2,15 +2,11 @@
 <resources>
     <string name="app_name">MagnifierGlass</string>
     <string name="button_color_description">vaihda kontrastitilaa</string>
-    <string name="button_zoom_description">vaihda suurennustasoa</string>
     <string name="button_flash_description">kytke taskulamppu päälle ja pois</string>
     <string name="button_pause_description">jäädytä nykyinen kuva</string>
     <string name="button_zoom_in_description">lähennä</string>
     <string name="button_zoom_out_description">loitonna</string>
     <string name="button_exit_description">poistu</string>
-    <string name="text_autofocus_enabled">Automaattitarkennus käytössä.</string>
-    <string name="text_autofocus_disabled">Automaattitarkennus pois käytöstä. Napauta tarkentaaksesi.</string>
-    <string name="text_image_stored">Kuva tallennettu kohteeseen </string>
     <string name="title_activity_settings">Asetukset</string>
     <string name="notification_sounds_header">Ilmoitusäänet</string>
     <string name="lighting_header">Valaistus</string>

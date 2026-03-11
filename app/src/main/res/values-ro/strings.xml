@@ -2,15 +2,11 @@
 <resources>
     <string name="app_name">MagnifierGlass</string>
     <string name="button_color_description">schimbă modul de contrast</string>
-    <string name="button_zoom_description">schimbă nivelul de mărire</string>
     <string name="button_flash_description">pornește și oprește lanterna</string>
     <string name="button_pause_description">îngheață imaginea curentă</string>
     <string name="button_zoom_in_description">mărire</string>
     <string name="button_zoom_out_description">micșorare</string>
     <string name="button_exit_description">ieșire din aplicație</string>
-    <string name="text_autofocus_enabled">Autofocus activat.</string>
-    <string name="text_autofocus_disabled">Autofocus dezactivat. Atingeți pentru focalizare.</string>
-    <string name="text_image_stored">Imagine salvată în </string>
 
     <!-- Preference Titles -->
     <string name="title_activity_settings">Setări</string>
