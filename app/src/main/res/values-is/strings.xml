@@ -28,4 +28,14 @@
         <item>Rétthentur</item>
         <item>Örvhentur</item>
     </string-array>
+
+    <!-- OCR / TTS -->
+    <string name="button_speak_description">lesa texta upphátt</string>
+    <string name="tts_not_ready">Talgerving er ekki tilbúin ennþá</string>
+    <string name="tts_language_unavailable">Talmál ekki tiltækt</string>
+    <string name="ocr_no_text">Enginn texti fannst</string>
+    <string name="ocr_failed">Textaþekking mistókst</string>
+    <string name="ocr_downloading">Sæki %1$s málgögn…</string>
+    <string name="ocr_download_complete">Málgögn tilbúin</string>
+    <string name="ocr_download_failed">Niðurhal máls mistókst</string>
 </resources>

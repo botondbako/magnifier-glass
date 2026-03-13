@@ -39,4 +39,14 @@
         <item>Rechtshändig</item>
         <item>Linkshändig</item>
     </string-array>
+
+    <!-- OCR / TTS -->
+    <string name="button_speak_description">Text vorlesen</string>
+    <string name="tts_not_ready">Sprachausgabe noch nicht bereit</string>
+    <string name="tts_language_unavailable">Sprachausgabe-Sprache nicht verfügbar</string>
+    <string name="ocr_no_text">Kein Text gefunden</string>
+    <string name="ocr_failed">Texterkennung fehlgeschlagen</string>
+    <string name="ocr_downloading">Lade %1$s Sprachdaten herunter…</string>
+    <string name="ocr_download_complete">Sprachdaten bereit</string>
+    <string name="ocr_download_failed">Sprachdaten-Download fehlgeschlagen</string>
 </resources>

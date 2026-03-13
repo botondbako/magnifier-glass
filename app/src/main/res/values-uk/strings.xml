@@ -28,4 +28,14 @@
         <item>Правша</item>
         <item>Лівша</item>
     </string-array>
+
+    <!-- OCR / TTS -->
+    <string name="button_speak_description">прочитати текст вголос</string>
+    <string name="tts_not_ready">Синтез мовлення ще не готовий</string>
+    <string name="tts_language_unavailable">Мова мовлення недоступна</string>
+    <string name="ocr_no_text">Текст не знайдено</string>
+    <string name="ocr_failed">Розпізнавання тексту не вдалося</string>
+    <string name="ocr_downloading">Завантаження мовних даних %1$s…</string>
+    <string name="ocr_download_complete">Мовні дані готові</string>
+    <string name="ocr_download_failed">Завантаження мови не вдалося</string>
 </resources>

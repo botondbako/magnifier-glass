@@ -28,4 +28,14 @@
         <item>Droitier</item>
         <item>Gaucher</item>
     </string-array>
+
+    <!-- OCR / TTS -->
+    <string name="button_speak_description">lire le texte à voix haute</string>
+    <string name="tts_not_ready">La synthèse vocale n\'est pas encore prête</string>
+    <string name="tts_language_unavailable">Langue vocale non disponible</string>
+    <string name="ocr_no_text">Aucun texte trouvé</string>
+    <string name="ocr_failed">La reconnaissance de texte a échoué</string>
+    <string name="ocr_downloading">Téléchargement des données linguistiques %1$s…</string>
+    <string name="ocr_download_complete">Données linguistiques prêtes</string>
+    <string name="ocr_download_failed">Le téléchargement de la langue a échoué</string>
 </resources>

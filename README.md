@@ -20,6 +20,18 @@ Features:
 - Configurable default zoom, preview resolution, camera selection
 - Multi-language support
 - Full-screen immersive mode
+- **OCR text-to-speech**: freeze the image and press the speak button to have recognized text read aloud
+  - Powered by Tesseract OCR (best accuracy models) with English bundled
+  - Additional OCR language models downloaded automatically when a non-English menu language is selected (28 languages supported)
+  - Auto-detects text language for correct TTS pronunciation
+  - Reads text blocks in proper reading order (multi-column layouts)
+  - Grayscale + contrast preprocessing for improved recognition
+
+## Known limitations
+
+- Handwritten text and stylized fonts (e.g. 7-segment displays) are poorly recognized — Tesseract is trained on printed text. Google ML Kit would be a better engine for handwriting.
+- OCR language model download requires an internet connection on first use per language (~12–15 MB each).
+- Android 7.0 devices have outdated root CA certificates; the app uses a permissive TLS configuration for language data downloads from GitHub.
 
 ## Requirements
 
@@ -106,6 +118,12 @@ adb install app/build/outputs/apk/debug/app-debug.apk
 ```bash
 ./gradlew testDebugUnitTest
 ```
+
+## Third-party libraries
+
+- [PhotoView](https://github.com/chrisbanes/PhotoView) — pinch-to-zoom ImageView (Apache 2.0)
+- [Tesseract4Android](https://github.com/nicktgn/tesseract4android) — Tesseract OCR engine for Android (Apache 2.0)
+- [tessdata_best](https://github.com/tesseract-ocr/tessdata_best) — trained OCR models (Apache 2.0)
 
 ## License
 

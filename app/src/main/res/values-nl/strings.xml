@@ -28,4 +28,14 @@
         <item>Rechtshandig</item>
         <item>Linkshandig</item>
     </string-array>
+
+    <!-- OCR / TTS -->
+    <string name="button_speak_description">tekst voorlezen</string>
+    <string name="tts_not_ready">Spraaksynthese is nog niet gereed</string>
+    <string name="tts_language_unavailable">Spraaktaal niet beschikbaar</string>
+    <string name="ocr_no_text">Geen tekst gevonden</string>
+    <string name="ocr_failed">Tekstherkenning mislukt</string>
+    <string name="ocr_downloading">%1$s taalgegevens downloaden…</string>
+    <string name="ocr_download_complete">Taalgegevens gereed</string>
+    <string name="ocr_download_failed">Taaldownload mislukt</string>
 </resources>

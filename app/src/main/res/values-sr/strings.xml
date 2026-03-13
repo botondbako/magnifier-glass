@@ -28,4 +28,14 @@
         <item>Десноруки</item>
         <item>Леворуки</item>
     </string-array>
+
+    <!-- OCR / TTS -->
+    <string name="button_speak_description">прочитај текст наглас</string>
+    <string name="tts_not_ready">Синтеза говора још није спремна</string>
+    <string name="tts_language_unavailable">Језик говора није доступан</string>
+    <string name="ocr_no_text">Текст није пронађен</string>
+    <string name="ocr_failed">Препознавање текста није успело</string>
+    <string name="ocr_downloading">Преузимање језичких података %1$s…</string>
+    <string name="ocr_download_complete">Језички подаци спремни</string>
+    <string name="ocr_download_failed">Преузимање језика није успело</string>
 </resources>

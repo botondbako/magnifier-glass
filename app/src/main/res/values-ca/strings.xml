@@ -28,4 +28,14 @@
         <item>Dretà</item>
         <item>Esquerrà</item>
     </string-array>
+
+    <!-- OCR / TTS -->
+    <string name="button_speak_description">llegir el text en veu alta</string>
+    <string name="tts_not_ready">La síntesi de veu encara no està llesta</string>
+    <string name="tts_language_unavailable">L\'idioma de veu no està disponible</string>
+    <string name="ocr_no_text">No s\'ha trobat text</string>
+    <string name="ocr_failed">El reconeixement de text ha fallat</string>
+    <string name="ocr_downloading">Descarregant dades d\'idioma %1$s…</string>
+    <string name="ocr_download_complete">Dades d\'idioma llestes</string>
+    <string name="ocr_download_failed">La descàrrega de l\'idioma ha fallat</string>
 </resources>

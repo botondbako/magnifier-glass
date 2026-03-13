@@ -107,8 +107,23 @@
     </LinearLayout>
 
     <Button android:id="@+id/button_photo"
-        android:visibility="invisible"
+        android:visibility="gone"
         android:layout_width="0dp" android:layout_height="0dp" />
+
+    <!-- Speak button: shares position with zoom_panel (both centerHorizontal + alignParentBottom).
+         Only visible when frozen, at which point zoom_panel is INVISIBLE. -->
+    <Button android:id="@+id/button_speak"
+        android:visibility="gone"
+        android:layout_width="36dp" android:layout_height="36dp"
+        android:text="🔊" android:textSize="18sp" android:textColor="#000000"
+        android:background="@drawable/button_zoom_round_corners"
+        android:contentDescription="@string/button_speak_description"
+        android:focusable="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="4dp"
+        android:elevation="8dp"
+        android:padding="0dp" android:minWidth="0dp" android:minHeight="0dp" />
 
     <Button android:id="@+id/button_pause"
         android:layout_width="36dp" android:layout_height="36dp"

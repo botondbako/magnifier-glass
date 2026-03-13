@@ -28,4 +28,14 @@
         <item>Destrorso</item>
         <item>Mancino</item>
     </string-array>
+
+    <!-- OCR / TTS -->
+    <string name="button_speak_description">leggi il testo ad alta voce</string>
+    <string name="tts_not_ready">La sintesi vocale non è ancora pronta</string>
+    <string name="tts_language_unavailable">Lingua vocale non disponibile</string>
+    <string name="ocr_no_text">Nessun testo trovato</string>
+    <string name="ocr_failed">Riconoscimento del testo non riuscito</string>
+    <string name="ocr_downloading">Download dei dati linguistici %1$s…</string>
+    <string name="ocr_download_complete">Dati linguistici pronti</string>
+    <string name="ocr_download_failed">Download della lingua non riuscito</string>
 </resources>

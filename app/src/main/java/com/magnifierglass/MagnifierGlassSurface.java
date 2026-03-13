@@ -775,6 +775,19 @@ public class MagnifierGlassSurface extends SurfaceView implements SurfaceHolder.
     public void pauseWithFocus(final Runnable onPaused) {
         if (mCamera == null || mState != STATE_PREVIEW) return;
 
+        final Runnable freezeAndNotify = new Runnable() {
+            private boolean mDone;
+            @Override
+            public void run() {
+                if (mDone) return;
+                mDone = true;
+                if (mState == STATE_PREVIEW) {
+                    freezePreview();
+                }
+                if (onPaused != null) onPaused.run();
+            }
+        };
+
         try {
             mCamera.autoFocus(new Camera.AutoFocusCallback() {
                 @Override
@@ -788,17 +801,11 @@ public class MagnifierGlassSurface extends SurfaceView implements SurfaceHolder.
                         mFrameBufferCount = 0;
                         mFrameBufferIndex = 0;
                     }
-                    postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (mState == STATE_PREVIEW) {
-                                freezePreview();
-                            }
-                            if (onPaused != null) onPaused.run();
-                        }
-                    }, 250); // ~8 frames at 30 fps
+                    postDelayed(freezeAndNotify, 250); // ~8 frames at 30 fps
                 }
             });
+            // Safety timeout: if autoFocus callback never fires, freeze anyway
+            postDelayed(freezeAndNotify, 2000);
         } catch (RuntimeException e) {
             // autofocus not supported or camera in bad state — freeze immediately
             freezePreview();

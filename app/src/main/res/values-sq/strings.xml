@@ -28,4 +28,14 @@
         <item>Djathtazi</item>
         <item>Majtazi</item>
     </string-array>
+
+    <!-- OCR / TTS -->
+    <string name="button_speak_description">lexo tekstin me zë</string>
+    <string name="tts_not_ready">Sinteza e të folurit nuk është gati ende</string>
+    <string name="tts_language_unavailable">Gjuha e të folurit nuk është e disponueshme</string>
+    <string name="ocr_no_text">Nuk u gjet tekst</string>
+    <string name="ocr_failed">Njohja e tekstit dështoi</string>
+    <string name="ocr_downloading">Po shkarkohen të dhënat gjuhësore %1$s…</string>
+    <string name="ocr_download_complete">Të dhënat gjuhësore janë gati</string>
+    <string name="ocr_download_failed">Shkarkimi i gjuhës dështoi</string>
 </resources>

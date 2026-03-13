@@ -28,4 +28,14 @@
         <item>Pravák</item>
         <item>Ľavák</item>
     </string-array>
+
+    <!-- OCR / TTS -->
+    <string name="button_speak_description">prečítať text nahlas</string>
+    <string name="tts_not_ready">Syntéza reči ešte nie je pripravená</string>
+    <string name="tts_language_unavailable">Jazyk reči nie je dostupný</string>
+    <string name="ocr_no_text">Nebol nájdený žiadny text</string>
+    <string name="ocr_failed">Rozpoznávanie textu zlyhalo</string>
+    <string name="ocr_downloading">Sťahovanie jazykových údajov %1$s…</string>
+    <string name="ocr_download_complete">Jazykové údaje pripravené</string>
+    <string name="ocr_download_failed">Sťahovanie jazyka zlyhalo</string>
 </resources>

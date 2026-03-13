@@ -28,4 +28,14 @@
         <item>Δεξιόχειρας</item>
         <item>Αριστερόχειρας</item>
     </string-array>
+
+    <!-- OCR / TTS -->
+    <string name="button_speak_description">ανάγνωση κειμένου</string>
+    <string name="tts_not_ready">Η σύνθεση ομιλίας δεν είναι έτοιμη ακόμα</string>
+    <string name="tts_language_unavailable">Η γλώσσα ομιλίας δεν είναι διαθέσιμη</string>
+    <string name="ocr_no_text">Δεν βρέθηκε κείμενο</string>
+    <string name="ocr_failed">Η αναγνώριση κειμένου απέτυχε</string>
+    <string name="ocr_downloading">Λήψη δεδομένων γλώσσας %1$s…</string>
+    <string name="ocr_download_complete">Τα δεδομένα γλώσσας είναι έτοιμα</string>
+    <string name="ocr_download_failed">Η λήψη γλώσσας απέτυχε</string>
 </resources>

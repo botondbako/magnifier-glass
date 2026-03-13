@@ -28,4 +28,14 @@
         <item>Høyrehendt</item>
         <item>Venstrehendt</item>
     </string-array>
+
+    <!-- OCR / TTS -->
+    <string name="button_speak_description">les tekst høyt</string>
+    <string name="tts_not_ready">Talesyntese er ikke klar ennå</string>
+    <string name="tts_language_unavailable">Talespråk ikke tilgjengelig</string>
+    <string name="ocr_no_text">Ingen tekst funnet</string>
+    <string name="ocr_failed">Tekstgjenkjenning mislyktes</string>
+    <string name="ocr_downloading">Laster ned %1$s språkdata…</string>
+    <string name="ocr_download_complete">Språkdata klar</string>
+    <string name="ocr_download_failed">Nedlasting av språk mislyktes</string>
 </resources>

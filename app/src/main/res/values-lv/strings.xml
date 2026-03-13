@@ -28,4 +28,14 @@
         <item>Labrocis</item>
         <item>Kreilis</item>
     </string-array>
+
+    <!-- OCR / TTS -->
+    <string name="button_speak_description">nolasīt tekstu skaļi</string>
+    <string name="tts_not_ready">Runas sintēze vēl nav gatava</string>
+    <string name="tts_language_unavailable">Runas valoda nav pieejama</string>
+    <string name="ocr_no_text">Teksts nav atrasts</string>
+    <string name="ocr_failed">Teksta atpazīšana neizdevās</string>
+    <string name="ocr_downloading">Lejupielādē %1$s valodas datus…</string>
+    <string name="ocr_download_complete">Valodas dati gatavi</string>
+    <string name="ocr_download_failed">Valodas lejupielāde neizdevās</string>
 </resources>

@@ -28,4 +28,14 @@
         <item>Oikeakätinen</item>
         <item>Vasenkätinen</item>
     </string-array>
+
+    <!-- OCR / TTS -->
+    <string name="button_speak_description">lue teksti ääneen</string>
+    <string name="tts_not_ready">Puhesynteesi ei ole vielä valmis</string>
+    <string name="tts_language_unavailable">Puhekieli ei ole käytettävissä</string>
+    <string name="ocr_no_text">Tekstiä ei löytynyt</string>
+    <string name="ocr_failed">Tekstintunnistus epäonnistui</string>
+    <string name="ocr_downloading">Ladataan %1$s kielitietoja…</string>
+    <string name="ocr_download_complete">Kielitiedot valmiina</string>
+    <string name="ocr_download_failed">Kielen lataus epäonnistui</string>
 </resources>

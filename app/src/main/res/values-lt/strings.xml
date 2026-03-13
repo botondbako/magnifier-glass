@@ -28,4 +28,14 @@
         <item>Dešiniarankis</item>
         <item>Kairiarankis</item>
     </string-array>
+
+    <!-- OCR / TTS -->
+    <string name="button_speak_description">perskaityti tekstą balsu</string>
+    <string name="tts_not_ready">Kalbos sintezė dar neparuošta</string>
+    <string name="tts_language_unavailable">Kalbos kalba nepasiekiama</string>
+    <string name="ocr_no_text">Tekstas nerastas</string>
+    <string name="ocr_failed">Teksto atpažinimas nepavyko</string>
+    <string name="ocr_downloading">Atsisiunčiami %1$s kalbos duomenys…</string>
+    <string name="ocr_download_complete">Kalbos duomenys paruošti</string>
+    <string name="ocr_download_failed">Kalbos atsisiuntimas nepavyko</string>
 </resources>

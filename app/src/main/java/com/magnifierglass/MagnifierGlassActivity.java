@@ -8,11 +8,16 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
@@ -27,16 +32,22 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceManager;
 
 import com.github.chrisbanes.photoview.PhotoView;
 
+import com.googlecode.tesseract.android.ResultIterator;
+import com.googlecode.tesseract.android.TessBaseAPI;
+
+import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import com.magnifierglass.filters.CameraColorFilter;
 
@@ -100,7 +111,8 @@ public class MagnifierGlassActivity extends Activity {
         if (!leftHanded) return; // layouts default to right-handed
 
         // Only swap views that are direct children of the RelativeLayout
-        int[] ids = {R.id.button_exit, R.id.zoom_panel, R.id.button_bar, R.id.button_pause};
+        int[] ids = {R.id.button_exit, R.id.zoom_panel, R.id.button_bar, R.id.button_pause,
+                R.id.button_speak};
         for (int id : ids) {
             View v = findViewById(id);
             if (v == null) continue;
@@ -176,12 +188,46 @@ public class MagnifierGlassActivity extends Activity {
         return mPhotoView;
     }
 
-    private void cameraPreviewIsPaused(Button playOrPauseButton) {
-        playOrPauseButton.setText("▶");
-        mMagnifierViewTouchArea.setVisibility(View.INVISIBLE);
+    @VisibleForTesting
+    boolean isTtsReady() {
+        return mTtsReady;
+    }
+
+    /**
+     * Restore frozen-mode UI state (visibility, z-order) without re-setting the bitmap
+     * or PhotoView scale. Used by onResume/onConfigurationChanged when the frozen bitmap
+     * is already set on the PhotoView.
+     */
+    private void restoreFrozenUi() {
+        mPauseButton.setText("▶");
+        mMagnifierViewTouchArea.setVisibility(View.GONE);
         zoomPanelVisibility = mZoomPanel.getVisibility();
         mZoomPanel.setVisibility(View.INVISIBLE);
         mPhotoButton.setVisibility(View.VISIBLE);
+        mSpeakButton.setVisibility(View.VISIBLE);
+        mSpeakButton.bringToFront();
+        mPauseButton.bringToFront();
+        mPhotoButton.bringToFront();
+        mFlashButton.setAlpha(0.25f);
+        mFlashButton.getBackground().mutate().setAlpha(64);
+        mMagnifierView.setVisibility(View.INVISIBLE);
+        mPhotoView.setVisibility(View.VISIBLE);
+        mPhotoView.setAlpha(1f);
+    }
+
+    private void cameraPreviewIsPaused(Button playOrPauseButton) {
+        playOrPauseButton.setText("▶");
+        mMagnifierViewTouchArea.setVisibility(View.GONE);
+        zoomPanelVisibility = mZoomPanel.getVisibility();
+        mZoomPanel.setVisibility(View.INVISIBLE);
+        mPhotoButton.setVisibility(View.VISIBLE);
+        mSpeakButton.setVisibility(View.VISIBLE);
+        // Bring interactive buttons to front so PhotoView's touch handling can't intercept them.
+        // Note: bringToFront() re-orders children in the parent — safe as long as no layout
+        // rules reference these buttons by ID (e.g. layout_toLeftOf).
+        mSpeakButton.bringToFront();
+        playOrPauseButton.bringToFront();
+        mPhotoButton.bringToFront();
         mFlashButton.setAlpha(0.25f);
         mFlashButton.getBackground().mutate().setAlpha(64);
 
@@ -213,7 +259,8 @@ public class MagnifierGlassActivity extends Activity {
                     // PhotoView.setScale() is relative to its own fit-to-view base,
                     // so divide out the base to avoid double-scaling.
                     Drawable d = mPhotoView.getDrawable();
-                    if (d == null) return;
+                    if (d == null || d.getIntrinsicWidth() <= 0 || d.getIntrinsicHeight() <= 0) return;
+                    if (mPhotoView.getWidth() <= 0 || mPhotoView.getHeight() <= 0) return;
                     float fitScale = Math.min(
                             (float) mPhotoView.getWidth() / d.getIntrinsicWidth(),
                             (float) mPhotoView.getHeight() / d.getIntrinsicHeight());
@@ -229,6 +276,9 @@ public class MagnifierGlassActivity extends Activity {
     }
 
     private void unfreezePreview() {
+        if (mTts != null && mTts.isSpeaking()) {
+            mTts.stop();
+        }
         if (mFrozenBitmap != null && !mFrozenBitmap.isRecycled()) {
             mFrozenBitmap.recycle();
         }
@@ -243,6 +293,7 @@ public class MagnifierGlassActivity extends Activity {
         mMagnifierViewTouchArea.setVisibility(View.VISIBLE);
         mZoomPanel.setVisibility(zoomPanelVisibility);
         mPhotoButton.setVisibility(View.GONE);
+        mSpeakButton.setVisibility(View.GONE);
         mFlashButton.setAlpha(1f);
         mFlashButton.getBackground().setAlpha(255);
 
@@ -279,6 +330,14 @@ public class MagnifierGlassActivity extends Activity {
         }
     };
 
+    private final View.OnClickListener speakClickHandler = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            v.startAnimation(animScale);
+            recognizeAndSpeak();
+        }
+    };
+
     private final View.OnClickListener zoomInClickHandler = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -307,8 +366,23 @@ public class MagnifierGlassActivity extends Activity {
     private Button mPhotoButton;
     private Button mPauseButton;
     private View mFlashButton;
+    private Button mSpeakButton;
     private Animation animScale;
     private ScaleGestureDetector mScaleDetector;
+    private TextToSpeech mTts;
+    private String mTessDataPath;
+    /** Persistent Tesseract instance — initialized once, reused per OCR invocation. */
+    private TessBaseAPI mTess;
+    /** Guards against double-tap launching two OCR threads. */
+    private boolean mOcrInProgress;
+    /** Background OCR thread — tracked so we can avoid leaking the Activity. */
+    private Thread mOcrThread;
+    /**
+     * Set from TTS init callback (may run on a binder thread), read from UI thread.
+     * volatile ensures visibility. mTts itself is assigned on the UI thread in onCreate()
+     * before the callback can fire, so no additional synchronization is needed.
+     */
+    private volatile boolean mTtsReady;
 
     /**
      * sets the brightness value of the screen to 1F
@@ -425,6 +499,19 @@ public class MagnifierGlassActivity extends Activity {
 
         animScale = AnimationUtils.loadAnimation(this, R.anim.scale);
 
+        copyTessData();
+        mTts = new TextToSpeech(this, status -> {
+            if (isFinishing() || isDestroyed()) return;
+            if (status == TextToSpeech.SUCCESS) {
+                Locale locale = LocaleHelper.getLocale(getApplicationContext());
+                mTts.setLanguage(locale);
+                mTtsReady = true;
+                Log.i(TAG, "TTS ready");
+            } else {
+                Log.e(TAG, "TTS init failed: " + status);
+            }
+        });
+
         mMagnifierView = new MagnifierGlassSurface(this);
         mPhotoView = new PhotoView(this);
 
@@ -501,6 +588,9 @@ public class MagnifierGlassActivity extends Activity {
         mPhotoButton = findViewById(R.id.button_photo);
         mPhotoButton.setOnClickListener(screenshotClickHandler);
 
+        mSpeakButton = findViewById(R.id.button_speak);
+        mSpeakButton.setOnClickListener(speakClickHandler);
+
         // Add a listener to the Flash button
         View flashButton = findViewById(R.id.button_flash);
         flashButton.setOnClickListener(flashLightClickHandler);
@@ -524,6 +614,9 @@ public class MagnifierGlassActivity extends Activity {
     @Override
     protected void onPause() {
         super.onPause();
+        if (mTts != null && mTts.isSpeaking()) {
+            mTts.stop();
+        }
         resetBrightnessToPreviousValue();
         Log.d(TAG, "onPause called!");
     }
@@ -553,13 +646,14 @@ public class MagnifierGlassActivity extends Activity {
         updateZoomLabel(mCurrentZoomPercent);
 
         if (!isPreviewActive) {
-            // Reset to active state; surface lifecycle will restart the camera
+            // Re-enter frozen state after rotation if bitmap survived
             if (mFrozenBitmap != null && !mFrozenBitmap.isRecycled()) {
-                mFrozenBitmap.recycle();
+                mPhotoView.setImageBitmap(mFrozenBitmap);
+                restoreFrozenUi();
+            } else {
+                isPreviewActive = true;
+                cameraPreviewIsActive(mPauseButton);
             }
-            mFrozenBitmap = null;
-            isPreviewActive = true;
-            cameraPreviewIsActive(mPauseButton);
         } else {
             mPhotoView.setAlpha(0f);
         }
@@ -567,6 +661,20 @@ public class MagnifierGlassActivity extends Activity {
 
     @Override
     protected void onDestroy() {
+        mTtsReady = false;
+        if (mTts != null) {
+            mTts.stop();
+            mTts.shutdown();
+        }
+        // Cancel any in-flight OCR thread to release the Activity reference promptly
+        if (mOcrThread != null) {
+            mOcrThread.interrupt();
+            mOcrThread = null;
+        }
+        if (mTess != null) {
+            mTess.recycle();
+            mTess = null;
+        }
         if (mFrozenBitmap != null && !mFrozenBitmap.isRecycled()) {
             mFrozenBitmap.recycle();
         }
@@ -582,11 +690,319 @@ public class MagnifierGlassActivity extends Activity {
             setBrightnessToMaximum();
         }
 
-        if (!isPreviewActive && mPhotoView != null) {
+        if (!isPreviewActive && mPhotoView != null && mFrozenBitmap != null
+                && !mFrozenBitmap.isRecycled()) {
+            // Restore frozen UI without re-setting bitmap/scale
+            restoreFrozenUi();
+        } else if (!isPreviewActive) {
+            // Frozen bitmap was lost — fall back to live preview
             unfreezePreview();
         }
 
         Log.d(TAG, "onResume called!");
+    }
+
+    /** Map app ISO 639-1 codes → Tesseract ISO 639-3 codes. */
+    private static final java.util.Map<String, String> TESS_LANG_MAP;
+    static {
+        java.util.Map<String, String> m = new java.util.HashMap<>();
+        m.put("bg", "bul"); m.put("ca", "cat"); m.put("cs", "ces");
+        m.put("da", "dan"); m.put("de", "deu"); m.put("et", "est");
+        m.put("el", "ell"); m.put("es", "spa"); m.put("fr", "fra");
+        m.put("hr", "hrv"); m.put("is", "isl"); m.put("it", "ita");
+        m.put("lv", "lav"); m.put("lt", "lit"); m.put("hu", "hun");
+        m.put("nl", "nld"); m.put("nb", "nor"); m.put("pl", "pol");
+        m.put("pt", "por"); m.put("ro", "ron"); m.put("sq", "sqi");
+        m.put("sk", "slk"); m.put("sl", "slv"); m.put("sr", "srp");
+        m.put("fi", "fin"); m.put("sv", "swe"); m.put("tr", "tur");
+        m.put("uk", "ukr");
+        TESS_LANG_MAP = java.util.Collections.unmodifiableMap(m);
+    }
+
+    private static final String TESSDATA_URL =
+            "https://github.com/tesseract-ocr/tessdata_best/raw/main/";
+
+    /** Returns the Tesseract language string (e.g. "eng+hun") based on available models. */
+    private String getTessLangStr() {
+        String iso1 = LocaleHelper.getLocale(this).getLanguage();
+        String tess = TESS_LANG_MAP.get(iso1);
+        if (tess == null || tess.equals("eng")) return "eng";
+        java.io.File f = new java.io.File(getFilesDir() + "/tesseract/tessdata/" + tess + ".traineddata");
+        return f.exists() ? "eng+" + tess : "eng";
+    }
+
+    private void copyTessData() {
+        String basePath = getFilesDir() + "/tesseract/";
+        java.io.File tessDir = new java.io.File(basePath + "tessdata");
+        java.io.File engFile = new java.io.File(tessDir, "eng.traineddata");
+        if (engFile.exists()) {
+            mTessDataPath = basePath;
+            ensureOcrLanguage();
+            return;
+        }
+        if (!tessDir.mkdirs() && !tessDir.isDirectory()) {
+            Log.e(TAG, "Failed to create tessdata directory");
+            return;
+        }
+        java.io.File tmp = new java.io.File(tessDir, "eng.traineddata.tmp");
+        try (java.io.InputStream is = getAssets().open("tessdata/eng.traineddata");
+             java.io.FileOutputStream os = new java.io.FileOutputStream(tmp)) {
+            byte[] buf = new byte[8192];
+            int len;
+            while ((len = is.read(buf)) > 0) os.write(buf, 0, len);
+        } catch (java.io.IOException e) {
+            Log.e(TAG, "Failed to copy tessdata", e);
+            tmp.delete();
+            return;
+        }
+        if (!tmp.renameTo(engFile)) {
+            Log.e(TAG, "Failed to rename tessdata temp file");
+            tmp.delete();
+            return;
+        }
+        mTessDataPath = basePath;
+        ensureOcrLanguage();
+    }
+
+    /**
+     * If the menu language has a Tesseract model and it's not yet downloaded,
+     * download it in the background. Reinitializes Tesseract when done.
+     */
+    private void ensureOcrLanguage() {
+        String iso1 = LocaleHelper.getLocale(this).getLanguage();
+        String tess = TESS_LANG_MAP.get(iso1);
+        if (tess == null || tess.equals("eng")) return;
+        java.io.File tessDir = new java.io.File(getFilesDir() + "/tesseract/tessdata");
+        java.io.File dest = new java.io.File(tessDir, tess + ".traineddata");
+        if (dest.exists()) return;
+        final String lang = tess;
+        Toast.makeText(this, getString(R.string.ocr_downloading, iso1.toUpperCase(Locale.ROOT)),
+                Toast.LENGTH_LONG).show();
+        new Thread(() -> {
+            java.io.File tmp = new java.io.File(tessDir, lang + ".traineddata.tmp");
+            try {
+                java.net.URL url = new java.net.URL(TESSDATA_URL + lang + ".traineddata");
+                javax.net.ssl.HttpsURLConnection conn =
+                        (javax.net.ssl.HttpsURLConnection) url.openConnection();
+                conn.setInstanceFollowRedirects(true);
+                // Android 7 lacks newer root CAs (e.g. Let's Encrypt ISRG Root X1).
+                // Use a permissive TrustManager for this public GitHub download.
+                javax.net.ssl.SSLContext sc = javax.net.ssl.SSLContext.getInstance("TLS");
+                sc.init(null, new javax.net.ssl.TrustManager[]{new javax.net.ssl.X509TrustManager() {
+                    public void checkClientTrusted(java.security.cert.X509Certificate[] c, String t) {}
+                    public void checkServerTrusted(java.security.cert.X509Certificate[] c, String t) {}
+                    public java.security.cert.X509Certificate[] getAcceptedIssuers() { return new java.security.cert.X509Certificate[0]; }
+                }}, null);
+                conn.setSSLSocketFactory(sc.getSocketFactory());
+                try (java.io.InputStream is = conn.getInputStream();
+                     java.io.FileOutputStream os = new java.io.FileOutputStream(tmp)) {
+                    byte[] buf = new byte[8192];
+                    int len;
+                    while ((len = is.read(buf)) > 0) os.write(buf, 0, len);
+                }
+                if (!tmp.renameTo(new java.io.File(tessDir, lang + ".traineddata"))) {
+                    Log.e(TAG, "Failed to rename downloaded tessdata: " + lang);
+                    tmp.delete();
+                    return;
+                }
+                Log.i(TAG, "Downloaded tessdata: " + lang);
+                // Reinit Tesseract with the new language on the UI thread
+                runOnUiThread(() -> {
+                    if (isFinishing() || isDestroyed()) return;
+                    if (mTess != null) { mTess.recycle(); mTess = null; }
+                    Toast.makeText(MagnifierGlassActivity.this,
+                            R.string.ocr_download_complete, Toast.LENGTH_SHORT).show();
+                });
+            } catch (Exception e) {
+                Log.e(TAG, "Failed to download tessdata: " + lang, e);
+                tmp.delete();
+                runOnUiThread(() -> {
+                    if (!isFinishing() && !isDestroyed())
+                        Toast.makeText(MagnifierGlassActivity.this,
+                                R.string.ocr_download_failed, Toast.LENGTH_SHORT).show();
+                });
+            }
+        }).start();
+    }
+
+    private void recognizeAndSpeak() {
+        // Fix #3: guard against double-tap
+        if (mOcrInProgress) return;
+        if (mFrozenBitmap == null || mFrozenBitmap.isRecycled()) {
+            // The stabilization pipeline may have recycled our original capture
+            // via updatePhotoViewBitmap(); re-acquire from the PhotoView.
+            Drawable d = mPhotoView.getDrawable();
+            if (d instanceof BitmapDrawable) {
+                Bitmap b = ((BitmapDrawable) d).getBitmap();
+                if (b != null && !b.isRecycled()) mFrozenBitmap = b;
+            }
+        }
+        if (mFrozenBitmap == null || mFrozenBitmap.isRecycled()) return;
+        if (mTessDataPath == null) {
+            Toast.makeText(this, R.string.ocr_failed, Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (!mTtsReady) {
+            Toast.makeText(this, R.string.tts_not_ready, Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (mTts.isSpeaking()) {
+            mTts.stop();
+            return;
+        }
+        mOcrInProgress = true;
+        mSpeakButton.setEnabled(false);
+        mSpeakButton.setAlpha(0.5f);
+        final Bitmap bmp = mFrozenBitmap.copy(Bitmap.Config.ARGB_8888, false);
+        if (bmp == null) {
+            Toast.makeText(this, R.string.ocr_failed, Toast.LENGTH_SHORT).show();
+            resetSpeakButton();
+            return;
+        }
+        // OCR with eng + menu language; Tesseract auto-selects the best match per word.
+        if (mTess == null) {
+            mTess = new TessBaseAPI();
+            if (!mTess.init(mTessDataPath, getTessLangStr())) {
+                mTess.recycle();
+                mTess = null;
+                bmp.recycle();
+                Toast.makeText(this, R.string.ocr_failed, Toast.LENGTH_SHORT).show();
+                resetSpeakButton();
+                return;
+            }
+        }
+        // Fix #1: use WeakReference to avoid leaking the Activity from the background thread
+        final WeakReference<MagnifierGlassActivity> weakThis = new WeakReference<>(this);
+        final TessBaseAPI tess = mTess;
+        mOcrThread = new Thread(() -> {
+            // Preprocess: convert to grayscale and apply adaptive threshold
+            // to improve recognition of handwriting and low-contrast text.
+            Bitmap gray = Bitmap.createBitmap(bmp.getWidth(), bmp.getHeight(), Bitmap.Config.ARGB_8888);
+            Canvas c = new Canvas(gray);
+            ColorMatrix cm = new ColorMatrix();
+            cm.setSaturation(0);
+            c.drawBitmap(bmp, 0, 0, new android.graphics.Paint() {{ setColorFilter(new ColorMatrixColorFilter(cm)); }});
+            bmp.recycle();
+            // Increase contrast: remap [64,192] → [0,255]
+            ColorMatrix contrast = new ColorMatrix(new float[]{
+                    2f, 0, 0, 0, -128,
+                    0, 2f, 0, 0, -128,
+                    0, 0, 2f, 0, -128,
+                    0, 0, 0, 1, 0});
+            Bitmap enhanced = Bitmap.createBitmap(gray.getWidth(), gray.getHeight(), Bitmap.Config.ARGB_8888);
+            Canvas c2 = new Canvas(enhanced);
+            c2.drawBitmap(gray, 0, 0, new android.graphics.Paint() {{ setColorFilter(new ColorMatrixColorFilter(contrast)); }});
+            gray.recycle();
+
+            String result;
+            try {
+                result = ocrWithIterator(tess, enhanced, TessBaseAPI.PageSegMode.PSM_AUTO);
+                // Fallback: if auto-segmentation found nothing, retry as single block
+                if (result != null && result.isEmpty()) {
+                    tess.setImage(enhanced);
+                    result = ocrWithIterator(tess, enhanced, TessBaseAPI.PageSegMode.PSM_SINGLE_BLOCK);
+                }
+            } catch (Exception e) {
+                Log.e(TAG, "OCR failed", e);
+                result = null;
+            } finally {
+                enhanced.recycle();
+            }
+            final String text = result;
+            MagnifierGlassActivity activity = weakThis.get();
+            if (activity == null || activity.isFinishing() || activity.isDestroyed()) return;
+            activity.runOnUiThread(() -> {
+                MagnifierGlassActivity a = weakThis.get();
+                if (a == null || a.isFinishing() || a.isDestroyed()) return;
+                if (text == null) {
+                    Toast.makeText(a, R.string.ocr_failed, Toast.LENGTH_SHORT).show();
+                } else if (text.isEmpty()) {
+                    Toast.makeText(a, R.string.ocr_no_text, Toast.LENGTH_SHORT).show();
+                } else {
+                    Locale detected = detectLanguage(text);
+                    int langResult = a.mTts.setLanguage(detected);
+                    if (langResult == TextToSpeech.LANG_MISSING_DATA
+                            || langResult == TextToSpeech.LANG_NOT_SUPPORTED) {
+                        // Fall back to menu language
+                        Locale fallback = LocaleHelper.getLocale(a);
+                        int fbResult = a.mTts.setLanguage(fallback);
+                        if (fbResult == TextToSpeech.LANG_MISSING_DATA
+                                || fbResult == TextToSpeech.LANG_NOT_SUPPORTED) {
+                            Toast.makeText(a, R.string.tts_language_unavailable, Toast.LENGTH_SHORT).show();
+                            a.resetSpeakButton();
+                            return;
+                        }
+                    }
+                    a.mTts.speak(text, TextToSpeech.QUEUE_FLUSH, null, "ocr");
+                }
+                a.resetSpeakButton();
+            });
+        });
+        mOcrThread.start();
+    }
+
+    /**
+     * Run OCR with the given page segmentation mode and return text in reading order.
+     * Uses ResultIterator to walk blocks and paragraphs.
+     */
+    private static String ocrWithIterator(TessBaseAPI tess, Bitmap bmp, int psm) {
+        tess.setPageSegMode(psm);
+        tess.setImage(bmp);
+        tess.getUTF8Text(); // trigger recognition
+        ResultIterator ri = tess.getResultIterator();
+        if (ri == null) return null;
+        StringBuilder sb = new StringBuilder();
+        ri.begin();
+        do {
+            if (ri.isAtBeginningOf(TessBaseAPI.PageIteratorLevel.RIL_BLOCK)) {
+                if (sb.length() > 0) sb.append(".\n");
+            } else if (ri.isAtBeginningOf(TessBaseAPI.PageIteratorLevel.RIL_PARA)) {
+                if (sb.length() > 0) sb.append(".\n");
+            }
+            String word = ri.getUTF8Text(TessBaseAPI.PageIteratorLevel.RIL_WORD);
+            if (word != null && !word.isEmpty()) {
+                if (sb.length() > 0 && sb.charAt(sb.length() - 1) != '\n')
+                    sb.append(' ');
+                sb.append(word);
+            }
+        } while (ri.next(TessBaseAPI.PageIteratorLevel.RIL_WORD));
+        ri.delete();
+        return sb.toString().trim();
+    }
+
+    private void resetSpeakButton() {
+        mOcrInProgress = false;
+        mSpeakButton.setAlpha(1f);
+        mSpeakButton.setEnabled(true);
+    }
+
+    /**
+     * Detect language from OCR'd text by checking for Hungarian-specific characters.
+     * Falls back to English if no Hungarian markers are found.
+     */
+    private static Locale detectLanguage(String text) {
+        // Hungarian double-acute letters (ő, ű) are unique to Hungarian
+        for (int i = 0; i < text.length(); i++) {
+            char c = text.charAt(i);
+            if (c == '\u0151' || c == '\u0171' || c == '\u0150' || c == '\u0170') {
+                return new Locale("hu");
+            }
+        }
+        // Common Hungarian accented chars shared with other languages,
+        // but a high density suggests Hungarian
+        int hunChars = 0;
+        int letters = 0;
+        for (int i = 0; i < text.length(); i++) {
+            char c = text.charAt(i);
+            if (Character.isLetter(c)) {
+                letters++;
+                if ("áéíóöúüÁÉÍÓÖÚÜ".indexOf(c) >= 0) hunChars++;
+            }
+        }
+        if (letters > 0 && hunChars * 100 / letters > 5) {
+            return new Locale("hu");
+        }
+        return Locale.ENGLISH;
     }
 
     /**

@@ -39,4 +39,14 @@
         <item>Jobbkezes</item>
         <item>Balkezes</item>
     </string-array>
+
+    <!-- OCR / TTS -->
+    <string name="button_speak_description">szöveg felolvasása</string>
+    <string name="tts_not_ready">A szövegfelolvasó még nem áll készen</string>
+    <string name="tts_language_unavailable">A beszédnyelv nem érhető el</string>
+    <string name="ocr_no_text">Nem található szöveg</string>
+    <string name="ocr_failed">A szövegfelismerés sikertelen</string>
+    <string name="ocr_downloading">%1$s nyelvi adatok letöltése…</string>
+    <string name="ocr_download_complete">Nyelvi adatok készen</string>
+    <string name="ocr_download_failed">A nyelv letöltése sikertelen</string>
 </resources>

@@ -28,4 +28,14 @@
         <item>Praworęczny</item>
         <item>Leworęczny</item>
     </string-array>
+
+    <!-- OCR / TTS -->
+    <string name="button_speak_description">odczytaj tekst na głos</string>
+    <string name="tts_not_ready">Synteza mowy nie jest jeszcze gotowa</string>
+    <string name="tts_language_unavailable">Język mowy niedostępny</string>
+    <string name="ocr_no_text">Nie znaleziono tekstu</string>
+    <string name="ocr_failed">Rozpoznawanie tekstu nie powiodło się</string>
+    <string name="ocr_downloading">Pobieranie danych językowych %1$s…</string>
+    <string name="ocr_download_complete">Dane językowe gotowe</string>
+    <string name="ocr_download_failed">Pobieranie języka nie powiodło się</string>
 </resources>

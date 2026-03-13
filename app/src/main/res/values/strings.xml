@@ -7,6 +7,14 @@
     <string name="button_zoom_in_description">zoom in</string>
     <string name="button_zoom_out_description">zoom out</string>
     <string name="button_exit_description">exit app</string>
+    <string name="button_speak_description">read text aloud</string>
+    <string name="tts_not_ready">Text-to-speech not ready yet</string>
+    <string name="tts_language_unavailable">Speech language not available</string>
+    <string name="ocr_no_text">No text found</string>
+    <string name="ocr_failed">Text recognition failed</string>
+    <string name="ocr_downloading">Downloading %1$s language data…</string>
+    <string name="ocr_download_complete">Language data ready</string>
+    <string name="ocr_download_failed">Language download failed</string>
 
     <!-- Key names (equal in all languages) -->
     <string name="key_preference_zoom_level" translatable="false">MagnifierGlassAndroidKeyPreferenceZoomLevel</string>

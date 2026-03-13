@@ -28,4 +28,14 @@
         <item>Sağ elini kullanan</item>
         <item>Sol elini kullanan</item>
     </string-array>
+
+    <!-- OCR / TTS -->
+    <string name="button_speak_description">metni sesli oku</string>
+    <string name="tts_not_ready">Konuşma sentezi henüz hazır değil</string>
+    <string name="tts_language_unavailable">Konuşma dili mevcut değil</string>
+    <string name="ocr_no_text">Metin bulunamadı</string>
+    <string name="ocr_failed">Metin tanıma başarısız oldu</string>
+    <string name="ocr_downloading">%1$s dil verileri indiriliyor…</string>
+    <string name="ocr_download_complete">Dil verileri hazır</string>
+    <string name="ocr_download_failed">Dil indirme başarısız oldu</string>
 </resources>

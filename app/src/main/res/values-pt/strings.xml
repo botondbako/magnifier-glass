@@ -28,4 +28,14 @@
         <item>Destro</item>
         <item>Canhoto</item>
     </string-array>
+
+    <!-- OCR / TTS -->
+    <string name="button_speak_description">ler texto em voz alta</string>
+    <string name="tts_not_ready">A síntese de voz ainda não está pronta</string>
+    <string name="tts_language_unavailable">Idioma de voz não disponível</string>
+    <string name="ocr_no_text">Nenhum texto encontrado</string>
+    <string name="ocr_failed">O reconhecimento de texto falhou</string>
+    <string name="ocr_downloading">A transferir dados do idioma %1$s…</string>
+    <string name="ocr_download_complete">Dados do idioma prontos</string>
+    <string name="ocr_download_failed">A transferência do idioma falhou</string>
 </resources>

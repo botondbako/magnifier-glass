@@ -28,4 +28,14 @@
         <item>Desničar</item>
         <item>Levičar</item>
     </string-array>
+
+    <!-- OCR / TTS -->
+    <string name="button_speak_description">preberi besedilo na glas</string>
+    <string name="tts_not_ready">Sinteza govora še ni pripravljena</string>
+    <string name="tts_language_unavailable">Jezik govora ni na voljo</string>
+    <string name="ocr_no_text">Besedilo ni bilo najdeno</string>
+    <string name="ocr_failed">Prepoznavanje besedila ni uspelo</string>
+    <string name="ocr_downloading">Prenašanje jezikovnih podatkov %1$s…</string>
+    <string name="ocr_download_complete">Jezikovni podatki pripravljeni</string>
+    <string name="ocr_download_failed">Prenos jezika ni uspel</string>
 </resources>

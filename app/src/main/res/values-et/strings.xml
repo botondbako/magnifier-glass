@@ -28,4 +28,14 @@
         <item>Paremakäeline</item>
         <item>Vasakukäeline</item>
     </string-array>
+
+    <!-- OCR / TTS -->
+    <string name="button_speak_description">loe tekst ette</string>
+    <string name="tts_not_ready">Kõnesüntees pole veel valmis</string>
+    <string name="tts_language_unavailable">Kõne keel pole saadaval</string>
+    <string name="ocr_no_text">Teksti ei leitud</string>
+    <string name="ocr_failed">Tekstituvastus ebaõnnestus</string>
+    <string name="ocr_downloading">%1$s keeleandmete allalaadimine…</string>
+    <string name="ocr_download_complete">Keeleandmed valmis</string>
+    <string name="ocr_download_failed">Keele allalaadimine ebaõnnestus</string>
 </resources>

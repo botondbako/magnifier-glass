@@ -28,4 +28,14 @@
         <item>Højrehåndet</item>
         <item>Venstrehåndet</item>
     </string-array>
+
+    <!-- OCR / TTS -->
+    <string name="button_speak_description">læs tekst højt</string>
+    <string name="tts_not_ready">Talesyntese er ikke klar endnu</string>
+    <string name="tts_language_unavailable">Talesprog ikke tilgængeligt</string>
+    <string name="ocr_no_text">Ingen tekst fundet</string>
+    <string name="ocr_failed">Tekstgenkendelse mislykkedes</string>
+    <string name="ocr_downloading">Downloader %1$s sprogdata…</string>
+    <string name="ocr_download_complete">Sprogdata klar</string>
+    <string name="ocr_download_failed">Download af sprog mislykkedes</string>
 </resources>

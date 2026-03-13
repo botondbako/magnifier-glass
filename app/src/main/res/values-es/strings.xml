@@ -28,4 +28,14 @@
         <item>Diestro</item>
         <item>Zurdo</item>
     </string-array>
+
+    <!-- OCR / TTS -->
+    <string name="button_speak_description">leer texto en voz alta</string>
+    <string name="tts_not_ready">La síntesis de voz aún no está lista</string>
+    <string name="tts_language_unavailable">Idioma de voz no disponible</string>
+    <string name="ocr_no_text">No se encontró texto</string>
+    <string name="ocr_failed">El reconocimiento de texto falló</string>
+    <string name="ocr_downloading">Descargando datos de idioma %1$s…</string>
+    <string name="ocr_download_complete">Datos de idioma listos</string>
+    <string name="ocr_download_failed">La descarga del idioma falló</string>
 </resources>
