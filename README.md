@@ -24,10 +24,13 @@ Features:
 - **OCR text-to-speech**: freeze the image and press the speak button to have recognized text read aloud
   - Powered by Tesseract OCR (best accuracy models) with English bundled
   - Additional OCR language models downloaded automatically when a non-English menu language is selected (28 languages supported)
-  - Auto-detects text language for correct TTS pronunciation
+  - TTS always uses the menu language — no heuristic detection, predictable pronunciation
+  - All OCR status (progress, results, errors, downloads) announced via TTS for eyes-free use
+  - Garbage filtering rejects noise/artifacts that aren't real text
   - Reads text blocks in proper reading order (multi-column layouts)
   - Grayscale + contrast preprocessing for improved recognition
   - Long-press speak button to repeat last recognized text without re-running OCR
+  - OCR text preserved across screen rotations
 
 ### Accessibility
 
@@ -48,7 +51,7 @@ Features:
 
 ## Requirements
 
-- Android 5.0+ (API 21)
+- Android 7.0+ (API 24)
 - Device with a camera
 
 ## Building from source
@@ -56,7 +59,7 @@ Features:
 ### Prerequisites
 
 All platforms need:
-- **JDK 17** or newer
+- **JDK 21** or newer
 - **Android SDK** with:
   - SDK Platform 34
   - Build Tools 34.0.0
@@ -75,13 +78,13 @@ Set the `ANDROID_HOME` environment variable to your SDK location.
 
 ```bash
 # Debian/Ubuntu
-sudo apt install openjdk-17-jdk
+sudo apt install openjdk-21-jdk
 
 # Fedora
-sudo dnf install java-17-openjdk-devel
+sudo dnf install java-21-openjdk-devel
 
 # Arch
-sudo pacman -S jdk17-openjdk
+sudo pacman -S jdk21-openjdk
 
 export ANDROID_HOME=~/Android/Sdk
 ```
@@ -89,13 +92,13 @@ export ANDROID_HOME=~/Android/Sdk
 #### macOS
 
 ```bash
-brew install openjdk@17
+brew install openjdk@21
 export ANDROID_HOME=~/Library/Android/sdk
 ```
 
 #### Windows
 
-Install JDK 17 from [Adoptium](https://adoptium.net/) or via `winget install EclipseAdoptium.Temurin.17.JDK`. Set `ANDROID_HOME` to `%LOCALAPPDATA%\Android\Sdk` (the Android Studio default).
+Install JDK 21 from [Adoptium](https://adoptium.net/) or via `winget install EclipseAdoptium.Temurin.21.JDK`. Set `ANDROID_HOME` to `%LOCALAPPDATA%\Android\Sdk` (the Android Studio default).
 
 Use `gradlew.bat` instead of `./gradlew` in all commands below.
 
@@ -135,11 +138,11 @@ adb install app/build/outputs/apk/debug/app-debug.apk
 ## Third-party libraries
 
 - [PhotoView](https://github.com/chrisbanes/PhotoView) — pinch-to-zoom ImageView (Apache 2.0)
-- [Tesseract4Android](https://github.com/nicktgn/tesseract4android) — Tesseract OCR engine for Android (Apache 2.0)
+- [Tesseract4Android](https://github.com/adaptech-cz/Tesseract4Android) — Tesseract OCR engine for Android (Apache 2.0)
 - [tessdata_best](https://github.com/tesseract-ocr/tessdata_best) — trained OCR models (Apache 2.0)
 
 ## License
 
 Original code copyright (c) 2015 Christian Illies, licensed under the Apache License, Version 2.0.
 
-This fork has been substantially rewritten by [Botond Bako](https://github.com/botondbako). All changes and new code are copyright (c) 2026 Botond Bako, licensed under the same Apache License, Version 2.0. See [LICENSE](http://www.apache.org/licenses/LICENSE-2.0) for details.
+This fork has been substantially rewritten by [Botond Bako](https://github.com/botondbako). All changes and new code are copyright (c) 2026 Botond Bako, licensed under the same Apache License, Version 2.0. See [LICENSE](LICENSE) for details.
