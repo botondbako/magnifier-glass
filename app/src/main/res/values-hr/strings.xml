@@ -6,7 +6,7 @@
     <string name="button_pause_description">zamrzni trenutnu sliku</string>
     <string name="button_zoom_in_description">povećaj</string>
     <string name="button_zoom_out_description">smanji</string>
-    <string name="button_exit_description">izlaz</string>
+    <string name="button_exit_description">dugi pritisak za izlaz</string>
     <string name="title_activity_settings">Postavke</string>
     <string name="notification_sounds_header">Zvukovi obavijesti</string>
     <string name="lighting_header">Osvjetljenje</string>
@@ -22,20 +22,30 @@
     <string name="wide_or_other_camera">Širokokutna ili druga</string>
     <string name="ui_header">Sučelje</string>
     <string name="default_zoom_title">Zadana razina zumiranja</string>
-    <string name="handedness_title">Rukovodnost</string>
+    <string name="zoom_step_title">Korak gumba za zumiranje</string>
+    <string name="volume_zoom_title">Zumiranje tipkom za glasnoću</string>
+    <string name="handedness_title">Dominantna ruka</string>
     <string name="language_title">Jezik</string>
     <string-array name="handedness_entries">
         <item>Desnoruk</item>
         <item>Ljevoruk</item>
     </string-array>
-
+    <string-array name="zoom_step_entries">
+        <item>Mali (10%)</item>
+        <item>Veliki (25%)</item>
+    </string-array>
     <!-- OCR / TTS -->
     <string name="button_speak_description">pročitaj tekst naglas</string>
     <string name="tts_not_ready">Sinteza govora još nije spremna</string>
-    <string name="tts_language_unavailable">Jezik govora nije dostupan</string>
     <string name="ocr_no_text">Tekst nije pronađen</string>
     <string name="ocr_failed">Prepoznavanje teksta nije uspjelo</string>
+    <string name="ocr_not_ready">OCR podaci se učitavaju, pričekajte</string>
     <string name="ocr_downloading">Preuzimanje jezičnih podataka %1$s…</string>
     <string name="ocr_download_complete">Jezični podaci spremni</string>
     <string name="ocr_download_failed">Preuzimanje jezika nije uspjelo</string>
+    <string name="button_settings_description">otvori postavke</string>
+    <string name="button_photo_description">podijeli snimku zaslona</string>
+    <string name="ocr_in_progress">Čitanje teksta, molimo pričekajte</string>
+    <string name="ocr_downloading_wait">Preuzimanje jezičnih podataka, molimo pričekajte</string>
+    <string name="zoom_times_suffix">puta</string>
 </resources>

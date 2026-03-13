@@ -6,7 +6,7 @@
     <string name="button_pause_description">aktuális kamerakép befagyasztása</string>
     <string name="button_zoom_in_description">nagyítás</string>
     <string name="button_zoom_out_description">kicsinyítés</string>
-    <string name="button_exit_description">kilépés</string>
+    <string name="button_exit_description">tartsa nyomva a kilépéshez</string>
 
     <!-- Preference Titles -->
     <string name="title_activity_settings">Beállítások</string>
@@ -32,6 +32,8 @@
     <!-- UI Preferences -->
     <string name="ui_header">Felület</string>
     <string name="default_zoom_title">Alapértelmezett nagyítási szint</string>
+    <string name="zoom_step_title">Nagyítás gomb lépésköze</string>
+    <string name="volume_zoom_title">Nagyítás hangerőgombbal</string>
     <string name="handedness_title">Kezesség</string>
     <string name="language_title">Nyelv</string>
 
@@ -39,14 +41,22 @@
         <item>Jobbkezes</item>
         <item>Balkezes</item>
     </string-array>
-
+    <string-array name="zoom_step_entries">
+        <item>Kicsi (10%)</item>
+        <item>Nagy (25%)</item>
+    </string-array>
     <!-- OCR / TTS -->
     <string name="button_speak_description">szöveg felolvasása</string>
     <string name="tts_not_ready">A szövegfelolvasó még nem áll készen</string>
-    <string name="tts_language_unavailable">A beszédnyelv nem érhető el</string>
     <string name="ocr_no_text">Nem található szöveg</string>
     <string name="ocr_failed">A szövegfelismerés sikertelen</string>
+    <string name="ocr_not_ready">OCR adatok betöltése, kérem várjon</string>
     <string name="ocr_downloading">%1$s nyelvi adatok letöltése…</string>
     <string name="ocr_download_complete">Nyelvi adatok készen</string>
     <string name="ocr_download_failed">A nyelv letöltése sikertelen</string>
+    <string name="button_settings_description">beállítások megnyitása</string>
+    <string name="button_photo_description">képernyőkép megosztása</string>
+    <string name="ocr_in_progress">Szöveg olvasása, kérem várjon</string>
+    <string name="ocr_downloading_wait">Nyelvi adatok letöltése, kérem várjon</string>
+    <string name="zoom_times_suffix">szoros</string>
 </resources>

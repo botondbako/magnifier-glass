@@ -6,7 +6,7 @@
     <string name="button_pause_description">zamrzni trenutno sliko</string>
     <string name="button_zoom_in_description">povečaj</string>
     <string name="button_zoom_out_description">pomanjšaj</string>
-    <string name="button_exit_description">izhod</string>
+    <string name="button_exit_description">dolg pritisk za izhod</string>
     <string name="title_activity_settings">Nastavitve</string>
     <string name="notification_sounds_header">Zvoki obvestil</string>
     <string name="lighting_header">Osvetlitev</string>
@@ -22,20 +22,30 @@
     <string name="wide_or_other_camera">Širokokotna ali druga</string>
     <string name="ui_header">Vmesnik</string>
     <string name="default_zoom_title">Privzeta stopnja povečave</string>
+    <string name="zoom_step_title">Korak gumba za povečavo</string>
+    <string name="volume_zoom_title">Povečava z gumbom za glasnost</string>
     <string name="handedness_title">Ročnost</string>
     <string name="language_title">Jezik</string>
     <string-array name="handedness_entries">
         <item>Desničar</item>
         <item>Levičar</item>
     </string-array>
-
+    <string-array name="zoom_step_entries">
+        <item>Majhen (10%)</item>
+        <item>Velik (25%)</item>
+    </string-array>
     <!-- OCR / TTS -->
     <string name="button_speak_description">preberi besedilo na glas</string>
     <string name="tts_not_ready">Sinteza govora še ni pripravljena</string>
-    <string name="tts_language_unavailable">Jezik govora ni na voljo</string>
     <string name="ocr_no_text">Besedilo ni bilo najdeno</string>
     <string name="ocr_failed">Prepoznavanje besedila ni uspelo</string>
+    <string name="ocr_not_ready">OCR podatki se nalagajo, prosimo počakajte</string>
     <string name="ocr_downloading">Prenašanje jezikovnih podatkov %1$s…</string>
     <string name="ocr_download_complete">Jezikovni podatki pripravljeni</string>
     <string name="ocr_download_failed">Prenos jezika ni uspel</string>
+    <string name="button_settings_description">odpri nastavitve</string>
+    <string name="button_photo_description">deli posnetek zaslona</string>
+    <string name="ocr_in_progress">Branje besedila, prosimo počakajte</string>
+    <string name="ocr_downloading_wait">Prenašanje jezikovnih podatkov, prosimo počakajte</string>
+    <string name="zoom_times_suffix">krat</string>
 </resources>

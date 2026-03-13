@@ -6,7 +6,7 @@
     <string name="button_pause_description">külmuta praegune pilt</string>
     <string name="button_zoom_in_description">suurenda</string>
     <string name="button_zoom_out_description">vähenda</string>
-    <string name="button_exit_description">välju</string>
+    <string name="button_exit_description">pikk vajutus väljumiseks</string>
     <string name="title_activity_settings">Seaded</string>
     <string name="notification_sounds_header">Teavitushelid</string>
     <string name="lighting_header">Valgustus</string>
@@ -22,20 +22,30 @@
     <string name="wide_or_other_camera">Lainurk- või muu</string>
     <string name="ui_header">Liides</string>
     <string name="default_zoom_title">Vaikimisi suumitase</string>
+    <string name="zoom_step_title">Suuminupu samm</string>
+    <string name="volume_zoom_title">Suumimine helitugevuse nupuga</string>
     <string name="handedness_title">Käelisus</string>
     <string name="language_title">Keel</string>
     <string-array name="handedness_entries">
         <item>Paremakäeline</item>
         <item>Vasakukäeline</item>
     </string-array>
-
+    <string-array name="zoom_step_entries">
+        <item>Väike (10%)</item>
+        <item>Suur (25%)</item>
+    </string-array>
     <!-- OCR / TTS -->
     <string name="button_speak_description">loe tekst ette</string>
     <string name="tts_not_ready">Kõnesüntees pole veel valmis</string>
-    <string name="tts_language_unavailable">Kõne keel pole saadaval</string>
     <string name="ocr_no_text">Teksti ei leitud</string>
     <string name="ocr_failed">Tekstituvastus ebaõnnestus</string>
+    <string name="ocr_not_ready">OCR andmed laaditakse, palun oodake</string>
     <string name="ocr_downloading">%1$s keeleandmete allalaadimine…</string>
     <string name="ocr_download_complete">Keeleandmed valmis</string>
     <string name="ocr_download_failed">Keele allalaadimine ebaõnnestus</string>
+    <string name="button_settings_description">ava seaded</string>
+    <string name="button_photo_description">jaga ekraanipilti</string>
+    <string name="ocr_in_progress">Teksti lugemine, palun oodake</string>
+    <string name="ocr_downloading_wait">Keeleandmete allalaadimine, palun oodake</string>
+    <string name="zoom_times_suffix">korda</string>
 </resources>

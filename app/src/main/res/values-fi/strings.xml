@@ -6,7 +6,7 @@
     <string name="button_pause_description">jäädytä nykyinen kuva</string>
     <string name="button_zoom_in_description">lähennä</string>
     <string name="button_zoom_out_description">loitonna</string>
-    <string name="button_exit_description">poistu</string>
+    <string name="button_exit_description">pitkä painallus sulkeaksesi</string>
     <string name="title_activity_settings">Asetukset</string>
     <string name="notification_sounds_header">Ilmoitusäänet</string>
     <string name="lighting_header">Valaistus</string>
@@ -22,20 +22,30 @@
     <string name="wide_or_other_camera">Laajakulma tai muu</string>
     <string name="ui_header">Käyttöliittymä</string>
     <string name="default_zoom_title">Oletuszoomaustaso</string>
+    <string name="zoom_step_title">Zoomausnäppäimen askel</string>
+    <string name="volume_zoom_title">Zoomaus äänenvoimakkuusnäppäimellä</string>
     <string name="handedness_title">Kätisyys</string>
     <string name="language_title">Kieli</string>
     <string-array name="handedness_entries">
         <item>Oikeakätinen</item>
         <item>Vasenkätinen</item>
     </string-array>
-
+    <string-array name="zoom_step_entries">
+        <item>Pieni (10%)</item>
+        <item>Suuri (25%)</item>
+    </string-array>
     <!-- OCR / TTS -->
     <string name="button_speak_description">lue teksti ääneen</string>
     <string name="tts_not_ready">Puhesynteesi ei ole vielä valmis</string>
-    <string name="tts_language_unavailable">Puhekieli ei ole käytettävissä</string>
     <string name="ocr_no_text">Tekstiä ei löytynyt</string>
     <string name="ocr_failed">Tekstintunnistus epäonnistui</string>
+    <string name="ocr_not_ready">OCR-tiedot latautuvat, odota hetki</string>
     <string name="ocr_downloading">Ladataan %1$s kielitietoja…</string>
     <string name="ocr_download_complete">Kielitiedot valmiina</string>
     <string name="ocr_download_failed">Kielen lataus epäonnistui</string>
+    <string name="button_settings_description">avaa asetukset</string>
+    <string name="button_photo_description">jaa kuvakaappaus</string>
+    <string name="ocr_in_progress">Luetaan tekstiä, odota</string>
+    <string name="ocr_downloading_wait">Ladataan kielitietoja, odota</string>
+    <string name="zoom_times_suffix">kertaa</string>
 </resources>

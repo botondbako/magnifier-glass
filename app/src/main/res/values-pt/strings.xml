@@ -6,7 +6,7 @@
     <string name="button_pause_description">congelar a imagem atual</string>
     <string name="button_zoom_in_description">ampliar</string>
     <string name="button_zoom_out_description">reduzir</string>
-    <string name="button_exit_description">sair</string>
+    <string name="button_exit_description">pressão longa para sair</string>
     <string name="title_activity_settings">Definições</string>
     <string name="notification_sounds_header">Sons de notificação</string>
     <string name="lighting_header">Iluminação</string>
@@ -22,20 +22,30 @@
     <string name="wide_or_other_camera">Grande angular ou outra</string>
     <string name="ui_header">Interface</string>
     <string name="default_zoom_title">Nível de zoom predefinido</string>
+    <string name="zoom_step_title">Passo do botão de zoom</string>
+    <string name="volume_zoom_title">Zoom com botão de volume</string>
     <string name="handedness_title">Lateralidade</string>
     <string name="language_title">Idioma</string>
     <string-array name="handedness_entries">
         <item>Destro</item>
         <item>Canhoto</item>
     </string-array>
-
+    <string-array name="zoom_step_entries">
+        <item>Pequeno (10%)</item>
+        <item>Grande (25%)</item>
+    </string-array>
     <!-- OCR / TTS -->
     <string name="button_speak_description">ler texto em voz alta</string>
     <string name="tts_not_ready">A síntese de voz ainda não está pronta</string>
-    <string name="tts_language_unavailable">Idioma de voz não disponível</string>
     <string name="ocr_no_text">Nenhum texto encontrado</string>
     <string name="ocr_failed">O reconhecimento de texto falhou</string>
+    <string name="ocr_not_ready">A carregar dados OCR, aguarde</string>
     <string name="ocr_downloading">A transferir dados do idioma %1$s…</string>
     <string name="ocr_download_complete">Dados do idioma prontos</string>
     <string name="ocr_download_failed">A transferência do idioma falhou</string>
+    <string name="button_settings_description">abrir definições</string>
+    <string name="button_photo_description">partilhar captura de ecrã</string>
+    <string name="ocr_in_progress">A ler texto, por favor aguarde</string>
+    <string name="ocr_downloading_wait">A transferir dados de idioma, por favor aguarde</string>
+    <string name="zoom_times_suffix">vezes</string>
 </resources>

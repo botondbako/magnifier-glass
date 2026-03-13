@@ -38,6 +38,19 @@
             app:useSimpleSummaryProvider="true" />
 
         <DropDownPreference
+            app:defaultValue="10"
+            app:entries="@array/zoom_step_entries"
+            app:entryValues="@array/zoom_step_values"
+            app:key="@string/key_preference_zoom_step"
+            app:title="@string/zoom_step_title"
+            app:useSimpleSummaryProvider="true" />
+
+        <SwitchPreference
+            app:defaultValue="true"
+            app:key="@string/key_preference_volume_zoom"
+            app:title="@string/volume_zoom_title" />
+
+        <DropDownPreference
             app:defaultValue="right"
             app:entries="@array/handedness_entries"
             app:entryValues="@array/handedness_values"

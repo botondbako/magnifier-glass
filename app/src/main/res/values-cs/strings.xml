@@ -6,7 +6,7 @@
     <string name="button_pause_description">zmrazit aktuální obraz</string>
     <string name="button_zoom_in_description">přiblížit</string>
     <string name="button_zoom_out_description">oddálit</string>
-    <string name="button_exit_description">ukončit</string>
+    <string name="button_exit_description">dlouhým stiskem ukončíte aplikaci</string>
     <string name="title_activity_settings">Nastavení</string>
     <string name="notification_sounds_header">Zvuky oznámení</string>
     <string name="lighting_header">Osvětlení</string>
@@ -22,20 +22,30 @@
     <string name="wide_or_other_camera">Širokoúhlý nebo jiný</string>
     <string name="ui_header">Rozhraní</string>
     <string name="default_zoom_title">Výchozí úroveň přiblížení</string>
+    <string name="zoom_step_title">Krok tlačítka přiblížení</string>
+    <string name="volume_zoom_title">Přiblížení tlačítkem hlasitosti</string>
     <string name="handedness_title">Strannost</string>
     <string name="language_title">Jazyk</string>
     <string-array name="handedness_entries">
         <item>Pravák</item>
         <item>Levák</item>
     </string-array>
-
+    <string-array name="zoom_step_entries">
+        <item>Malý (10%)</item>
+        <item>Velký (25%)</item>
+    </string-array>
     <!-- OCR / TTS -->
     <string name="button_speak_description">přečíst text nahlas</string>
     <string name="tts_not_ready">Syntéza řeči ještě není připravena</string>
-    <string name="tts_language_unavailable">Jazyk řeči není dostupný</string>
     <string name="ocr_no_text">Nebyl nalezen žádný text</string>
     <string name="ocr_failed">Rozpoznávání textu selhalo</string>
+    <string name="ocr_not_ready">OCR data se načítají, čekejte prosím</string>
     <string name="ocr_downloading">Stahování jazykových dat %1$s…</string>
     <string name="ocr_download_complete">Jazyková data připravena</string>
     <string name="ocr_download_failed">Stahování jazyka selhalo</string>
+    <string name="button_settings_description">otevřít nastavení</string>
+    <string name="button_photo_description">sdílet snímek obrazovky</string>
+    <string name="ocr_in_progress">Čtení textu, prosím čekejte</string>
+    <string name="ocr_downloading_wait">Stahování jazykových dat, prosím čekejte</string>
+    <string name="zoom_times_suffix">krát</string>
 </resources>

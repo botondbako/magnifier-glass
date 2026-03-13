@@ -6,7 +6,7 @@
     <string name="button_pause_description">frys gjeldende bilde</string>
     <string name="button_zoom_in_description">zoom inn</string>
     <string name="button_zoom_out_description">zoom ut</string>
-    <string name="button_exit_description">avslutt</string>
+    <string name="button_exit_description">langt trykk for å avslutte</string>
     <string name="title_activity_settings">Innstillinger</string>
     <string name="notification_sounds_header">Varsellyder</string>
     <string name="lighting_header">Belysning</string>
@@ -22,20 +22,30 @@
     <string name="wide_or_other_camera">Vidvinkel eller annet</string>
     <string name="ui_header">Grensesnitt</string>
     <string name="default_zoom_title">Standard zoomnivå</string>
+    <string name="zoom_step_title">Zoomknapp-trinn</string>
+    <string name="volume_zoom_title">Zoom med volumknapp</string>
     <string name="handedness_title">Håndthet</string>
     <string name="language_title">Språk</string>
     <string-array name="handedness_entries">
         <item>Høyrehendt</item>
         <item>Venstrehendt</item>
     </string-array>
-
+    <string-array name="zoom_step_entries">
+        <item>Lite (10%)</item>
+        <item>Stort (25%)</item>
+    </string-array>
     <!-- OCR / TTS -->
     <string name="button_speak_description">les tekst høyt</string>
     <string name="tts_not_ready">Talesyntese er ikke klar ennå</string>
-    <string name="tts_language_unavailable">Talespråk ikke tilgjengelig</string>
     <string name="ocr_no_text">Ingen tekst funnet</string>
     <string name="ocr_failed">Tekstgjenkjenning mislyktes</string>
+    <string name="ocr_not_ready">OCR-data lastes, vennligst vent</string>
     <string name="ocr_downloading">Laster ned %1$s språkdata…</string>
     <string name="ocr_download_complete">Språkdata klar</string>
     <string name="ocr_download_failed">Nedlasting av språk mislyktes</string>
+    <string name="button_settings_description">åpne innstillinger</string>
+    <string name="button_photo_description">del skjermbilde</string>
+    <string name="ocr_in_progress">Leser tekst, vennligst vent</string>
+    <string name="ocr_downloading_wait">Laster ned språkdata, vennligst vent</string>
+    <string name="zoom_times_suffix">ganger</string>
 </resources>

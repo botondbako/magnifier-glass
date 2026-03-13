@@ -12,13 +12,14 @@ Features:
 - Live camera preview with pinch-to-zoom (live and frozen image)
 - 5 color modes: normal, black/white, white/black, blue/yellow, yellow/blue
 - Zoom in/out buttons with on-screen zoom level indicator
+- Volume button zoom — use physical volume keys to zoom in/out without looking at the screen
 - LED flashlight toggle for low-light conditions
 - Multi-frame image stabilization for sharper frozen images
 - Continuous autofocus (tap to refocus)
 - Screenshot capture and share
 - Left-handed mode (mirrors button layout)
-- Configurable default zoom, preview resolution, camera selection
-- Multi-language support
+- Configurable default zoom, zoom step size, preview resolution, camera selection
+- Multi-language support (29 languages)
 - Full-screen immersive mode
 - **OCR text-to-speech**: freeze the image and press the speak button to have recognized text read aloud
   - Powered by Tesseract OCR (best accuracy models) with English bundled
@@ -26,12 +27,24 @@ Features:
   - Auto-detects text language for correct TTS pronunciation
   - Reads text blocks in proper reading order (multi-column layouts)
   - Grayscale + contrast preprocessing for improved recognition
+  - Long-press speak button to repeat last recognized text without re-running OCR
+
+### Accessibility
+
+- 48dp touch targets on all buttons (meets WCAG 2.5.8 and Android guidelines)
+- Haptic feedback on every button press and long-press
+- Zoom level announced via text-to-speech after each change
+- Volume button zoom for eyes-free operation
+- Long-press to exit prevents accidental app closure
+- All buttons focusable with content descriptions for TalkBack and switch access
+- Respects system "Remove animations" setting (reduced motion)
+- Configurable zoom step size (10% or 25%) for users with limited motor control
 
 ## Known limitations
 
 - Handwritten text and stylized fonts (e.g. 7-segment displays) are poorly recognized — Tesseract is trained on printed text. Google ML Kit would be a better engine for handwriting.
 - OCR language model download requires an internet connection on first use per language (~12–15 MB each).
-- Android 7.0 devices have outdated root CA certificates; the app uses a permissive TLS configuration for language data downloads from GitHub.
+- Android 7.0 devices have outdated root CA certificates; the app bundles the ISRG Root X1 certificate for reliable language data downloads from GitHub.
 
 ## Requirements
 

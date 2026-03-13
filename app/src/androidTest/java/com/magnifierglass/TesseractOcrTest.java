@@ -41,11 +41,17 @@ public class TesseractOcrTest {
         File engFile = new File(tessDir, "eng.traineddata");
         if (!engFile.exists()) {
             tessDir.mkdirs();
+            // Atomic write: copy to temp file, then rename
+            File tmp = new File(tessDir, "eng.traineddata.tmp");
             try (InputStream is = ctx.getAssets().open("tessdata/eng.traineddata");
-                 FileOutputStream os = new FileOutputStream(engFile)) {
+                 FileOutputStream os = new FileOutputStream(tmp)) {
                 byte[] buf = new byte[8192];
                 int len;
                 while ((len = is.read(buf)) > 0) os.write(buf, 0, len);
+            }
+            if (!tmp.renameTo(engFile)) {
+                tmp.delete();
+                fail("Failed to rename tessdata temp file");
             }
         }
         tess = new TessBaseAPI();
@@ -165,4 +171,44 @@ public class TesseractOcrTest {
         assertTrue("First should contain 'Alpha': " + r1, r1.contains("Alpha"));
         assertTrue("Second should contain 'Beta': " + r2, r2.contains("Beta"));
     }
+
+    // --- ocrWithIterator tests ---
+
+    @Test
+    public void ocrWithIterator_singleLine() {
+        Bitmap bmp = renderText("Hello World", 600, 100, 48);
+        String result = MagnifierGlassActivity.ocrWithIterator(
+                tess, bmp, TessBaseAPI.PageSegMode.PSM_SINGLE_BLOCK);
+        bmp.recycle();
+        assertNotNull(result);
+        assertTrue("Should contain 'Hello': " + result, result.contains("Hello"));
+        assertTrue("Should contain 'World': " + result, result.contains("World"));
+    }
+
+    @Test
+    public void ocrWithIterator_multiBlock() {
+        Bitmap bmp = renderMultiline(new String[]{
+                "First block text",
+                "Second block text"
+        }, 800, 48);
+        String result = MagnifierGlassActivity.ocrWithIterator(
+                tess, bmp, TessBaseAPI.PageSegMode.PSM_AUTO);
+        bmp.recycle();
+        assertNotNull(result);
+        assertTrue("Should contain 'First': " + result, result.contains("First"));
+        assertTrue("Should contain 'Second': " + result, result.contains("Second"));
+    }
+
+    @Test
+    public void ocrWithIterator_blankImage() {
+        Bitmap bmp = Bitmap.createBitmap(400, 100, Bitmap.Config.ARGB_8888);
+        new Canvas(bmp).drawColor(Color.WHITE);
+        String result = MagnifierGlassActivity.ocrWithIterator(
+                tess, bmp, TessBaseAPI.PageSegMode.PSM_AUTO);
+        bmp.recycle();
+        // May return null (no iterator) or empty string
+        assertTrue("Blank should be null or empty, got: " + result,
+                result == null || result.isEmpty());
+    }
+
 }

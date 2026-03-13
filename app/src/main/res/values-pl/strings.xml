@@ -6,7 +6,7 @@
     <string name="button_pause_description">zamroź bieżący obraz</string>
     <string name="button_zoom_in_description">powiększ</string>
     <string name="button_zoom_out_description">pomniejsz</string>
-    <string name="button_exit_description">wyjdź</string>
+    <string name="button_exit_description">przytrzymaj, aby wyjść</string>
     <string name="title_activity_settings">Ustawienia</string>
     <string name="notification_sounds_header">Dźwięki powiadomień</string>
     <string name="lighting_header">Oświetlenie</string>
@@ -22,20 +22,30 @@
     <string name="wide_or_other_camera">Szerokokątny lub inny</string>
     <string name="ui_header">Interfejs</string>
     <string name="default_zoom_title">Domyślny poziom zoomu</string>
+    <string name="zoom_step_title">Krok przycisku powiększenia</string>
+    <string name="volume_zoom_title">Zoom przyciskiem głośności</string>
     <string name="handedness_title">Ręczność</string>
     <string name="language_title">Język</string>
     <string-array name="handedness_entries">
         <item>Praworęczny</item>
         <item>Leworęczny</item>
     </string-array>
-
+    <string-array name="zoom_step_entries">
+        <item>Mały (10%)</item>
+        <item>Duży (25%)</item>
+    </string-array>
     <!-- OCR / TTS -->
     <string name="button_speak_description">odczytaj tekst na głos</string>
     <string name="tts_not_ready">Synteza mowy nie jest jeszcze gotowa</string>
-    <string name="tts_language_unavailable">Język mowy niedostępny</string>
     <string name="ocr_no_text">Nie znaleziono tekstu</string>
     <string name="ocr_failed">Rozpoznawanie tekstu nie powiodło się</string>
+    <string name="ocr_not_ready">Ładowanie danych OCR, proszę czekać</string>
     <string name="ocr_downloading">Pobieranie danych językowych %1$s…</string>
     <string name="ocr_download_complete">Dane językowe gotowe</string>
     <string name="ocr_download_failed">Pobieranie języka nie powiodło się</string>
+    <string name="button_settings_description">otwórz ustawienia</string>
+    <string name="button_photo_description">udostępnij zrzut ekranu</string>
+    <string name="ocr_in_progress">Odczytywanie tekstu, proszę czekać</string>
+    <string name="ocr_downloading_wait">Pobieranie danych językowych, proszę czekać</string>
+    <string name="zoom_times_suffix">razy</string>
 </resources>

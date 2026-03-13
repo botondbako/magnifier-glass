@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">MagnifierGlass</string>
-    <string name="button_color_description">wechsel den Kontrastmodus</string>
-    <string name="button_flash_description">an und ausschalten des Blitzlichts</string>
-    <string name="button_pause_description">fiert das aktuelle Bild ein</string>
+    <string name="button_color_description">Kontrastmodus wechseln</string>
+    <string name="button_flash_description">Taschenlampe ein- und ausschalten</string>
+    <string name="button_pause_description">aktuelles Bild einfrieren</string>
     <string name="button_zoom_in_description">vergrößern</string>
     <string name="button_zoom_out_description">verkleinern</string>
-    <string name="button_exit_description">App beenden</string>
+    <string name="button_exit_description">lange drücken zum Beenden</string>
 
     <!-- Preference Titles -->
     <string name="title_activity_settings">Einstellungen</string>
@@ -32,6 +32,8 @@
     <!-- UI Preferences -->
     <string name="ui_header">Oberfläche</string>
     <string name="default_zoom_title">Standard-Vergrößerungsstufe</string>
+    <string name="zoom_step_title">Zoom-Tastenschritt</string>
+    <string name="volume_zoom_title">Zoom mit Lautstärketaste</string>
     <string name="handedness_title">Händigkeit</string>
     <string name="language_title">Sprache</string>
 
@@ -39,14 +41,22 @@
         <item>Rechtshändig</item>
         <item>Linkshändig</item>
     </string-array>
-
+    <string-array name="zoom_step_entries">
+        <item>Klein (10%)</item>
+        <item>Groß (25%)</item>
+    </string-array>
     <!-- OCR / TTS -->
     <string name="button_speak_description">Text vorlesen</string>
     <string name="tts_not_ready">Sprachausgabe noch nicht bereit</string>
-    <string name="tts_language_unavailable">Sprachausgabe-Sprache nicht verfügbar</string>
     <string name="ocr_no_text">Kein Text gefunden</string>
     <string name="ocr_failed">Texterkennung fehlgeschlagen</string>
+    <string name="ocr_not_ready">OCR-Daten werden geladen, bitte warten</string>
     <string name="ocr_downloading">Lade %1$s Sprachdaten herunter…</string>
     <string name="ocr_download_complete">Sprachdaten bereit</string>
     <string name="ocr_download_failed">Sprachdaten-Download fehlgeschlagen</string>
+    <string name="button_settings_description">Einstellungen öffnen</string>
+    <string name="button_photo_description">Screenshot teilen</string>
+    <string name="ocr_in_progress">Text wird gelesen, bitte warten</string>
+    <string name="ocr_downloading_wait">Sprachdaten werden heruntergeladen, bitte warten</string>
+    <string name="zoom_times_suffix">fach</string>
 </resources>

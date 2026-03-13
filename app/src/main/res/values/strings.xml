@@ -6,13 +6,17 @@
     <string name="button_pause_description">freezes the current camera image</string>
     <string name="button_zoom_in_description">zoom in</string>
     <string name="button_zoom_out_description">zoom out</string>
-    <string name="button_exit_description">exit app</string>
+    <string name="button_exit_description">long press to exit app</string>
     <string name="button_speak_description">read text aloud</string>
+    <string name="button_settings_description">open settings</string>
+    <string name="button_photo_description">share screenshot</string>
     <string name="tts_not_ready">Text-to-speech not ready yet</string>
-    <string name="tts_language_unavailable">Speech language not available</string>
     <string name="ocr_no_text">No text found</string>
     <string name="ocr_failed">Text recognition failed</string>
+    <string name="ocr_not_ready">OCR data loading, please wait</string>
+    <string name="ocr_in_progress">Reading text, please wait</string>
     <string name="ocr_downloading">Downloading %1$s language data…</string>
+    <string name="ocr_downloading_wait">Downloading language data, please wait</string>
     <string name="ocr_download_complete">Language data ready</string>
     <string name="ocr_download_failed">Language download failed</string>
 
@@ -27,6 +31,8 @@
     <string name="key_preference_camera_id" translatable="false">MagnifierGlassAndroidKeyPreferenceCameraId</string>
     <string name="key_preference_default_zoom" translatable="false">MagnifierGlassAndroidKeyPreferenceDefaultZoom</string>
     <string name="key_preference_handedness" translatable="false">MagnifierGlassAndroidKeyPreferenceHandedness</string>
+    <string name="key_preference_zoom_step" translatable="false">MagnifierGlassAndroidKeyPreferenceZoomStep</string>
+    <string name="key_preference_volume_zoom" translatable="false">MagnifierGlassAndroidKeyPreferenceVolumeZoom</string>
     <string name="key_preference_language" translatable="false">MagnifierGlassAndroidKeyPreferenceLanguage</string>
 
     <!-- Preference Titles -->
@@ -53,6 +59,9 @@
     <!-- UI Preferences -->
     <string name="ui_header">Interface</string>
     <string name="default_zoom_title">Default zoom level</string>
+    <string name="zoom_step_title">Zoom button step</string>
+    <string name="volume_zoom_title">Volume button zoom</string>
+    <string name="zoom_times_suffix">times</string>
     <string name="handedness_title">Handedness</string>
     <string name="language_title">Language</string>
 </resources>

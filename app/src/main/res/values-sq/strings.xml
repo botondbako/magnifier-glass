@@ -2,11 +2,11 @@
 <resources>
     <string name="app_name">MagnifierGlass</string>
     <string name="button_color_description">ndrysho modalitetin e kontrastit</string>
-    <string name="button_flash_description">ndiz dhe fik elektrikun</string>
+    <string name="button_flash_description">ndiz dhe fik dritën</string>
     <string name="button_pause_description">ngri imazhin aktual</string>
     <string name="button_zoom_in_description">zmadho</string>
     <string name="button_zoom_out_description">zvogëlo</string>
-    <string name="button_exit_description">dil</string>
+    <string name="button_exit_description">shtypje e gjatë për të dalë</string>
     <string name="title_activity_settings">Cilësimet</string>
     <string name="notification_sounds_header">Tingujt e njoftimeve</string>
     <string name="lighting_header">Ndriçimi</string>
@@ -22,20 +22,30 @@
     <string name="wide_or_other_camera">Këndgjerë ose tjetër</string>
     <string name="ui_header">Ndërfaqja</string>
     <string name="default_zoom_title">Niveli i paracaktuar i zmadhimit</string>
-    <string name="handedness_title">Dorëzimi</string>
+    <string name="zoom_step_title">Hapi i butonit të zmadhimit</string>
+    <string name="volume_zoom_title">Zmadhim me butonin e volumit</string>
+    <string name="handedness_title">Përdorimi i dorës</string>
     <string name="language_title">Gjuha</string>
     <string-array name="handedness_entries">
         <item>Djathtazi</item>
         <item>Majtazi</item>
     </string-array>
-
+    <string-array name="zoom_step_entries">
+        <item>I vogël (10%)</item>
+        <item>I madh (25%)</item>
+    </string-array>
     <!-- OCR / TTS -->
     <string name="button_speak_description">lexo tekstin me zë</string>
     <string name="tts_not_ready">Sinteza e të folurit nuk është gati ende</string>
-    <string name="tts_language_unavailable">Gjuha e të folurit nuk është e disponueshme</string>
     <string name="ocr_no_text">Nuk u gjet tekst</string>
     <string name="ocr_failed">Njohja e tekstit dështoi</string>
+    <string name="ocr_not_ready">Të dhënat OCR po ngarkohen, ju lutem prisni</string>
     <string name="ocr_downloading">Po shkarkohen të dhënat gjuhësore %1$s…</string>
     <string name="ocr_download_complete">Të dhënat gjuhësore janë gati</string>
     <string name="ocr_download_failed">Shkarkimi i gjuhës dështoi</string>
+    <string name="button_settings_description">hap cilësimet</string>
+    <string name="button_photo_description">ndaj pamjen e ekranit</string>
+    <string name="ocr_in_progress">Duke lexuar tekstin, ju lutem prisni</string>
+    <string name="ocr_downloading_wait">Duke shkarkuar të dhënat e gjuhës, ju lutem prisni</string>
+    <string name="zoom_times_suffix">herë</string>
 </resources>

@@ -6,7 +6,7 @@
     <string name="button_pause_description">mevcut görüntüyü dondur</string>
     <string name="button_zoom_in_description">yakınlaştır</string>
     <string name="button_zoom_out_description">uzaklaştır</string>
-    <string name="button_exit_description">çıkış</string>
+    <string name="button_exit_description">çıkmak için uzun basın</string>
     <string name="title_activity_settings">Ayarlar</string>
     <string name="notification_sounds_header">Bildirim sesleri</string>
     <string name="lighting_header">Aydınlatma</string>
@@ -22,20 +22,30 @@
     <string name="wide_or_other_camera">Geniş açı veya diğer</string>
     <string name="ui_header">Arayüz</string>
     <string name="default_zoom_title">Varsayılan yakınlaştırma seviyesi</string>
+    <string name="zoom_step_title">Yakınlaştırma düğmesi adımı</string>
+    <string name="volume_zoom_title">Ses düğmesiyle yakınlaştırma</string>
     <string name="handedness_title">El tercihi</string>
     <string name="language_title">Dil</string>
     <string-array name="handedness_entries">
         <item>Sağ elini kullanan</item>
         <item>Sol elini kullanan</item>
     </string-array>
-
+    <string-array name="zoom_step_entries">
+        <item>Küçük (%10)</item>
+        <item>Büyük (%25)</item>
+    </string-array>
     <!-- OCR / TTS -->
     <string name="button_speak_description">metni sesli oku</string>
     <string name="tts_not_ready">Konuşma sentezi henüz hazır değil</string>
-    <string name="tts_language_unavailable">Konuşma dili mevcut değil</string>
     <string name="ocr_no_text">Metin bulunamadı</string>
     <string name="ocr_failed">Metin tanıma başarısız oldu</string>
+    <string name="ocr_not_ready">OCR verileri yükleniyor, lütfen bekleyin</string>
     <string name="ocr_downloading">%1$s dil verileri indiriliyor…</string>
     <string name="ocr_download_complete">Dil verileri hazır</string>
     <string name="ocr_download_failed">Dil indirme başarısız oldu</string>
+    <string name="button_settings_description">ayarları aç</string>
+    <string name="button_photo_description">ekran görüntüsünü paylaş</string>
+    <string name="ocr_in_progress">Metin okunuyor, lütfen bekleyin</string>
+    <string name="ocr_downloading_wait">Dil verileri indiriliyor, lütfen bekleyin</string>
+    <string name="zoom_times_suffix">kat</string>
 </resources>

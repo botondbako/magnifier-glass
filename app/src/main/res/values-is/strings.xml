@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">MagnifierGlass</string>
-    <string name="button_color_description">breyta birtustigsham</string>
+    <string name="button_color_description">breyta birtuskilaham</string>
     <string name="button_flash_description">kveikja og slökkva á vasaljósi</string>
     <string name="button_pause_description">frysta núverandi mynd</string>
     <string name="button_zoom_in_description">stækka</string>
     <string name="button_zoom_out_description">minnka</string>
-    <string name="button_exit_description">hætta</string>
+    <string name="button_exit_description">haltu inni til að loka</string>
     <string name="title_activity_settings">Stillingar</string>
     <string name="notification_sounds_header">Tilkynningahljóð</string>
     <string name="lighting_header">Lýsing</string>
@@ -22,20 +22,30 @@
     <string name="wide_or_other_camera">Víðmynd eða önnur</string>
     <string name="ui_header">Viðmót</string>
     <string name="default_zoom_title">Sjálfgefið aðdráttarstig</string>
-    <string name="handedness_title">Handlegg</string>
+    <string name="zoom_step_title">Aðdráttarhnappaskref</string>
+    <string name="volume_zoom_title">Aðdráttur með hljóðstyrknartakka</string>
+    <string name="handedness_title">Handhætti</string>
     <string name="language_title">Tungumál</string>
     <string-array name="handedness_entries">
         <item>Rétthentur</item>
         <item>Örvhentur</item>
     </string-array>
-
+    <string-array name="zoom_step_entries">
+        <item>Lítið (10%)</item>
+        <item>Stórt (25%)</item>
+    </string-array>
     <!-- OCR / TTS -->
     <string name="button_speak_description">lesa texta upphátt</string>
     <string name="tts_not_ready">Talgerving er ekki tilbúin ennþá</string>
-    <string name="tts_language_unavailable">Talmál ekki tiltækt</string>
     <string name="ocr_no_text">Enginn texti fannst</string>
     <string name="ocr_failed">Textaþekking mistókst</string>
+    <string name="ocr_not_ready">OCR gögn hlaðast, vinsamlegast bíðið</string>
     <string name="ocr_downloading">Sæki %1$s málgögn…</string>
     <string name="ocr_download_complete">Málgögn tilbúin</string>
     <string name="ocr_download_failed">Niðurhal máls mistókst</string>
+    <string name="button_settings_description">opna stillingar</string>
+    <string name="button_photo_description">deila skjámynd</string>
+    <string name="ocr_in_progress">Les texta, vinsamlegast bíðið</string>
+    <string name="ocr_downloading_wait">Hleð niður tungumálagögnum, vinsamlegast bíðið</string>
+    <string name="zoom_times_suffix">sinnum</string>
 </resources>

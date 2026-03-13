@@ -6,7 +6,7 @@
     <string name="button_pause_description">замрзни тренутну слику</string>
     <string name="button_zoom_in_description">увећај</string>
     <string name="button_zoom_out_description">умањи</string>
-    <string name="button_exit_description">излаз</string>
+    <string name="button_exit_description">дуги притисак за излаз</string>
     <string name="title_activity_settings">Подешавања</string>
     <string name="notification_sounds_header">Звуци обавештења</string>
     <string name="lighting_header">Осветљење</string>
@@ -22,20 +22,30 @@
     <string name="wide_or_other_camera">Широкоугаона или друга</string>
     <string name="ui_header">Интерфејс</string>
     <string name="default_zoom_title">Подразумевани ниво зумирања</string>
+    <string name="zoom_step_title">Корак дугмета за зумирање</string>
+    <string name="volume_zoom_title">Зумирање дугметом за јачину звука</string>
     <string name="handedness_title">Рукост</string>
     <string name="language_title">Језик</string>
     <string-array name="handedness_entries">
         <item>Десноруки</item>
         <item>Леворуки</item>
     </string-array>
-
+    <string-array name="zoom_step_entries">
+        <item>Мали (10%)</item>
+        <item>Велики (25%)</item>
+    </string-array>
     <!-- OCR / TTS -->
     <string name="button_speak_description">прочитај текст наглас</string>
     <string name="tts_not_ready">Синтеза говора још није спремна</string>
-    <string name="tts_language_unavailable">Језик говора није доступан</string>
     <string name="ocr_no_text">Текст није пронађен</string>
     <string name="ocr_failed">Препознавање текста није успело</string>
+    <string name="ocr_not_ready">OCR подаци се учитавају, молимо сачекајте</string>
     <string name="ocr_downloading">Преузимање језичких података %1$s…</string>
     <string name="ocr_download_complete">Језички подаци спремни</string>
     <string name="ocr_download_failed">Преузимање језика није успело</string>
+    <string name="button_settings_description">отвори подешавања</string>
+    <string name="button_photo_description">дели снимак екрана</string>
+    <string name="ocr_in_progress">Читање текста, молимо сачекајте</string>
+    <string name="ocr_downloading_wait">Преузимање језичких података, молимо сачекајте</string>
+    <string name="zoom_times_suffix">пута</string>
 </resources>

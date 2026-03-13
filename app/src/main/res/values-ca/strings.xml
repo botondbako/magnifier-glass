@@ -6,7 +6,7 @@
     <string name="button_pause_description">congelar la imatge actual</string>
     <string name="button_zoom_in_description">ampliar</string>
     <string name="button_zoom_out_description">reduir</string>
-    <string name="button_exit_description">sortir</string>
+    <string name="button_exit_description">manteniu premut per sortir</string>
     <string name="title_activity_settings">Configuració</string>
     <string name="notification_sounds_header">Sons de notificació</string>
     <string name="lighting_header">Il·luminació</string>
@@ -22,20 +22,30 @@
     <string name="wide_or_other_camera">Gran angular o altra</string>
     <string name="ui_header">Interfície</string>
     <string name="default_zoom_title">Nivell de zoom predeterminat</string>
+    <string name="zoom_step_title">Pas del botó de zoom</string>
+    <string name="volume_zoom_title">Zoom amb botó de volum</string>
     <string name="handedness_title">Lateralitat</string>
     <string name="language_title">Llengua</string>
     <string-array name="handedness_entries">
         <item>Dretà</item>
         <item>Esquerrà</item>
     </string-array>
-
+    <string-array name="zoom_step_entries">
+        <item>Petit (10%)</item>
+        <item>Gran (25%)</item>
+    </string-array>
     <!-- OCR / TTS -->
     <string name="button_speak_description">llegir el text en veu alta</string>
     <string name="tts_not_ready">La síntesi de veu encara no està llesta</string>
-    <string name="tts_language_unavailable">L\'idioma de veu no està disponible</string>
     <string name="ocr_no_text">No s\'ha trobat text</string>
     <string name="ocr_failed">El reconeixement de text ha fallat</string>
+    <string name="ocr_not_ready">Les dades OCR s\'estan carregant, espereu</string>
     <string name="ocr_downloading">Descarregant dades d\'idioma %1$s…</string>
     <string name="ocr_download_complete">Dades d\'idioma llestes</string>
     <string name="ocr_download_failed">La descàrrega de l\'idioma ha fallat</string>
+    <string name="button_settings_description">obrir la configuració</string>
+    <string name="button_photo_description">compartir captura de pantalla</string>
+    <string name="ocr_in_progress">Llegint text, si us plau espereu</string>
+    <string name="ocr_downloading_wait">Descarregant dades d\'idioma, si us plau espereu</string>
+    <string name="zoom_times_suffix">vegades</string>
 </resources>

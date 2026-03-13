@@ -6,7 +6,7 @@
     <string name="button_pause_description">замразяване на текущото изображение</string>
     <string name="button_zoom_in_description">увеличаване</string>
     <string name="button_zoom_out_description">намаляване</string>
-    <string name="button_exit_description">изход</string>
+    <string name="button_exit_description">задръжте натиснато за изход</string>
     <string name="title_activity_settings">Настройки</string>
     <string name="notification_sounds_header">Звуци за известия</string>
     <string name="lighting_header">Осветление</string>
@@ -22,20 +22,30 @@
     <string name="wide_or_other_camera">Широкоъгълна или друга</string>
     <string name="ui_header">Интерфейс</string>
     <string name="default_zoom_title">Ниво на увеличение по подразбиране</string>
+    <string name="zoom_step_title">Стъпка на бутона за мащабиране</string>
+    <string name="volume_zoom_title">Мащабиране с бутон за сила на звука</string>
     <string name="handedness_title">Ръчност</string>
     <string name="language_title">Език</string>
     <string-array name="handedness_entries">
         <item>Деснорък</item>
         <item>Леворък</item>
     </string-array>
-
+    <string-array name="zoom_step_entries">
+        <item>Малка (10%)</item>
+        <item>Голяма (25%)</item>
+    </string-array>
     <!-- OCR / TTS -->
     <string name="button_speak_description">прочитане на текста на глас</string>
     <string name="tts_not_ready">Синтезът на реч все още не е готов</string>
-    <string name="tts_language_unavailable">Езикът за реч не е наличен</string>
     <string name="ocr_no_text">Не е намерен текст</string>
     <string name="ocr_failed">Разпознаването на текст е неуспешно</string>
+    <string name="ocr_not_ready">OCR данните се зареждат, моля изчакайте</string>
     <string name="ocr_downloading">Изтегляне на %1$s езикови данни…</string>
     <string name="ocr_download_complete">Езиковите данни са готови</string>
     <string name="ocr_download_failed">Изтеглянето на езика е неуспешно</string>
+    <string name="button_settings_description">отваряне на настройките</string>
+    <string name="button_photo_description">споделяне на екранна снимка</string>
+    <string name="ocr_in_progress">Разчитане на текст, моля изчакайте</string>
+    <string name="ocr_downloading_wait">Изтегляне на езикови данни, моля изчакайте</string>
+    <string name="zoom_times_suffix">пъти</string>
 </resources>

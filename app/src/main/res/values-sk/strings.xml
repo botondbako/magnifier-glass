@@ -6,7 +6,7 @@
     <string name="button_pause_description">zmraziť aktuálny obraz</string>
     <string name="button_zoom_in_description">priblížiť</string>
     <string name="button_zoom_out_description">oddialiť</string>
-    <string name="button_exit_description">ukončiť</string>
+    <string name="button_exit_description">dlhým stlačením ukončíte aplikáciu</string>
     <string name="title_activity_settings">Nastavenia</string>
     <string name="notification_sounds_header">Zvuky oznámení</string>
     <string name="lighting_header">Osvetlenie</string>
@@ -22,20 +22,30 @@
     <string name="wide_or_other_camera">Širokoúhlý alebo iný</string>
     <string name="ui_header">Rozhranie</string>
     <string name="default_zoom_title">Predvolená úroveň priblíženia</string>
+    <string name="zoom_step_title">Krok tlačidla priblíženia</string>
+    <string name="volume_zoom_title">Priblíženie tlačidlom hlasitosti</string>
     <string name="handedness_title">Strannosť</string>
     <string name="language_title">Jazyk</string>
     <string-array name="handedness_entries">
         <item>Pravák</item>
         <item>Ľavák</item>
     </string-array>
-
+    <string-array name="zoom_step_entries">
+        <item>Malý (10%)</item>
+        <item>Veľký (25%)</item>
+    </string-array>
     <!-- OCR / TTS -->
     <string name="button_speak_description">prečítať text nahlas</string>
     <string name="tts_not_ready">Syntéza reči ešte nie je pripravená</string>
-    <string name="tts_language_unavailable">Jazyk reči nie je dostupný</string>
     <string name="ocr_no_text">Nebol nájdený žiadny text</string>
     <string name="ocr_failed">Rozpoznávanie textu zlyhalo</string>
+    <string name="ocr_not_ready">OCR dáta sa načítavajú, čakajte prosím</string>
     <string name="ocr_downloading">Sťahovanie jazykových údajov %1$s…</string>
     <string name="ocr_download_complete">Jazykové údaje pripravené</string>
     <string name="ocr_download_failed">Sťahovanie jazyka zlyhalo</string>
+    <string name="button_settings_description">otvoriť nastavenia</string>
+    <string name="button_photo_description">zdieľať snímku obrazovky</string>
+    <string name="ocr_in_progress">Čítanie textu, prosím čakajte</string>
+    <string name="ocr_downloading_wait">Sťahovanie jazykových dát, prosím čakajte</string>
+    <string name="zoom_times_suffix">krát</string>
 </resources>

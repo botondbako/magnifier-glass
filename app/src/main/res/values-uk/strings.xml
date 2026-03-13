@@ -6,7 +6,7 @@
     <string name="button_pause_description">заморозити поточне зображення</string>
     <string name="button_zoom_in_description">збільшити</string>
     <string name="button_zoom_out_description">зменшити</string>
-    <string name="button_exit_description">вихід</string>
+    <string name="button_exit_description">довге натискання для виходу</string>
     <string name="title_activity_settings">Налаштування</string>
     <string name="notification_sounds_header">Звуки сповіщень</string>
     <string name="lighting_header">Освітлення</string>
@@ -22,20 +22,30 @@
     <string name="wide_or_other_camera">Ширококутна або інша</string>
     <string name="ui_header">Інтерфейс</string>
     <string name="default_zoom_title">Рівень масштабування за замовчуванням</string>
+    <string name="zoom_step_title">Крок кнопки масштабування</string>
+    <string name="volume_zoom_title">Масштабування кнопкою гучності</string>
     <string name="handedness_title">Рукість</string>
     <string name="language_title">Мова</string>
     <string-array name="handedness_entries">
         <item>Правша</item>
         <item>Лівша</item>
     </string-array>
-
+    <string-array name="zoom_step_entries">
+        <item>Малий (10%)</item>
+        <item>Великий (25%)</item>
+    </string-array>
     <!-- OCR / TTS -->
     <string name="button_speak_description">прочитати текст вголос</string>
     <string name="tts_not_ready">Синтез мовлення ще не готовий</string>
-    <string name="tts_language_unavailable">Мова мовлення недоступна</string>
     <string name="ocr_no_text">Текст не знайдено</string>
     <string name="ocr_failed">Розпізнавання тексту не вдалося</string>
+    <string name="ocr_not_ready">Дані OCR завантажуються, зачекайте</string>
     <string name="ocr_downloading">Завантаження мовних даних %1$s…</string>
     <string name="ocr_download_complete">Мовні дані готові</string>
     <string name="ocr_download_failed">Завантаження мови не вдалося</string>
+    <string name="button_settings_description">відкрити налаштування</string>
+    <string name="button_photo_description">поділитися знімком екрана</string>
+    <string name="ocr_in_progress">Читання тексту, будь ласка зачекайте</string>
+    <string name="ocr_downloading_wait">Завантаження мовних даних, будь ласка зачекайте</string>
+    <string name="zoom_times_suffix">разів</string>
 </resources>

@@ -6,7 +6,7 @@
     <string name="button_pause_description">congelar la imagen actual</string>
     <string name="button_zoom_in_description">acercar</string>
     <string name="button_zoom_out_description">alejar</string>
-    <string name="button_exit_description">salir</string>
+    <string name="button_exit_description">mantener pulsado para salir</string>
     <string name="title_activity_settings">Ajustes</string>
     <string name="notification_sounds_header">Sonidos de notificación</string>
     <string name="lighting_header">Iluminación</string>
@@ -22,20 +22,30 @@
     <string name="wide_or_other_camera">Gran angular u otra</string>
     <string name="ui_header">Interfaz</string>
     <string name="default_zoom_title">Nivel de zoom predeterminado</string>
+    <string name="zoom_step_title">Paso del botón de zoom</string>
+    <string name="volume_zoom_title">Zoom con botón de volumen</string>
     <string name="handedness_title">Lateralidad</string>
     <string name="language_title">Idioma</string>
     <string-array name="handedness_entries">
         <item>Diestro</item>
         <item>Zurdo</item>
     </string-array>
-
+    <string-array name="zoom_step_entries">
+        <item>Pequeño (10%)</item>
+        <item>Grande (25%)</item>
+    </string-array>
     <!-- OCR / TTS -->
     <string name="button_speak_description">leer texto en voz alta</string>
     <string name="tts_not_ready">La síntesis de voz aún no está lista</string>
-    <string name="tts_language_unavailable">Idioma de voz no disponible</string>
     <string name="ocr_no_text">No se encontró texto</string>
     <string name="ocr_failed">El reconocimiento de texto falló</string>
+    <string name="ocr_not_ready">Cargando datos OCR, espere por favor</string>
     <string name="ocr_downloading">Descargando datos de idioma %1$s…</string>
     <string name="ocr_download_complete">Datos de idioma listos</string>
     <string name="ocr_download_failed">La descarga del idioma falló</string>
+    <string name="button_settings_description">abrir ajustes</string>
+    <string name="button_photo_description">compartir captura de pantalla</string>
+    <string name="ocr_in_progress">Leyendo texto, por favor espere</string>
+    <string name="ocr_downloading_wait">Descargando datos de idioma, por favor espere</string>
+    <string name="zoom_times_suffix">veces</string>
 </resources>

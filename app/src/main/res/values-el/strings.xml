@@ -6,7 +6,7 @@
     <string name="button_pause_description">πάγωμα τρέχουσας εικόνας</string>
     <string name="button_zoom_in_description">μεγέθυνση</string>
     <string name="button_zoom_out_description">σμίκρυνση</string>
-    <string name="button_exit_description">έξοδος</string>
+    <string name="button_exit_description">παρατεταμένο πάτημα για έξοδο</string>
     <string name="title_activity_settings">Ρυθμίσεις</string>
     <string name="notification_sounds_header">Ήχοι ειδοποιήσεων</string>
     <string name="lighting_header">Φωτισμός</string>
@@ -22,20 +22,30 @@
     <string name="wide_or_other_camera">Ευρυγώνια ή άλλη</string>
     <string name="ui_header">Διεπαφή</string>
     <string name="default_zoom_title">Προεπιλεγμένο επίπεδο ζουμ</string>
+    <string name="zoom_step_title">Βήμα κουμπιού ζουμ</string>
+    <string name="volume_zoom_title">Ζουμ με κουμπί έντασης</string>
     <string name="handedness_title">Χειρικότητα</string>
     <string name="language_title">Γλώσσα</string>
     <string-array name="handedness_entries">
         <item>Δεξιόχειρας</item>
         <item>Αριστερόχειρας</item>
     </string-array>
-
+    <string-array name="zoom_step_entries">
+        <item>Μικρό (10%)</item>
+        <item>Μεγάλο (25%)</item>
+    </string-array>
     <!-- OCR / TTS -->
     <string name="button_speak_description">ανάγνωση κειμένου</string>
     <string name="tts_not_ready">Η σύνθεση ομιλίας δεν είναι έτοιμη ακόμα</string>
-    <string name="tts_language_unavailable">Η γλώσσα ομιλίας δεν είναι διαθέσιμη</string>
     <string name="ocr_no_text">Δεν βρέθηκε κείμενο</string>
     <string name="ocr_failed">Η αναγνώριση κειμένου απέτυχε</string>
+    <string name="ocr_not_ready">Τα δεδομένα OCR φορτώνονται, παρακαλώ περιμένετε</string>
     <string name="ocr_downloading">Λήψη δεδομένων γλώσσας %1$s…</string>
     <string name="ocr_download_complete">Τα δεδομένα γλώσσας είναι έτοιμα</string>
     <string name="ocr_download_failed">Η λήψη γλώσσας απέτυχε</string>
+    <string name="button_settings_description">άνοιγμα ρυθμίσεων</string>
+    <string name="button_photo_description">κοινοποίηση στιγμιότυπου</string>
+    <string name="ocr_in_progress">Ανάγνωση κειμένου, παρακαλώ περιμένετε</string>
+    <string name="ocr_downloading_wait">Λήψη γλωσσικών δεδομένων, παρακαλώ περιμένετε</string>
+    <string name="zoom_times_suffix">φορές</string>
 </resources>

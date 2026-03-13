@@ -776,6 +776,7 @@ public class MagnifierGlassSurface extends SurfaceView implements SurfaceHolder.
         if (mCamera == null || mState != STATE_PREVIEW) return;
 
         final Runnable freezeAndNotify = new Runnable() {
+            /** UI-thread-only (both postDelayed callbacks run on the View's handler). */
             private boolean mDone;
             @Override
             public void run() {

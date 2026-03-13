@@ -6,7 +6,7 @@
     <string name="button_pause_description">îngheață imaginea curentă</string>
     <string name="button_zoom_in_description">mărire</string>
     <string name="button_zoom_out_description">micșorare</string>
-    <string name="button_exit_description">ieșire din aplicație</string>
+    <string name="button_exit_description">apăsare lungă pentru ieșire</string>
 
     <!-- Preference Titles -->
     <string name="title_activity_settings">Setări</string>
@@ -32,6 +32,8 @@
     <!-- UI Preferences -->
     <string name="ui_header">Interfață</string>
     <string name="default_zoom_title">Nivel implicit de mărire</string>
+    <string name="zoom_step_title">Pasul butonului de zoom</string>
+    <string name="volume_zoom_title">Zoom cu butonul de volum</string>
     <string name="handedness_title">Mâna dominantă</string>
     <string name="language_title">Limbă</string>
 
@@ -39,14 +41,22 @@
         <item>Dreptaci</item>
         <item>Stângaci</item>
     </string-array>
-
+    <string-array name="zoom_step_entries">
+        <item>Mic (10%)</item>
+        <item>Mare (25%)</item>
+    </string-array>
     <!-- OCR / TTS -->
     <string name="button_speak_description">citește textul cu voce tare</string>
     <string name="tts_not_ready">Sinteza vocală nu este încă pregătită</string>
-    <string name="tts_language_unavailable">Limba vocală nu este disponibilă</string>
     <string name="ocr_no_text">Nu a fost găsit niciun text</string>
     <string name="ocr_failed">Recunoașterea textului a eșuat</string>
+    <string name="ocr_not_ready">Datele OCR se încarcă, vă rugăm așteptați</string>
     <string name="ocr_downloading">Se descarcă datele lingvistice %1$s…</string>
     <string name="ocr_download_complete">Datele lingvistice sunt pregătite</string>
     <string name="ocr_download_failed">Descărcarea limbii a eșuat</string>
+    <string name="button_settings_description">deschide setările</string>
+    <string name="button_photo_description">partajare captură de ecran</string>
+    <string name="ocr_in_progress">Se citește textul, vă rugăm așteptați</string>
+    <string name="ocr_downloading_wait">Se descarcă datele de limbă, vă rugăm așteptați</string>
+    <string name="zoom_times_suffix">ori</string>
 </resources>

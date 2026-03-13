@@ -6,7 +6,7 @@
     <string name="button_pause_description">frys det aktuelle billede</string>
     <string name="button_zoom_in_description">zoom ind</string>
     <string name="button_zoom_out_description">zoom ud</string>
-    <string name="button_exit_description">afslut</string>
+    <string name="button_exit_description">langt tryk for at afslutte</string>
     <string name="title_activity_settings">Indstillinger</string>
     <string name="notification_sounds_header">Notifikationslyde</string>
     <string name="lighting_header">Belysning</string>
@@ -22,20 +22,30 @@
     <string name="wide_or_other_camera">Vidvinkel eller andet</string>
     <string name="ui_header">Brugerflade</string>
     <string name="default_zoom_title">Standard zoomniveau</string>
+    <string name="zoom_step_title">Zoomknap-trin</string>
+    <string name="volume_zoom_title">Zoom med lydstyrkeknap</string>
     <string name="handedness_title">Håndthed</string>
     <string name="language_title">Sprog</string>
     <string-array name="handedness_entries">
         <item>Højrehåndet</item>
         <item>Venstrehåndet</item>
     </string-array>
-
+    <string-array name="zoom_step_entries">
+        <item>Lille (10%)</item>
+        <item>Stor (25%)</item>
+    </string-array>
     <!-- OCR / TTS -->
     <string name="button_speak_description">læs tekst højt</string>
     <string name="tts_not_ready">Talesyntese er ikke klar endnu</string>
-    <string name="tts_language_unavailable">Talesprog ikke tilgængeligt</string>
     <string name="ocr_no_text">Ingen tekst fundet</string>
     <string name="ocr_failed">Tekstgenkendelse mislykkedes</string>
+    <string name="ocr_not_ready">OCR-data indlæses, vent venligst</string>
     <string name="ocr_downloading">Downloader %1$s sprogdata…</string>
     <string name="ocr_download_complete">Sprogdata klar</string>
     <string name="ocr_download_failed">Download af sprog mislykkedes</string>
+    <string name="button_settings_description">åbn indstillinger</string>
+    <string name="button_photo_description">del skærmbillede</string>
+    <string name="ocr_in_progress">Læser tekst, vent venligst</string>
+    <string name="ocr_downloading_wait">Downloader sprogdata, vent venligst</string>
+    <string name="zoom_times_suffix">gange</string>
 </resources>
