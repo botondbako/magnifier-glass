@@ -18,6 +18,8 @@ import android.graphics.drawable.Drawable;
 import android.hardware.Camera;
 import android.media.MediaActionSound;
 import android.os.Build;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.Surface;
 import android.view.SurfaceHolder;
@@ -36,6 +38,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import com.magnifierglass.filters.BlackWhiteColorFilter;
 import com.magnifierglass.filters.BlueYellowColorFilter;
@@ -47,6 +50,18 @@ import com.magnifierglass.threads.BitmapCreateThread;
 
 
 public class MagnifierGlassSurface extends SurfaceView implements SurfaceHolder.Callback, BitmapRenderer {
+
+    /** Callback for flash state changes triggered internally (e.g. auto-torch). */
+    public interface FlashStateListener {
+        void onFlashStateChanged(boolean on);
+    }
+
+    /** Must be set on the UI thread. */
+    private volatile FlashStateListener mFlashStateListener;
+
+    public void setFlashStateListener(FlashStateListener listener) {
+        mFlashStateListener = listener;
+    }
 
     /**
      * The debug Tag identifier for the whole class.
@@ -195,7 +210,7 @@ public class MagnifierGlassSurface extends SurfaceView implements SurfaceHolder.
     /**
      * if true the flashlight should be on.
      */
-    private boolean mCameraFlashMode;
+    private volatile boolean mCameraFlashMode;
     /**
      * stores the value of the devices max zoom level of the camera.
      */
@@ -233,6 +248,8 @@ public class MagnifierGlassSurface extends SurfaceView implements SurfaceHolder.
 
     /** Camera sensor orientation (hardware constant, -1 until first camera open). */
     private int mCameraSensorOrientation = -1;
+    /** True until the first successful camera start — used for startup feedback (per process). */
+    private static volatile boolean sFirstStart = true;
 
     /**
      * the display orientation applied to the camera preview.
@@ -311,6 +328,45 @@ public class MagnifierGlassSurface extends SurfaceView implements SurfaceHolder.
 
 
     /**
+     * Ambient light auto-torch: frame counter for sampling interval.
+     * Written only on the camera callback thread (single-threaded); reset in enableCamera()
+     * before the preview callback starts, so no synchronization needed.
+     */
+    private int mLuminanceFrameCount;
+    /**
+     * Frames remaining to skip after a torch state change (camera AE settle time).
+     * Written on UI thread (via post()) and decremented on camera callback thread.
+     * AtomicInteger for safe cross-thread access.
+     */
+    private final AtomicInteger mLuminanceSettleCount = new AtomicInteger();
+    /**
+     * Ambient light auto-torch: true if we turned the torch on automatically.
+     * Written and read on UI thread (via post() and enableCamera()).
+     * Volatile as a defensive measure for cross-thread visibility.
+     */
+    private volatile boolean mAutoTorchActive;
+    /**
+     * Generation counter incremented on every manual flash toggle.
+     * Auto-torch runnables capture this before posting and discard themselves
+     * if it has changed, preventing stale decisions from overriding user intent.
+     * Volatile: read on camera callback thread, written on UI thread.
+     * Int overflow is harmless — the only check is gen != mAutoTorchGeneration.
+     */
+    private volatile int mAutoTorchGeneration;
+    /** Ambient light auto-torch: preference enabled. Reloaded in enableCamera(). */
+    private volatile boolean mAutoTorchAmbient;
+    /** Threshold below which torch turns on (0–255 Y-plane average). */
+    private static final int LUMINANCE_LOW = 45;
+    /** Threshold above which torch turns off (hysteresis gap prevents flicker). */
+    private static final int LUMINANCE_HIGH = 70;
+    /** Sample luminance every N frames (~0.5s at 30fps). */
+    private static final int LUMINANCE_SAMPLE_INTERVAL = 15;
+    /** Frames to skip after a torch state change to let camera AE settle. */
+    private static final int LUMINANCE_SETTLE_FRAMES = 45;
+    /** Stride for luminance sampling — larger = faster, less precise. */
+    private static final int LUMINANCE_STRIDE = 64;
+
+    /**
      * Callback for camera preview frames.
      * Each frame is copied into a pre-allocated slot in the circular
      * {@link #mFrameBuffer} for stabilization. A separate clone is kept
@@ -335,6 +391,50 @@ public class MagnifierGlassSurface extends SurfaceView implements SurfaceHolder.
                 // on a background thread, so it must not alias a reusable slot.
                 mCameraPreviewBufferData = data.clone();
             }
+
+            // Ambient light auto-torch: sample every N frames on the camera thread,
+            // then post the torch decision to the UI thread to avoid races with manual toggle.
+            // mLuminanceFrameCount is only written here (single camera callback thread).
+            if (mAutoTorchAmbient) {
+                // Count down settle delay per-frame (not per-sample) for accurate timing.
+                if (mLuminanceSettleCount.get() > 0) {
+                    mLuminanceSettleCount.decrementAndGet();
+                    mLuminanceFrameCount = 0;
+                } else if (++mLuminanceFrameCount >= LUMINANCE_SAMPLE_INTERVAL) {
+                    mLuminanceFrameCount = 0;
+                    int ySize = mCameraPreviewWidth * mCameraPreviewHeight;
+                    if (ySize > 0 && data.length >= ySize) {
+                        long sum = 0;
+                        int samples = 0;
+                        for (int i = 0; i < ySize; i += LUMINANCE_STRIDE) {
+                            sum += data[i] & 0xFF;
+                            samples++;
+                        }
+                        final int avg = (int) (sum / samples);
+                        final int gen = mAutoTorchGeneration;
+                        post(() -> {
+                            if (gen != mAutoTorchGeneration) return;
+                            FlashStateListener l = mFlashStateListener;
+                            if (!mAutoTorchActive && avg < LUMINANCE_LOW) {
+                                mAutoTorchActive = true;
+                                mCameraFlashMode = true;
+                                turnFlashlightOn();
+                                // Overwrites any in-progress camera-thread decrement — intentional.
+                                mLuminanceSettleCount.set(LUMINANCE_SETTLE_FRAMES);
+                                if (l != null) l.onFlashStateChanged(true);
+                            } else if (mAutoTorchActive && avg > LUMINANCE_HIGH) {
+                                mAutoTorchActive = false;
+                                mCameraFlashMode = false;
+                                turnFlashlightOff();
+                                // Overwrites any in-progress camera-thread decrement — intentional.
+                                mLuminanceSettleCount.set(LUMINANCE_SETTLE_FRAMES);
+                                if (l != null) l.onFlashStateChanged(false);
+                            }
+                        });
+                    }
+                }
+            }
+
             if (!hasActiveFilterEnabled()) {
                 invalidate();
                 return;
@@ -380,7 +480,14 @@ public class MagnifierGlassSurface extends SurfaceView implements SurfaceHolder.
         Log.d(TAG, "MagnifierGlassSurface instantiated");
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        mCurrentColorFilterIndex = mSharedPreferences.getInt(getResources().getString(R.string.key_preference_color_mode), 0);
+        // Load color mode: preset overrides session-saved value
+        if (mSharedPreferences.contains(getResources().getString(R.string.key_preference_preset_color))) {
+            mCurrentColorFilterIndex = mSharedPreferences.getInt(
+                    getResources().getString(R.string.key_preference_preset_color), 0);
+        } else {
+            mCurrentColorFilterIndex = mSharedPreferences.getInt(
+                    getResources().getString(R.string.key_preference_color_mode), 0);
+        }
 
         mColorFilterPaint = new Paint();
 
@@ -455,6 +562,8 @@ public class MagnifierGlassSurface extends SurfaceView implements SurfaceHolder.
     public void surfaceDestroyed(SurfaceHolder holder) {
         Log.d(TAG, "called surfaceDestroyed. Storing settings");
 
+        // Persist zoom level and color mode here; zoom percent and flash state
+        // are persisted in Activity.onPause() (which fires even without surface destruction).
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         editor.putInt(getResources().getString(R.string.key_preference_zoom_level), mCameraCurrentZoomLevel);
         editor.putInt(getResources().getString(R.string.key_preference_color_mode), mCurrentColorFilterIndex);
@@ -608,15 +717,56 @@ public class MagnifierGlassSurface extends SurfaceView implements SurfaceHolder.
             setCameraZoomLevel(mCameraCurrentZoomLevel);
         }
         if (mCurrentColorFilterIndex > 0) {
-            mCurrentColorFilterIndex--;
-            // decrease index because
-            // the toggle causes the increment
-            toggleColorMode();
+            if (mCameraColorFilterList == null
+                    || mCurrentColorFilterIndex >= mCameraColorFilterList.size()) {
+                mCurrentColorFilterIndex = 0;
+            } else {
+                mCurrentColorFilterIndex--;
+                // decrease index because the toggle causes the increment
+                toggleColorMode();
+            }
         }
 
-        if (mSharedPreferences.getBoolean(getResources().getString(R.string.key_preference_auto_torch), false)) {
+        // Flash restore priority: preset > auto_torch setting > last-session state > off.
+        // When auto_torch is explicitly enabled, it wins over stale flash_state so that
+        // toggling the setting in preferences has an immediate, visible effect.
+        boolean flashOn;
+        if (mSharedPreferences.contains(getResources().getString(R.string.key_preference_preset_flash))) {
+            flashOn = mSharedPreferences.getBoolean(
+                    getResources().getString(R.string.key_preference_preset_flash), false);
+        } else if (mSharedPreferences.getBoolean(
+                getResources().getString(R.string.key_preference_auto_torch), false)) {
+            flashOn = true;
+        } else if (mSharedPreferences.contains(getResources().getString(R.string.key_preference_flash_state))) {
+            flashOn = mSharedPreferences.getBoolean(
+                    getResources().getString(R.string.key_preference_flash_state), false);
+        } else {
+            flashOn = false;
+        }
+        if (flashOn) {
             mCameraFlashMode = true;
             turnFlashlightOn();
+        } else {
+            mCameraFlashMode = false;
+        }
+
+        // Reset auto-torch state before setting the preference flag.
+        // The volatile write to mAutoTorchAmbient (last) establishes a happens-before
+        // for all prior writes, so the camera callback thread sees consistent state.
+        mLuminanceFrameCount = 0;
+        mLuminanceSettleCount.set(0);
+        mAutoTorchActive = false;
+        mAutoTorchGeneration++;
+        mAutoTorchAmbient = mSharedPreferences.getBoolean(
+                getResources().getString(R.string.key_preference_auto_torch_ambient), false);
+
+        // Startup feedback: short vibration on first camera ready
+        if (sFirstStart) {
+            sFirstStart = false;
+            if (mSharedPreferences.getBoolean(
+                    getResources().getString(R.string.key_preference_startup_vibration), false)) {
+                vibrateOnce(50);
+            }
         }
 
         Log.d(TAG, "Thread done. Camera successfully started");
@@ -772,8 +922,8 @@ public class MagnifierGlassSurface extends SurfaceView implements SurfaceHolder.
      * fill the buffer, then freezes the preview and calls {@code onPaused}.
      * Falls back to an immediate pause if autofocus is unavailable or fails.
      */
-    public void pauseWithFocus(final Runnable onPaused) {
-        if (mCamera == null || mState != STATE_PREVIEW) return;
+    public boolean pauseWithFocus(final Runnable onPaused) {
+        if (mCamera == null || mState != STATE_PREVIEW) return false;
 
         final Runnable freezeAndNotify = new Runnable() {
             /** UI-thread-only (both postDelayed callbacks run on the View's handler). */
@@ -793,6 +943,8 @@ public class MagnifierGlassSurface extends SurfaceView implements SurfaceHolder.
             mCamera.autoFocus(new Camera.AutoFocusCallback() {
                 @Override
                 public void onAutoFocus(boolean success, Camera camera) {
+                    // Cancel the safety timeout — autofocus completed normally
+                    removeCallbacks(freezeAndNotify);
                     if (mState != STATE_PREVIEW) {
                         if (onPaused != null) post(onPaused);
                         return;
@@ -809,9 +961,11 @@ public class MagnifierGlassSurface extends SurfaceView implements SurfaceHolder.
             postDelayed(freezeAndNotify, 2000);
         } catch (RuntimeException e) {
             // autofocus not supported or camera in bad state — freeze immediately
+            removeCallbacks(freezeAndNotify);
             freezePreview();
             if (onPaused != null) onPaused.run();
         }
+        return true;
     }
 
     /** Stops the preview and runs multi-frame stabilization off the UI thread. */
@@ -866,32 +1020,55 @@ public class MagnifierGlassSurface extends SurfaceView implements SurfaceHolder.
         return scaleX;
     }
 
+    /** Returns true if the flashlight is currently on. Thread-safe (volatile field). */
+    public boolean isFlashOn() {
+        return mCameraFlashMode;
+    }
+
     /**
      * Toggles flashlight on and off.
      */
     public void nextFlashlightMode() {
         if (mState != STATE_PREVIEW) return;
 
+        // Manual toggle overrides auto-torch; generation bump invalidates
+        // any already-posted auto-torch runnables, settle delay prevents
+        // new samples from immediately reverting the user's choice.
+        mAutoTorchGeneration++;
+        mAutoTorchActive = false;
+        mLuminanceSettleCount.set(LUMINANCE_SETTLE_FRAMES);
         mCameraFlashMode = !mCameraFlashMode;
         if (mCameraFlashMode) {
             turnFlashlightOn();
         } else {
             turnFlashlightOff();
         }
+        FlashStateListener l = mFlashStateListener;
+        if (l != null) l.onFlashStateChanged(mCameraFlashMode);
     }
 
     private void turnFlashlightOff() {
-        if (mState != STATE_PREVIEW || !supportsFlashlight()) return;
-        Camera.Parameters parameters = mCamera.getParameters();
-        parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
-        mCamera.setParameters(parameters);
+        if (mState != STATE_PREVIEW) return;
+        try {
+            if (!supportsFlashlight()) return;
+            Camera.Parameters parameters = mCamera.getParameters();
+            parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+            mCamera.setParameters(parameters);
+        } catch (RuntimeException e) {
+            Log.w(TAG, "turnFlashlightOff failed", e);
+        }
     }
 
     private void turnFlashlightOn() {
-        if (mState != STATE_PREVIEW || !supportsFlashlight()) return;
-        Camera.Parameters parameters = mCamera.getParameters();
-        parameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
-        mCamera.setParameters(parameters);
+        if (mState != STATE_PREVIEW) return;
+        try {
+            if (!supportsFlashlight()) return;
+            Camera.Parameters parameters = mCamera.getParameters();
+            parameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+            mCamera.setParameters(parameters);
+        } catch (RuntimeException e) {
+            Log.w(TAG, "turnFlashlightOn failed", e);
+        }
     }
 
 
@@ -1143,5 +1320,16 @@ public class MagnifierGlassSurface extends SurfaceView implements SurfaceHolder.
 
     public CharSequence[] getAvailablePreviewWidths() {
         return availablePreviewWidths;
+    }
+
+    @SuppressWarnings("deprecation")
+    private void vibrateOnce(long ms) {
+        Vibrator vib = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
+        if (vib == null || !vib.hasVibrator()) return;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            vib.vibrate(VibrationEffect.createOneShot(ms, VibrationEffect.DEFAULT_AMPLITUDE));
+        } else {
+            vib.vibrate(ms);
+        }
     }
 }

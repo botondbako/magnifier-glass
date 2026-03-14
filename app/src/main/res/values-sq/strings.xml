@@ -48,4 +48,16 @@
     <string name="ocr_in_progress">Duke lexuar tekstin, ju lutem prisni</string>
     <string name="ocr_downloading_wait">Duke shkarkuar të dhënat e gjuhës, ju lutem prisni</string>
     <string name="zoom_times_suffix">herë</string>
+    <string name="auto_torch_ambient_title">Elektrik automatik në dritë të dobët</string>
+    <string name="auto_torch_ambient_summary">Ndez automatikisht elektrikun në mjedise të errëta</string>
+    <string name="startup_vibration_title">Dridhje kur kamera është gati</string>
+    <string name="startup_vibration_summary">Dridhje e shkurtër kur kamera niset</string>
+    <string name="save_preset_title">Ruaj gjendjen aktuale si paracaktim fillestar</string>
+    <string name="save_preset_summary">Ruan zmadhimin, mënyrën e ngjyrave dhe gjendjen e blicit</string>
+    <string name="save_preset_done">Paracaktimi u ruajt</string>
+    <string name="clear_preset_title">Pastro paracaktimin fillestar</string>
+    <string name="clear_preset_summary">Përdor cilësimet e parazgjedhura në nisje</string>
+    <string name="clear_preset_done">Paracaktimi u pastrua</string>
+    <string name="announce_frozen">Imazhi i ngrirë</string>
+    <string name="announce_resumed">Pamja paraprake u rifillua</string>
 </resources>

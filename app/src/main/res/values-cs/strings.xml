@@ -48,4 +48,16 @@
     <string name="ocr_in_progress">Čtení textu, prosím čekejte</string>
     <string name="ocr_downloading_wait">Stahování jazykových dat, prosím čekejte</string>
     <string name="zoom_times_suffix">krát</string>
+    <string name="auto_torch_ambient_title">Automatická svítilna při slabém osvětlení</string>
+    <string name="auto_torch_ambient_summary">Automaticky zapne svítilnu v tmavém prostředí</string>
+    <string name="startup_vibration_title">Vibrovat při připravenosti kamery</string>
+    <string name="startup_vibration_summary">Krátká vibrace při spuštění kamery</string>
+    <string name="save_preset_title">Uložit aktuální stav jako výchozí předvolbu</string>
+    <string name="save_preset_summary">Uloží přiblížení, barevný režim a stav blesku</string>
+    <string name="save_preset_done">Předvolba uložena</string>
+    <string name="clear_preset_title">Vymazat výchozí předvolbu</string>
+    <string name="clear_preset_summary">Při spuštění použít výchozí nastavení</string>
+    <string name="clear_preset_done">Předvolba vymazána</string>
+    <string name="announce_frozen">Obraz zmrazen</string>
+    <string name="announce_resumed">Náhled obnoven</string>
 </resources>

@@ -48,4 +48,16 @@
     <string name="ocr_in_progress">Branje besedila, prosimo počakajte</string>
     <string name="ocr_downloading_wait">Prenašanje jezikovnih podatkov, prosimo počakajte</string>
     <string name="zoom_times_suffix">krat</string>
+    <string name="auto_torch_ambient_title">Samodejna svetilka pri šibki svetlobi</string>
+    <string name="auto_torch_ambient_summary">Samodejno vklopi svetilko v temnem okolju</string>
+    <string name="startup_vibration_title">Vibriranje, ko je kamera pripravljena</string>
+    <string name="startup_vibration_summary">Kratek vibracijski odziv ob zagonu kamere</string>
+    <string name="save_preset_title">Shrani trenutno stanje kot zagonsko prednastavitev</string>
+    <string name="save_preset_summary">Shrani povečavo, barvni način in stanje bliskavice</string>
+    <string name="save_preset_done">Prednastavitev shranjena</string>
+    <string name="clear_preset_title">Izbriši zagonsko prednastavitev</string>
+    <string name="clear_preset_summary">Ob zagonu uporabi privzete nastavitve</string>
+    <string name="clear_preset_done">Prednastavitev izbrisana</string>
+    <string name="announce_frozen">Slika zamrznjena</string>
+    <string name="announce_resumed">Predogled nadaljevan</string>
 </resources>

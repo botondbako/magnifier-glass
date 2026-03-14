@@ -48,4 +48,16 @@
     <string name="ocr_in_progress">Lettura del testo, attendere prego</string>
     <string name="ocr_downloading_wait">Download dei dati linguistici, attendere prego</string>
     <string name="zoom_times_suffix">volte</string>
+    <string name="auto_torch_ambient_title">Torcia automatica in condizioni di scarsa luce</string>
+    <string name="auto_torch_ambient_summary">Accende automaticamente la torcia in ambienti bui</string>
+    <string name="startup_vibration_title">Vibra quando la fotocamera è pronta</string>
+    <string name="startup_vibration_summary">Breve vibrazione all\'avvio della fotocamera</string>
+    <string name="save_preset_title">Salva lo stato attuale come impostazione di avvio</string>
+    <string name="save_preset_summary">Salva zoom, modalità colore e stato del flash</string>
+    <string name="save_preset_done">Impostazione salvata</string>
+    <string name="clear_preset_title">Cancella impostazione di avvio</string>
+    <string name="clear_preset_summary">Usa le impostazioni predefinite all\'avvio</string>
+    <string name="clear_preset_done">Impostazione cancellata</string>
+    <string name="announce_frozen">Immagine bloccata</string>
+    <string name="announce_resumed">Anteprima ripresa</string>
 </resources>

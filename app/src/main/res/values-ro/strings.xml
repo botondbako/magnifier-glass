@@ -59,4 +59,16 @@
     <string name="ocr_in_progress">Se citește textul, vă rugăm așteptați</string>
     <string name="ocr_downloading_wait">Se descarcă datele de limbă, vă rugăm așteptați</string>
     <string name="zoom_times_suffix">ori</string>
+    <string name="auto_torch_ambient_title">Lanternă automată la lumină slabă</string>
+    <string name="auto_torch_ambient_summary">Pornește automat lanterna în medii întunecate</string>
+    <string name="startup_vibration_title">Vibrează când camera este pregătită</string>
+    <string name="startup_vibration_summary">Vibrație scurtă la pornirea camerei</string>
+    <string name="save_preset_title">Salvează starea curentă ca presetare de pornire</string>
+    <string name="save_preset_summary">Salvează zoom-ul, modul de culoare și starea blițului</string>
+    <string name="save_preset_done">Presetare salvată</string>
+    <string name="clear_preset_title">Șterge presetarea de pornire</string>
+    <string name="clear_preset_summary">Folosește setările implicite la pornire</string>
+    <string name="clear_preset_done">Presetare ștearsă</string>
+    <string name="announce_frozen">Imagine înghețată</string>
+    <string name="announce_resumed">Previzualizare reluată</string>
 </resources>

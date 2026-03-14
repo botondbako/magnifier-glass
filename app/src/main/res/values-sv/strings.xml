@@ -48,4 +48,16 @@
     <string name="ocr_in_progress">Läser text, vänligen vänta</string>
     <string name="ocr_downloading_wait">Laddar ner språkdata, vänligen vänta</string>
     <string name="zoom_times_suffix">gånger</string>
+    <string name="auto_torch_ambient_title">Automatisk ficklampa vid svagt ljus</string>
+    <string name="auto_torch_ambient_summary">Tänder ficklampan automatiskt i mörka miljöer</string>
+    <string name="startup_vibration_title">Vibrera när kameran är redo</string>
+    <string name="startup_vibration_summary">Kort vibration när kameran startar</string>
+    <string name="save_preset_title">Spara nuvarande läge som startinställning</string>
+    <string name="save_preset_summary">Sparar zoom, färgläge och blixtstatus</string>
+    <string name="save_preset_done">Inställning sparad</string>
+    <string name="clear_preset_title">Rensa startinställning</string>
+    <string name="clear_preset_summary">Använd standardinställningar vid start</string>
+    <string name="clear_preset_done">Inställning rensad</string>
+    <string name="announce_frozen">Bild frusen</string>
+    <string name="announce_resumed">Förhandsgranskning återupptagen</string>
 </resources>

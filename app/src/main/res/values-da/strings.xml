@@ -48,4 +48,16 @@
     <string name="ocr_in_progress">Læser tekst, vent venligst</string>
     <string name="ocr_downloading_wait">Downloader sprogdata, vent venligst</string>
     <string name="zoom_times_suffix">gange</string>
+    <string name="auto_torch_ambient_title">Automatisk lommelygte ved svagt lys</string>
+    <string name="auto_torch_ambient_summary">Tænder automatisk lommelygten i mørke omgivelser</string>
+    <string name="startup_vibration_title">Vibrer når kameraet er klar</string>
+    <string name="startup_vibration_summary">Kort vibration når kameraet starter</string>
+    <string name="save_preset_title">Gem nuværende tilstand som startindstilling</string>
+    <string name="save_preset_summary">Gemmer zoom, farvetilstand og blitzstatus</string>
+    <string name="save_preset_done">Indstilling gemt</string>
+    <string name="clear_preset_title">Ryd startindstilling</string>
+    <string name="clear_preset_summary">Brug standardindstillinger ved opstart</string>
+    <string name="clear_preset_done">Indstilling ryddet</string>
+    <string name="announce_frozen">Billede frosset</string>
+    <string name="announce_resumed">Forhåndsvisning genoptaget</string>
 </resources>

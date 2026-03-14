@@ -11,6 +11,18 @@
             app:key="@string/key_preference_auto_torch"
             app:title="@string/auto_torch_title" />
 
+        <SwitchPreferenceCompat
+            app:defaultValue="false"
+            app:key="@string/key_preference_auto_torch_ambient"
+            app:summary="@string/auto_torch_ambient_summary"
+            app:title="@string/auto_torch_ambient_title" />
+
+        <SwitchPreferenceCompat
+            app:defaultValue="false"
+            app:key="@string/key_preference_startup_vibration"
+            app:summary="@string/startup_vibration_summary"
+            app:title="@string/startup_vibration_title" />
+
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/notification_sounds_header"
@@ -70,6 +82,17 @@
 
     <PreferenceCategory app:title="@string/advanced_header"
         app:icon="@drawable/ic_baseline_settings_applications_24">
+
+        <Preference
+            app:key="@string/key_preference_save_preset"
+            app:title="@string/save_preset_title"
+            app:summary="@string/save_preset_summary" />
+
+        <Preference
+            app:key="@string/key_preference_clear_preset"
+            app:title="@string/clear_preset_title"
+            app:summary="@string/clear_preset_summary" />
+
         <DropDownPreference
             app:defaultValue="3"
             app:entries="@array/preview_resolution_entries"

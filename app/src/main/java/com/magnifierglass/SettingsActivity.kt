@@ -1,12 +1,16 @@
 package com.magnifierglass
 
+import android.content.SharedPreferences
 import android.hardware.camera2.CameraCharacteristics
 import android.hardware.camera2.CameraManager
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.DropDownPreference
+import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.PreferenceManager
 import kotlin.math.max
 
 
@@ -39,6 +43,37 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     class SettingsFragment : PreferenceFragmentCompat() {
+        /** Keys whose changes should trigger an auto-save of the startup preset. */
+        private val autoSaveKeys by lazy { setOf(
+            getString(R.string.key_preference_auto_torch_ambient),
+            getString(R.string.key_preference_startup_vibration),
+            getString(R.string.key_preference_max_brightness),
+        ) }
+
+        private fun savePreset(prefs: SharedPreferences) {
+            prefs.edit()
+                .putInt(getString(R.string.key_preference_preset_zoom),
+                    prefs.getInt(getString(R.string.key_preference_zoom_percent), 0))
+                .putInt(getString(R.string.key_preference_preset_color),
+                    prefs.getInt(getString(R.string.key_preference_color_mode), 0))
+                .putBoolean(getString(R.string.key_preference_preset_flash),
+                    prefs.getBoolean(getString(R.string.key_preference_flash_state), false))
+                .apply()
+        }
+
+        private fun clearPreset(prefs: SharedPreferences) {
+            prefs.edit()
+                .remove(getString(R.string.key_preference_preset_zoom))
+                .remove(getString(R.string.key_preference_preset_color))
+                .remove(getString(R.string.key_preference_preset_flash))
+                .apply()
+        }
+
+        private val presetListener =
+            SharedPreferences.OnSharedPreferenceChangeListener { prefs, key ->
+                if (key != null && key in autoSaveKeys) savePreset(prefs)
+            }
+
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey)
             initPreviewResolutionWidth()
@@ -49,6 +84,31 @@ class SettingsActivity : AppCompatActivity() {
                     activity?.recreate()
                     true
                 }
+
+            findPreference<Preference>(getString(R.string.key_preference_save_preset))
+                ?.setOnPreferenceClickListener {
+                    val prefs = PreferenceManager.getDefaultSharedPreferences(requireContext())
+                    savePreset(prefs)
+                    Toast.makeText(requireContext(), R.string.save_preset_done, Toast.LENGTH_SHORT).show()
+                    true
+                }
+
+            findPreference<Preference>(getString(R.string.key_preference_clear_preset))
+                ?.setOnPreferenceClickListener {
+                    val prefs = PreferenceManager.getDefaultSharedPreferences(requireContext())
+                    clearPreset(prefs)
+                    Toast.makeText(requireContext(), R.string.clear_preset_done, Toast.LENGTH_SHORT).show()
+                    true
+                }
+
+            PreferenceManager.getDefaultSharedPreferences(requireContext())
+                .registerOnSharedPreferenceChangeListener(presetListener)
+        }
+
+        override fun onDestroyView() {
+            PreferenceManager.getDefaultSharedPreferences(requireContext())
+                .unregisterOnSharedPreferenceChangeListener(presetListener)
+            super.onDestroyView()
         }
 
         private fun initCameraChooser() {

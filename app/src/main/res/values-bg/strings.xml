@@ -48,4 +48,16 @@
     <string name="ocr_in_progress">Разчитане на текст, моля изчакайте</string>
     <string name="ocr_downloading_wait">Изтегляне на езикови данни, моля изчакайте</string>
     <string name="zoom_times_suffix">пъти</string>
+    <string name="auto_torch_ambient_title">Автоматично фенерче при слаба светлина</string>
+    <string name="auto_torch_ambient_summary">Автоматично включва фенерчето в тъмна среда</string>
+    <string name="startup_vibration_title">Вибрация при готовност на камерата</string>
+    <string name="startup_vibration_summary">Кратка вибрация при стартиране на камерата</string>
+    <string name="save_preset_title">Запази текущото състояние като начална настройка</string>
+    <string name="save_preset_summary">Запазва мащаба, цветовия режим и светкавицата</string>
+    <string name="save_preset_done">Настройката е запазена</string>
+    <string name="clear_preset_title">Изчисти началната настройка</string>
+    <string name="clear_preset_summary">Използвай стандартните настройки при стартиране</string>
+    <string name="clear_preset_done">Настройката е изчистена</string>
+    <string name="announce_frozen">Изображението е замразено</string>
+    <string name="announce_resumed">Визуализацията е възобновена</string>
 </resources>

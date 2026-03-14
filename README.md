@@ -10,15 +10,19 @@ MagnifierGlass turns your phone's camera into a handheld electronic magnifier. P
 
 Features:
 - Live camera preview with pinch-to-zoom (live and frozen image)
-- 5 color modes: normal, black/white, white/black, blue/yellow, yellow/blue
+- 5 color modes: normal, black/white, white/black, blue/yellow, yellow/blue (long-press resets to normal)
 - Zoom in/out buttons with on-screen zoom level indicator
 - Volume button zoom — use physical volume keys to zoom in/out without looking at the screen
 - LED flashlight toggle for low-light conditions
+- Ambient light auto-torch — automatically turns flashlight on/off based on scene brightness
 - Multi-frame image stabilization for sharper frozen images
-- Continuous autofocus (tap to refocus)
+- Continuous autofocus (tap to refocus, double-tap to freeze)
+- Double-tap frozen image to unfreeze
 - Screenshot capture and share
 - Left-handed mode (mirrors button layout)
+- Startup preset: saves zoom, color mode, and flash state — auto-saved when settings change
 - Configurable default zoom, zoom step size, preview resolution, camera selection
+- Flash state and zoom level persist across sessions
 - Multi-language support (29 languages)
 - Full-screen immersive mode
 - **OCR text-to-speech**: freeze the image and press the speak button to have recognized text read aloud
@@ -36,10 +40,12 @@ Features:
 
 - 48dp touch targets on all buttons (meets WCAG 2.5.8 and Android guidelines)
 - Haptic feedback on every button press and long-press
+- Vibration feedback when camera is ready (configurable)
 - Zoom level announced via text-to-speech after each change
 - Volume button zoom for eyes-free operation
 - Long-press to exit prevents accidental app closure
 - All buttons focusable with content descriptions for TalkBack and switch access
+- Freeze/unfreeze state changes announced for screen reader users
 - Respects system "Remove animations" setting (reduced motion)
 - Configurable zoom step size (10% or 25%) for users with limited motor control
 

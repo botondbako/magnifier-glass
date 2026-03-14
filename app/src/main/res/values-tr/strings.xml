@@ -48,4 +48,16 @@
     <string name="ocr_in_progress">Metin okunuyor, lütfen bekleyin</string>
     <string name="ocr_downloading_wait">Dil verileri indiriliyor, lütfen bekleyin</string>
     <string name="zoom_times_suffix">kat</string>
+    <string name="auto_torch_ambient_title">Düşük ışıkta otomatik el feneri</string>
+    <string name="auto_torch_ambient_summary">Karanlık ortamlarda el fenerini otomatik olarak açar</string>
+    <string name="startup_vibration_title">Kamera hazır olduğunda titreşim</string>
+    <string name="startup_vibration_summary">Kamera başlatılırken kısa titreşim</string>
+    <string name="save_preset_title">Mevcut durumu başlangıç ayarı olarak kaydet</string>
+    <string name="save_preset_summary">Yakınlaştırmayı, renk modunu ve flaş durumunu kaydeder</string>
+    <string name="save_preset_done">Ayar kaydedildi</string>
+    <string name="clear_preset_title">Başlangıç ayarını temizle</string>
+    <string name="clear_preset_summary">Başlangıçta varsayılan ayarları kullan</string>
+    <string name="clear_preset_done">Ayar temizlendi</string>
+    <string name="announce_frozen">Görüntü donduruldu</string>
+    <string name="announce_resumed">Önizleme devam etti</string>
 </resources>

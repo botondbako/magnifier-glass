@@ -48,4 +48,16 @@
     <string name="ocr_in_progress">Leser tekst, vennligst vent</string>
     <string name="ocr_downloading_wait">Laster ned språkdata, vennligst vent</string>
     <string name="zoom_times_suffix">ganger</string>
+    <string name="auto_torch_ambient_title">Automatisk lommelykt ved svakt lys</string>
+    <string name="auto_torch_ambient_summary">Slår automatisk på lommelykten i mørke omgivelser</string>
+    <string name="startup_vibration_title">Vibrer når kameraet er klart</string>
+    <string name="startup_vibration_summary">Kort vibrasjon når kameraet starter</string>
+    <string name="save_preset_title">Lagre nåværende tilstand som oppstartsinnstilling</string>
+    <string name="save_preset_summary">Lagrer zoom, fargemodus og blitsstatus</string>
+    <string name="save_preset_done">Innstilling lagret</string>
+    <string name="clear_preset_title">Fjern oppstartsinnstilling</string>
+    <string name="clear_preset_summary">Bruk standardinnstillinger ved oppstart</string>
+    <string name="clear_preset_done">Innstilling fjernet</string>
+    <string name="announce_frozen">Bilde frosset</string>
+    <string name="announce_resumed">Forhåndsvisning gjenopptatt</string>
 </resources>

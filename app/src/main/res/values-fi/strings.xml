@@ -48,4 +48,16 @@
     <string name="ocr_in_progress">Luetaan tekstiä, odota</string>
     <string name="ocr_downloading_wait">Ladataan kielitietoja, odota</string>
     <string name="zoom_times_suffix">kertaa</string>
+    <string name="auto_torch_ambient_title">Automaattinen taskulamppu hämärässä</string>
+    <string name="auto_torch_ambient_summary">Sytyttää taskulampun automaattisesti pimeässä ympäristössä</string>
+    <string name="startup_vibration_title">Värinä kun kamera on valmis</string>
+    <string name="startup_vibration_summary">Lyhyt värinä kameran käynnistyessä</string>
+    <string name="save_preset_title">Tallenna nykyinen tila käynnistysasetukseksi</string>
+    <string name="save_preset_summary">Tallentaa zoomin, väritilan ja salamavalon tilan</string>
+    <string name="save_preset_done">Asetus tallennettu</string>
+    <string name="clear_preset_title">Tyhjennä käynnistysasetus</string>
+    <string name="clear_preset_summary">Käytä oletusasetuksia käynnistyksessä</string>
+    <string name="clear_preset_done">Asetus tyhjennetty</string>
+    <string name="announce_frozen">Kuva jäädytetty</string>
+    <string name="announce_resumed">Esikatselu jatkettu</string>
 </resources>

@@ -48,4 +48,16 @@
     <string name="ocr_in_progress">Les texta, vinsamlegast bíðið</string>
     <string name="ocr_downloading_wait">Hleð niður tungumálagögnum, vinsamlegast bíðið</string>
     <string name="zoom_times_suffix">sinnum</string>
+    <string name="auto_torch_ambient_title">Sjálfvirk vasaljós í litlu ljósi</string>
+    <string name="auto_torch_ambient_summary">Kveikir sjálfkrafa á vasaljósi í myrkri</string>
+    <string name="startup_vibration_title">Titra þegar myndavél er tilbúin</string>
+    <string name="startup_vibration_summary">Stutt titringur þegar myndavél ræsist</string>
+    <string name="save_preset_title">Vista núverandi stöðu sem ræsingarstillingu</string>
+    <string name="save_preset_summary">Vistar aðdrátt, litastillingu og flassastöðu</string>
+    <string name="save_preset_done">Stilling vistuð</string>
+    <string name="clear_preset_title">Hreinsa ræsingarstillingu</string>
+    <string name="clear_preset_summary">Nota sjálfgefnar stillingar við ræsingu</string>
+    <string name="clear_preset_done">Stilling hreinsuð</string>
+    <string name="announce_frozen">Mynd fryst</string>
+    <string name="announce_resumed">Forskoðun haldið áfram</string>
 </resources>

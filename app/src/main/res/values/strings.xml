@@ -4,6 +4,8 @@
     <string name="button_color_description">change contrast mode</string>
     <string name="button_flash_description">toggle flashlight on and off</string>
     <string name="button_pause_description">freezes the current camera image</string>
+    <string name="announce_frozen">Image frozen</string>
+    <string name="announce_resumed">Preview resumed</string>
     <string name="button_zoom_in_description">zoom in</string>
     <string name="button_zoom_out_description">zoom out</string>
     <string name="button_exit_description">long press to exit app</string>
@@ -22,11 +24,20 @@
 
     <!-- Key names (equal in all languages) -->
     <string name="key_preference_zoom_level" translatable="false">MagnifierGlassAndroidKeyPreferenceZoomLevel</string>
+    <string name="key_preference_zoom_percent" translatable="false">MagnifierGlassAndroidKeyPreferenceZoomPercent</string>
     <string name="key_preference_color_mode" translatable="false">MagnifierGlassAndroidKeyPreferenceColorMode</string>
     <string name="key_preference_autofocus_sound" translatable="false">MagnifierGlassAndroidKeyPreferenceAutoFocusSound</string>
     <string name="key_preference_shutter_sound" translatable="false">MagnifierGlassAndroidKeyPreferenceShutterSound</string>
     <string name="key_preference_max_brightness" translatable="false">MagnifierGlassAndroidKeyPreferenceMaxBrightness</string>
     <string name="key_preference_auto_torch" translatable="false">MagnifierGlassAndroidKeyPreferenceAutoTorch</string>
+    <string name="key_preference_auto_torch_ambient" translatable="false">MagnifierGlassAndroidKeyPreferenceAutoTorchAmbient</string>
+    <string name="key_preference_startup_vibration" translatable="false">MagnifierGlassAndroidKeyPreferenceStartupVibration</string>
+    <string name="key_preference_flash_state" translatable="false">MagnifierGlassAndroidKeyPreferenceFlashState</string>
+    <string name="key_preference_preset_zoom" translatable="false">MagnifierGlassAndroidKeyPreferencePresetZoom</string>
+    <string name="key_preference_preset_color" translatable="false">MagnifierGlassAndroidKeyPreferencePresetColor</string>
+    <string name="key_preference_preset_flash" translatable="false">MagnifierGlassAndroidKeyPreferencePresetFlash</string>
+    <string name="key_preference_save_preset" translatable="false">MagnifierGlassAndroidKeyPreferenceSavePreset</string>
+    <string name="key_preference_clear_preset" translatable="false">MagnifierGlassAndroidKeyPreferenceClearPreset</string>
     <string name="key_preference_preview_resolution" translatable="false">MagnifierGlassAndroidKeyPreferencePreviewResolution</string>
     <string name="key_preference_camera_id" translatable="false">MagnifierGlassAndroidKeyPreferenceCameraId</string>
     <string name="key_preference_default_zoom" translatable="false">MagnifierGlassAndroidKeyPreferenceDefaultZoom</string>
@@ -47,6 +58,10 @@
     <!-- Lighting Preferences -->
     <string name="max_brightness_title">Maximum display brightness</string>
     <string name="auto_torch_title">Turn on flashlight on start</string>
+    <string name="auto_torch_ambient_title">Auto flashlight in low light</string>
+    <string name="auto_torch_ambient_summary">Automatically turns flashlight on in dark environments</string>
+    <string name="startup_vibration_title">Vibrate when camera is ready</string>
+    <string name="startup_vibration_summary">Short vibration when the camera starts</string>
 
     <!-- Advanced Preferences -->
     <string name="advanced_header">Advanced</string>
@@ -64,4 +79,10 @@
     <string name="zoom_times_suffix">times</string>
     <string name="handedness_title">Handedness</string>
     <string name="language_title">Language</string>
+    <string name="save_preset_title">Save current state as startup preset</string>
+    <string name="save_preset_summary">Saves zoom, color mode, and flash state</string>
+    <string name="save_preset_done">Preset saved</string>
+    <string name="clear_preset_title">Clear startup preset</string>
+    <string name="clear_preset_summary">Use default settings on startup</string>
+    <string name="clear_preset_done">Preset cleared</string>
 </resources>

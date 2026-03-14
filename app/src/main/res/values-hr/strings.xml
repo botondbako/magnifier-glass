@@ -48,4 +48,16 @@
     <string name="ocr_in_progress">Čitanje teksta, molimo pričekajte</string>
     <string name="ocr_downloading_wait">Preuzimanje jezičnih podataka, molimo pričekajte</string>
     <string name="zoom_times_suffix">puta</string>
+    <string name="auto_torch_ambient_title">Automatska svjetiljka pri slabom osvjetljenju</string>
+    <string name="auto_torch_ambient_summary">Automatski uključuje svjetiljku u tamnom okruženju</string>
+    <string name="startup_vibration_title">Vibracija kad je kamera spremna</string>
+    <string name="startup_vibration_summary">Kratka vibracija pri pokretanju kamere</string>
+    <string name="save_preset_title">Spremi trenutno stanje kao početnu postavku</string>
+    <string name="save_preset_summary">Sprema zum, način boja i stanje bljeskalice</string>
+    <string name="save_preset_done">Postavka spremljena</string>
+    <string name="clear_preset_title">Obriši početnu postavku</string>
+    <string name="clear_preset_summary">Koristi zadane postavke pri pokretanju</string>
+    <string name="clear_preset_done">Postavka obrisana</string>
+    <string name="announce_frozen">Slika zamrznuta</string>
+    <string name="announce_resumed">Pregled nastavljen</string>
 </resources>

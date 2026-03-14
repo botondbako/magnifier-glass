@@ -59,4 +59,16 @@
     <string name="ocr_in_progress">Szöveg olvasása, kérem várjon</string>
     <string name="ocr_downloading_wait">Nyelvi adatok letöltése, kérem várjon</string>
     <string name="zoom_times_suffix">szoros</string>
+    <string name="auto_torch_ambient_title">Automatikus zseblámpa gyenge fényben</string>
+    <string name="auto_torch_ambient_summary">Automatikusan bekapcsolja a zseblámpát sötét környezetben</string>
+    <string name="startup_vibration_title">Rezgés, amikor a kamera kész</string>
+    <string name="startup_vibration_summary">Rövid rezgés a kamera indításakor</string>
+    <string name="save_preset_title">Jelenlegi állapot mentése indítási beállításként</string>
+    <string name="save_preset_summary">Elmenti a nagyítást, a színmódot és a vaku állapotát</string>
+    <string name="save_preset_done">Beállítás mentve</string>
+    <string name="clear_preset_title">Indítási beállítás törlése</string>
+    <string name="clear_preset_summary">Alapértelmezett beállítások használata indításkor</string>
+    <string name="clear_preset_done">Beállítás törölve</string>
+    <string name="announce_frozen">Kép befagyasztva</string>
+    <string name="announce_resumed">Előnézet folytatva</string>
 </resources>

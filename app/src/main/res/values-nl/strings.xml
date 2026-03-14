@@ -48,4 +48,16 @@
     <string name="ocr_in_progress">Tekst wordt gelezen, even geduld</string>
     <string name="ocr_downloading_wait">Taalgegevens worden gedownload, even geduld</string>
     <string name="zoom_times_suffix">keer</string>
+    <string name="auto_torch_ambient_title">Automatische zaklamp bij weinig licht</string>
+    <string name="auto_torch_ambient_summary">Schakelt de zaklamp automatisch in bij weinig licht</string>
+    <string name="startup_vibration_title">Trillen wanneer camera gereed is</string>
+    <string name="startup_vibration_summary">Korte trilling bij het starten van de camera</string>
+    <string name="save_preset_title">Huidige staat opslaan als opstartinstelling</string>
+    <string name="save_preset_summary">Slaat zoom, kleurmodus en flitsstatus op</string>
+    <string name="save_preset_done">Instelling opgeslagen</string>
+    <string name="clear_preset_title">Opstartinstelling wissen</string>
+    <string name="clear_preset_summary">Standaardinstellingen gebruiken bij opstarten</string>
+    <string name="clear_preset_done">Instelling gewist</string>
+    <string name="announce_frozen">Beeld bevroren</string>
+    <string name="announce_resumed">Voorbeeld hervat</string>
 </resources>

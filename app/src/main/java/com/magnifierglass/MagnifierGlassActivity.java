@@ -1,6 +1,7 @@
 package com.magnifierglass;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -21,6 +22,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.HapticFeedbackConstants;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -87,6 +89,16 @@ public class MagnifierGlassActivity extends Activity {
      */
     private static final String TAG = "MagnifierGlassActivity";
 
+    private static final float FLASH_ALPHA_ON = 1f;
+    private static final int FLASH_BG_ALPHA_ON = 255;
+    private static final float FLASH_ALPHA_OFF = 0.25f;
+    private static final int FLASH_BG_ALPHA_OFF = 64;
+
+    private void setFlashButtonAppearance(boolean on) {
+        mFlashButton.setAlpha(on ? FLASH_ALPHA_ON : FLASH_ALPHA_OFF);
+        mFlashButton.getBackground().mutate().setAlpha(on ? FLASH_BG_ALPHA_ON : FLASH_BG_ALPHA_OFF);
+    }
+
     /**
      * our surface view containing the camera preview image.
      */
@@ -95,8 +107,11 @@ public class MagnifierGlassActivity extends Activity {
     /**
      * Is the preview running? > Pause Btn + Zoom Btn
      * If not > Play Btn + Photo Share Btn
+     * UI-thread-only — no synchronization needed.
      */
     private boolean isPreviewActive = true;
+    /** True while a freeze transition is in progress (prevents re-entrant gestures). */
+    private boolean isFreezing = false;
 
     /**
      * stores the brightness level of the screen to restore it after the
@@ -111,8 +126,7 @@ public class MagnifierGlassActivity extends Activity {
     private int mCurrentZoomPercent = -1;
     private int mZoomStep = 10;
     private boolean mVolumeZoom = true;
-    private static final SimpleDateFormat SCREENSHOT_DATE_FORMAT =
-            new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US);
+    private static final String SCREENSHOT_DATE_PATTERN = "yyyyMMdd_HHmmss";
     /** Cached frozen bitmap so it survives rotation while paused. UI-thread-only. */
     private Bitmap mFrozenBitmap;
     /** Locale applied in onCreate — used to detect changes in onResume. */
@@ -235,12 +249,45 @@ public class MagnifierGlassActivity extends Activity {
         }
     }
 
-    private final View.OnClickListener autoFocusClickHandler = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            mMagnifierView.restartAutoFocus();
+    /**
+     * Attempts to freeze the preview with autofocus. Manages isPreviewActive
+     * and button state. Returns true if freeze was initiated.
+     * Note: pauseWithFocus may invoke the callback synchronously on autofocus failure.
+     */
+    private boolean tryFreezePreview() {
+        if (!isPreviewActive || isFreezing) return false;
+        isFreezing = true;
+        isPreviewActive = false;
+        mPauseButton.setEnabled(false);
+        if (!mMagnifierView.pauseWithFocus(() -> {
+            isFreezing = false;
+            cameraPreviewIsPaused(mPauseButton);
+            mPauseButton.setEnabled(true);
+        })) {
+            isFreezing = false;
+            isPreviewActive = true;
+            mPauseButton.setEnabled(true);
+            return false;
         }
-    };
+        return true;
+    }
+
+    private final GestureDetector.OnDoubleTapListener mPhotoViewDoubleTapListener =
+            new GestureDetector.OnDoubleTapListener() {
+                @Override
+                public boolean onSingleTapConfirmed(MotionEvent e) { return false; }
+                @Override
+                public boolean onDoubleTap(MotionEvent e) {
+                    if (!isPreviewActive) {
+                        mPauseButton.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+                        unfreezePreview();
+                        return true;
+                    }
+                    return false;
+                }
+                @Override
+                public boolean onDoubleTapEvent(MotionEvent e) { return false; }
+            };
 
     private final View.OnClickListener colorModeClickHandler = new View.OnClickListener() {
         @Override
@@ -269,18 +316,8 @@ public class MagnifierGlassActivity extends Activity {
             v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
             if (animScale != null) v.startAnimation(animScale);
 
-            final Button btn = (Button) v;
-
             if (isPreviewActive) {
-                btn.setEnabled(false);
-                mMagnifierView.pauseWithFocus(new Runnable() {
-                    @Override
-                    public void run() {
-                        isPreviewActive = false;
-                        cameraPreviewIsPaused(btn);
-                        btn.setEnabled(true);
-                    }
-                });
+                tryFreezePreview();
             } else {
                 unfreezePreview();
             }
@@ -312,8 +349,7 @@ public class MagnifierGlassActivity extends Activity {
         mSpeakButton.bringToFront();
         mPauseButton.bringToFront();
         mPhotoButton.bringToFront();
-        mFlashButton.setAlpha(0.25f);
-        mFlashButton.getBackground().mutate().setAlpha(64);
+        setFlashButtonAppearance(false);
     }
 
     /**
@@ -330,6 +366,8 @@ public class MagnifierGlassActivity extends Activity {
 
     private void cameraPreviewIsPaused(Button playOrPauseButton) {
         applyFrozenUiState();
+        playOrPauseButton.announceForAccessibility(
+                getLocalizedString(R.string.announce_frozen));
 
         // Enable pinch to zoom via PhotoView from https://github.com/chrisbanes/PhotoView
         if (mFrozenBitmap == null || mFrozenBitmap.isRecycled()) {
@@ -376,6 +414,7 @@ public class MagnifierGlassActivity extends Activity {
     }
 
     private void unfreezePreview() {
+        if (isFreezing) return;
         if (mTts != null && mTts.isSpeaking()) {
             mTts.stop();
         }
@@ -386,6 +425,8 @@ public class MagnifierGlassActivity extends Activity {
         isPreviewActive = true;
         cameraPreviewIsActive(mPauseButton);
         mMagnifierView.resumeCameraPreview();
+        mPauseButton.announceForAccessibility(
+                getLocalizedString(R.string.announce_resumed));
     }
 
     private void cameraPreviewIsActive(Button playOrPauseButton) {
@@ -394,8 +435,9 @@ public class MagnifierGlassActivity extends Activity {
         mZoomPanel.setVisibility(zoomPanelVisibility);
         mPhotoButton.setVisibility(View.GONE);
         mSpeakButton.setVisibility(View.GONE);
-        mFlashButton.setAlpha(1f);
-        mFlashButton.getBackground().setAlpha(255);
+
+        // Reflect actual torch state — auto-torch may have turned it off while frozen
+        setFlashButtonAppearance(mMagnifierView.isFlashOn());
 
         mMagnifierView.setVisibility(View.VISIBLE);
         mMagnifierView.setAlpha(1.0f);
@@ -483,6 +525,21 @@ public class MagnifierGlassActivity extends Activity {
     private Button mSpeakButton;
     private Animation animScale;
     private ScaleGestureDetector mScaleDetector;
+    private GestureDetector mGestureDetector;
+
+    private final ScaleGestureDetector.SimpleOnScaleGestureListener mScaleListener =
+            new ScaleGestureDetector.SimpleOnScaleGestureListener() {
+                @Override
+                public boolean onScale(ScaleGestureDetector detector) {
+                    if (!isPreviewActive) return false;
+                    float factor = detector.getScaleFactor();
+                    int delta = Math.round((factor - 1.0f) * 100);
+                    mCurrentZoomPercent = Math.max(0, Math.min(100, mCurrentZoomPercent + delta));
+                    mMagnifierView.setZoomLevelPercent(mCurrentZoomPercent);
+                    updateZoomLabel(mCurrentZoomPercent, true);
+                    return true;
+                }
+            };
     private volatile TextToSpeech mTts;
     private volatile String mTessDataPath;
     /** Persistent Tesseract instance — initialized once, reused per OCR invocation. */
@@ -680,35 +737,53 @@ public class MagnifierGlassActivity extends Activity {
         previewLayout.addView(mPhotoView);
 
         mPhotoView.setAlpha(0f);
+        mPhotoView.setOnDoubleTapListener(mPhotoViewDoubleTapListener);
 
         setButtonListeners();
 
-        // Add listeners to the Preview area (left of the buttons to avoid accidental triggering)
+        // Touch area: double-tap freeze, single-tap autofocus, pinch-to-zoom
         mMagnifierViewTouchArea = findViewById(R.id.camera_preview_touch_area);
-        mMagnifierViewTouchArea.setOnClickListener(autoFocusClickHandler);
 
-        mScaleDetector = new ScaleGestureDetector(this, new ScaleGestureDetector.SimpleOnScaleGestureListener() {
-            @Override
-            public boolean onScale(ScaleGestureDetector detector) {
-                if (!isPreviewActive) return false;
-                float factor = detector.getScaleFactor();
-                int delta = Math.round((factor - 1.0f) * 100);
-                mCurrentZoomPercent = Math.max(0, Math.min(100, mCurrentZoomPercent + delta));
-                mMagnifierView.setZoomLevelPercent(mCurrentZoomPercent);
-                updateZoomLabel(mCurrentZoomPercent, true);
-                return true;
-            }
-        });
+        mScaleDetector = new ScaleGestureDetector(this, mScaleListener);
         setupTouchZoom();
 
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void setupTouchZoom() {
+        mGestureDetector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener() {
+            @Override
+            public boolean onDoubleTap(MotionEvent e) {
+                if (!isPreviewActive) return false;
+                if (tryFreezePreview()) {
+                    mPauseButton.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+                }
+                return true;
+            }
+
+            @Override
+            public boolean onSingleTapConfirmed(MotionEvent e) {
+                if (isPreviewActive) {
+                    mMagnifierView.restartAutoFocus();
+                    return true;
+                }
+                return false;
+            }
+        });
+        // Accessibility: click triggers autofocus for TalkBack / switch access users.
+        // The onTouch handler below consumes all touch events, so this click listener
+        // is only reachable via accessibility services (performClick from TalkBack).
+        mMagnifierViewTouchArea.setOnClickListener(v -> {
+            if (isPreviewActive) mMagnifierView.restartAutoFocus();
+        });
         mMagnifierViewTouchArea.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                mScaleDetector.onTouchEvent(event);
-                return event.getPointerCount() > 1;
+                if (isPreviewActive) mScaleDetector.onTouchEvent(event);
+                boolean gestureHandled = mGestureDetector.onTouchEvent(event);
+                // GestureDetector returns true on ACTION_DOWN, claiming the full
+                // sequence for single/double-tap detection and pinch-to-zoom.
+                return event.getPointerCount() > 1 || gestureHandled;
             }
         });
     }
@@ -742,11 +817,22 @@ public class MagnifierGlassActivity extends Activity {
         findViewById(R.id.button_zoom_in).setOnClickListener(zoomInClickHandler);
         findViewById(R.id.button_zoom_out).setOnClickListener(zoomOutClickHandler);
         if (mCurrentZoomPercent < 0) {
-            try {
-                mCurrentZoomPercent = Integer.parseInt(mSharedPreferences.getString(
-                        getString(R.string.key_preference_default_zoom), "0"));
-            } catch (NumberFormatException e) {
-                mCurrentZoomPercent = 0;
+            // Restore zoom: preset > last session > default setting
+            if (mSharedPreferences.contains(getString(R.string.key_preference_preset_zoom))) {
+                mCurrentZoomPercent = mSharedPreferences.getInt(
+                        getString(R.string.key_preference_preset_zoom), 0);
+            } else {
+                mCurrentZoomPercent = mSharedPreferences.getInt(
+                        getString(R.string.key_preference_zoom_percent), -1);
+            }
+            if (mCurrentZoomPercent < 0) {
+                // default_zoom is a String (DropDownPreference) — unlike the int keys above
+                try {
+                    mCurrentZoomPercent = Integer.parseInt(mSharedPreferences.getString(
+                            getString(R.string.key_preference_default_zoom), "0"));
+                } catch (NumberFormatException e) {
+                    mCurrentZoomPercent = 0;
+                }
             }
         }
         updateZoomLabel(mCurrentZoomPercent, false);
@@ -780,19 +866,28 @@ public class MagnifierGlassActivity extends Activity {
         Button pauseButton = findViewById(R.id.button_pause);
         pauseButton.setOnClickListener(pauseClickHandler);
 
-        mMagnifierView.setZoomPanel(findViewById(R.id.zoom_panel));
-        mMagnifierView.setFlashButton(flashButton);
-
         mZoomPanel = findViewById(R.id.zoom_panel);
         mPauseButton = pauseButton;
         mFlashButton = flashButton;
+
+        mMagnifierView.setZoomPanel(mZoomPanel);
+        mMagnifierView.setFlashButton(mFlashButton);
+        mMagnifierView.setFlashStateListener(this::setFlashButtonAppearance);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+        isFreezing = false;
         if (mTts != null && mTts.isSpeaking()) {
             mTts.stop();
+        }
+        // Persist last-used zoom percent and flash state so they survive app restart
+        if (mCurrentZoomPercent >= 0 && mMagnifierView != null) {
+            mSharedPreferences.edit()
+                    .putInt(getString(R.string.key_preference_zoom_percent), mCurrentZoomPercent)
+                    .putBoolean(getString(R.string.key_preference_flash_state), mMagnifierView.isFlashOn())
+                    .apply();
         }
         resetBrightnessToPreviousValue();
         Log.d(TAG, "onPause called!");
@@ -801,6 +896,7 @@ public class MagnifierGlassActivity extends Activity {
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
+        isFreezing = false;
         updateLocalizedContext();
         // Release camera before re-parenting so that mState is guaranteed
         // STATE_CLOSED when the new surface lifecycle calls enableCamera().
@@ -816,21 +912,10 @@ public class MagnifierGlassActivity extends Activity {
             ((ViewGroup) mPhotoView.getParent()).removeView(mPhotoView);
         previewLayout.addView(mMagnifierView);
         previewLayout.addView(mPhotoView);
+        mPhotoView.setOnDoubleTapListener(mPhotoViewDoubleTapListener);
         setButtonListeners();
         mMagnifierViewTouchArea = findViewById(R.id.camera_preview_touch_area);
-        mMagnifierViewTouchArea.setOnClickListener(autoFocusClickHandler);
-        mScaleDetector = new ScaleGestureDetector(this, new ScaleGestureDetector.SimpleOnScaleGestureListener() {
-            @Override
-            public boolean onScale(ScaleGestureDetector detector) {
-                if (!isPreviewActive) return false;
-                float factor = detector.getScaleFactor();
-                int delta = Math.round((factor - 1.0f) * 100);
-                mCurrentZoomPercent = Math.max(0, Math.min(100, mCurrentZoomPercent + delta));
-                mMagnifierView.setZoomLevelPercent(mCurrentZoomPercent);
-                updateZoomLabel(mCurrentZoomPercent, true);
-                return true;
-            }
-        });
+        mScaleDetector = new ScaleGestureDetector(this, mScaleListener);
         setupTouchZoom();
         mMagnifierView.setZoomLevelPercent(mCurrentZoomPercent);
         updateZoomLabel(mCurrentZoomPercent, false);
@@ -888,6 +973,7 @@ public class MagnifierGlassActivity extends Activity {
             mFrozenBitmap.recycle();
         }
         mFrozenBitmap = null;
+        mMagnifierView.setFlashStateListener(null);
         super.onDestroy();
         Log.d(TAG, "onDestroy called!");
     }
@@ -1408,7 +1494,7 @@ public class MagnifierGlassActivity extends Activity {
             return;
         }
         try {
-            String timeStamp = SCREENSHOT_DATE_FORMAT.format(new Date());
+            String timeStamp = new SimpleDateFormat(SCREENSHOT_DATE_PATTERN, Locale.US).format(new Date());
             String imageFileName = "JPEG_" + timeStamp + ".jpg";
             Bitmap bitmap = mMagnifierView.getBitmap();
             if (bitmap == null) return;

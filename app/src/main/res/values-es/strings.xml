@@ -48,4 +48,16 @@
     <string name="ocr_in_progress">Leyendo texto, por favor espere</string>
     <string name="ocr_downloading_wait">Descargando datos de idioma, por favor espere</string>
     <string name="zoom_times_suffix">veces</string>
+    <string name="auto_torch_ambient_title">Linterna automática con poca luz</string>
+    <string name="auto_torch_ambient_summary">Enciende automáticamente la linterna en entornos oscuros</string>
+    <string name="startup_vibration_title">Vibrar cuando la cámara esté lista</string>
+    <string name="startup_vibration_summary">Vibración corta al iniciar la cámara</string>
+    <string name="save_preset_title">Guardar estado actual como ajuste inicial</string>
+    <string name="save_preset_summary">Guarda el zoom, el modo de color y el estado del flash</string>
+    <string name="save_preset_done">Ajuste guardado</string>
+    <string name="clear_preset_title">Borrar ajuste inicial</string>
+    <string name="clear_preset_summary">Usar ajustes predeterminados al iniciar</string>
+    <string name="clear_preset_done">Ajuste borrado</string>
+    <string name="announce_frozen">Imagen congelada</string>
+    <string name="announce_resumed">Vista previa reanudada</string>
 </resources>

@@ -48,4 +48,16 @@
     <string name="ocr_in_progress">Skaitomas tekstas, prašome palaukti</string>
     <string name="ocr_downloading_wait">Atsisiunčiami kalbos duomenys, prašome palaukti</string>
     <string name="zoom_times_suffix">kartų</string>
+    <string name="auto_torch_ambient_title">Automatinis žibintuvėlis esant silpnam apšvietimui</string>
+    <string name="auto_torch_ambient_summary">Automatiškai įjungia žibintuvėlį tamsioje aplinkoje</string>
+    <string name="startup_vibration_title">Vibruoti kai kamera paruošta</string>
+    <string name="startup_vibration_summary">Trumpas vibravimas paleidžiant kamerą</string>
+    <string name="save_preset_title">Išsaugoti esamą būseną kaip paleidimo nustatymą</string>
+    <string name="save_preset_summary">Išsaugo priartinimą, spalvų režimą ir blykstės būseną</string>
+    <string name="save_preset_done">Nustatymas išsaugotas</string>
+    <string name="clear_preset_title">Išvalyti paleidimo nustatymą</string>
+    <string name="clear_preset_summary">Paleidžiant naudoti numatytuosius nustatymus</string>
+    <string name="clear_preset_done">Nustatymas išvalytas</string>
+    <string name="announce_frozen">Vaizdas sustabdytas</string>
+    <string name="announce_resumed">Peržiūra atnaujinta</string>
 </resources>

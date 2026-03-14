@@ -3,6 +3,7 @@
     <!-- access the camera -->
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
     <!--
  Store pictures on the sd card
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /

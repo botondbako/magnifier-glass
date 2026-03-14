@@ -48,4 +48,16 @@
     <string name="ocr_in_progress">Ανάγνωση κειμένου, παρακαλώ περιμένετε</string>
     <string name="ocr_downloading_wait">Λήψη γλωσσικών δεδομένων, παρακαλώ περιμένετε</string>
     <string name="zoom_times_suffix">φορές</string>
+    <string name="auto_torch_ambient_title">Αυτόματος φακός σε χαμηλό φωτισμό</string>
+    <string name="auto_torch_ambient_summary">Ενεργοποιεί αυτόματα τον φακό σε σκοτεινό περιβάλλον</string>
+    <string name="startup_vibration_title">Δόνηση όταν η κάμερα είναι έτοιμη</string>
+    <string name="startup_vibration_summary">Σύντομη δόνηση κατά την εκκίνηση της κάμερας</string>
+    <string name="save_preset_title">Αποθήκευση τρέχουσας κατάστασης ως προεπιλογή εκκίνησης</string>
+    <string name="save_preset_summary">Αποθηκεύει ζουμ, λειτουργία χρώματος και φλας</string>
+    <string name="save_preset_done">Η προεπιλογή αποθηκεύτηκε</string>
+    <string name="clear_preset_title">Διαγραφή προεπιλογής εκκίνησης</string>
+    <string name="clear_preset_summary">Χρήση προεπιλεγμένων ρυθμίσεων κατά την εκκίνηση</string>
+    <string name="clear_preset_done">Η προεπιλογή διαγράφηκε</string>
+    <string name="announce_frozen">Εικόνα παγωμένη</string>
+    <string name="announce_resumed">Η προεπισκόπηση συνεχίστηκε</string>
 </resources>

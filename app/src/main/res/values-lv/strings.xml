@@ -48,4 +48,16 @@
     <string name="ocr_in_progress">Teksta lasīšana, lūdzu uzgaidiet</string>
     <string name="ocr_downloading_wait">Valodas datu lejupielāde, lūdzu uzgaidiet</string>
     <string name="zoom_times_suffix">reizes</string>
+    <string name="auto_torch_ambient_title">Automātiskais lukturītis vājā apgaismojumā</string>
+    <string name="auto_torch_ambient_summary">Automātiski ieslēdz lukturīti tumšā vidē</string>
+    <string name="startup_vibration_title">Vibrēt, kad kamera gatava</string>
+    <string name="startup_vibration_summary">Īsa vibrācija, startējot kameru</string>
+    <string name="save_preset_title">Saglabāt pašreizējo stāvokli kā sākuma iestatījumu</string>
+    <string name="save_preset_summary">Saglabā tālummaiņu, krāsu režīmu un zibspuldzes stāvokli</string>
+    <string name="save_preset_done">Iestatījums saglabāts</string>
+    <string name="clear_preset_title">Notīrīt sākuma iestatījumu</string>
+    <string name="clear_preset_summary">Izmantot noklusējuma iestatījumus startējot</string>
+    <string name="clear_preset_done">Iestatījums notīrīts</string>
+    <string name="announce_frozen">Attēls iesaldēts</string>
+    <string name="announce_resumed">Priekšskatījums atsākts</string>
 </resources>

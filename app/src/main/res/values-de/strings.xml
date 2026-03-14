@@ -59,4 +59,16 @@
     <string name="ocr_in_progress">Text wird gelesen, bitte warten</string>
     <string name="ocr_downloading_wait">Sprachdaten werden heruntergeladen, bitte warten</string>
     <string name="zoom_times_suffix">fach</string>
+    <string name="auto_torch_ambient_title">Automatische Taschenlampe bei wenig Licht</string>
+    <string name="auto_torch_ambient_summary">Schaltet die Taschenlampe in dunkler Umgebung automatisch ein</string>
+    <string name="startup_vibration_title">Vibrieren, wenn die Kamera bereit ist</string>
+    <string name="startup_vibration_summary">Kurze Vibration beim Kamerastart</string>
+    <string name="save_preset_title">Aktuellen Zustand als Startvorgabe speichern</string>
+    <string name="save_preset_summary">Speichert Zoom, Farbmodus und Blitzstatus</string>
+    <string name="save_preset_done">Vorgabe gespeichert</string>
+    <string name="clear_preset_title">Startvorgabe löschen</string>
+    <string name="clear_preset_summary">Standardeinstellungen beim Start verwenden</string>
+    <string name="clear_preset_done">Vorgabe gelöscht</string>
+    <string name="announce_frozen">Bild eingefroren</string>
+    <string name="announce_resumed">Vorschau fortgesetzt</string>
 </resources>

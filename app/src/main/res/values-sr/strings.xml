@@ -48,4 +48,16 @@
     <string name="ocr_in_progress">Читање текста, молимо сачекајте</string>
     <string name="ocr_downloading_wait">Преузимање језичких података, молимо сачекајте</string>
     <string name="zoom_times_suffix">пута</string>
+    <string name="auto_torch_ambient_title">Аутоматска лампа при слабом осветљењу</string>
+    <string name="auto_torch_ambient_summary">Аутоматски укључује лампу у тамном окружењу</string>
+    <string name="startup_vibration_title">Вибрација када је камера спремна</string>
+    <string name="startup_vibration_summary">Кратка вибрација при покретању камере</string>
+    <string name="save_preset_title">Сачувај тренутно стање као почетну поставку</string>
+    <string name="save_preset_summary">Чува увећање, режим боја и стање блица</string>
+    <string name="save_preset_done">Поставка сачувана</string>
+    <string name="clear_preset_title">Обриши почетну поставку</string>
+    <string name="clear_preset_summary">Користи подразумеване поставке при покретању</string>
+    <string name="clear_preset_done">Поставка обрисана</string>
+    <string name="announce_frozen">Слика замрзнута</string>
+    <string name="announce_resumed">Преглед настављен</string>
 </resources>

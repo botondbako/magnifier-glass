@@ -48,4 +48,16 @@
     <string name="ocr_in_progress">Odczytywanie tekstu, proszę czekać</string>
     <string name="ocr_downloading_wait">Pobieranie danych językowych, proszę czekać</string>
     <string name="zoom_times_suffix">razy</string>
+    <string name="auto_torch_ambient_title">Automatyczna latarka przy słabym oświetleniu</string>
+    <string name="auto_torch_ambient_summary">Automatycznie włącza latarkę w ciemnym otoczeniu</string>
+    <string name="startup_vibration_title">Wibracja, gdy aparat jest gotowy</string>
+    <string name="startup_vibration_summary">Krótka wibracja przy uruchomieniu kamery</string>
+    <string name="save_preset_title">Zapisz bieżący stan jako ustawienie startowe</string>
+    <string name="save_preset_summary">Zapisuje powiększenie, tryb kolorów i stan lampy błyskowej</string>
+    <string name="save_preset_done">Ustawienie zapisane</string>
+    <string name="clear_preset_title">Wyczyść ustawienie startowe</string>
+    <string name="clear_preset_summary">Użyj domyślnych ustawień przy uruchomieniu</string>
+    <string name="clear_preset_done">Ustawienie wyczyszczone</string>
+    <string name="announce_frozen">Obraz zamrożony</string>
+    <string name="announce_resumed">Podgląd wznowiony</string>
 </resources>

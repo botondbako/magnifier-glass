@@ -48,4 +48,16 @@
     <string name="ocr_in_progress">Читання тексту, будь ласка зачекайте</string>
     <string name="ocr_downloading_wait">Завантаження мовних даних, будь ласка зачекайте</string>
     <string name="zoom_times_suffix">разів</string>
+    <string name="auto_torch_ambient_title">Автоматичний ліхтарик при слабкому освітленні</string>
+    <string name="auto_torch_ambient_summary">Автоматично вмикає ліхтарик у темному середовищі</string>
+    <string name="startup_vibration_title">Вібрація, коли камера готова</string>
+    <string name="startup_vibration_summary">Коротка вібрація при запуску камери</string>
+    <string name="save_preset_title">Зберегти поточний стан як початкове налаштування</string>
+    <string name="save_preset_summary">Зберігає масштаб, колірний режим і стан спалаху</string>
+    <string name="save_preset_done">Налаштування збережено</string>
+    <string name="clear_preset_title">Очистити початкове налаштування</string>
+    <string name="clear_preset_summary">Використовувати типові налаштування при запуску</string>
+    <string name="clear_preset_done">Налаштування очищено</string>
+    <string name="announce_frozen">Зображення заморожено</string>
+    <string name="announce_resumed">Попередній перегляд відновлено</string>
 </resources>

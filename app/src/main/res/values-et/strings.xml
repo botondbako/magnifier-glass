@@ -48,4 +48,16 @@
     <string name="ocr_in_progress">Teksti lugemine, palun oodake</string>
     <string name="ocr_downloading_wait">Keeleandmete allalaadimine, palun oodake</string>
     <string name="zoom_times_suffix">korda</string>
+    <string name="auto_torch_ambient_title">Automaatne taskulamp hämaras</string>
+    <string name="auto_torch_ambient_summary">Lülitab taskulambi pimedas keskkonnas automaatselt sisse</string>
+    <string name="startup_vibration_title">Vibreeri kaamera valmisolekul</string>
+    <string name="startup_vibration_summary">Lühike vibratsioon kaamera käivitamisel</string>
+    <string name="save_preset_title">Salvesta praegune olek käivituse eelseadistusena</string>
+    <string name="save_preset_summary">Salvestab suumi, värvirežiimi ja välgu oleku</string>
+    <string name="save_preset_done">Eelseadistus salvestatud</string>
+    <string name="clear_preset_title">Kustuta käivituse eelseadistus</string>
+    <string name="clear_preset_summary">Kasuta käivitamisel vaikesätteid</string>
+    <string name="clear_preset_done">Eelseadistus kustutatud</string>
+    <string name="announce_frozen">Pilt külmutatud</string>
+    <string name="announce_resumed">Eelvaade jätkatud</string>
 </resources>

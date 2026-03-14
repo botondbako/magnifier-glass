@@ -48,4 +48,16 @@
     <string name="ocr_in_progress">Llegint text, si us plau espereu</string>
     <string name="ocr_downloading_wait">Descarregant dades d\'idioma, si us plau espereu</string>
     <string name="zoom_times_suffix">vegades</string>
+    <string name="auto_torch_ambient_title">Llanterna automàtica amb poca llum</string>
+    <string name="auto_torch_ambient_summary">Activa automàticament la llanterna en entorns foscos</string>
+    <string name="startup_vibration_title">Vibrar quan la càmera estigui llesta</string>
+    <string name="startup_vibration_summary">Vibració curta en iniciar la càmera</string>
+    <string name="save_preset_title">Desa l\'estat actual com a configuració inicial</string>
+    <string name="save_preset_summary">Desa el zoom, el mode de color i l\'estat del flaix</string>
+    <string name="save_preset_done">Configuració desada</string>
+    <string name="clear_preset_title">Esborra la configuració inicial</string>
+    <string name="clear_preset_summary">Utilitza la configuració per defecte en iniciar</string>
+    <string name="clear_preset_done">Configuració esborrada</string>
+    <string name="announce_frozen">Imatge congelada</string>
+    <string name="announce_resumed">Previsualització represa</string>
 </resources>
